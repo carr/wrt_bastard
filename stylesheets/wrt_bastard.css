@@ -1,2 +1,4 @@
 /** remove gray border on focused items on some phones */
-a:hover, a:focus { outline: none; }
+a:hover, a:focus {
+	outline: none;
+}

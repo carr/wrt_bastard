@@ -1,0 +1,93 @@
+.spiffy {
+	display: block;
+}
+
+.spiffy * {
+	display: block;
+	height: 1px;
+	overflow: hidden;
+	font-size: 0.01em;
+	background: white;
+}
+
+.spiffy1 {
+	margin-left: 3px;
+	margin-right: 3px;
+	padding-left: 1px;
+	padding-right: 1px;
+	border-left: 1px solid #e86d6d;
+	border-right: 1px solid #e86d6d;
+	background: #f5bfbf;
+}
+
+.spiffy2 {
+	margin-left: 1px;
+	margin-right: 1px;
+	padding-right: 1px;
+	padding-left: 1px;
+	border-left: 1px solid #db1919;
+	border-right: 1px solid #db1919;
+	background: #f7cece;
+}
+
+.spiffy3 {
+	margin-left: 1px;
+	margin-right: 1px;
+	border-left: 1px solid #f7cece;
+	border-right: 1px solid #f7cece;
+}
+
+.spiffy4 {
+	border-left: 1px solid #e86d6d;
+	border-right: 1px solid #e86d6d;
+}
+
+.spiffy5 {
+	border-left: 1px solid #f5bfbf;
+	border-right: 1px solid #f5bfbf;
+}
+
+.spiffyfg {
+	background: white;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.keypad .dialog .button {
+	display: none;
+}
+
+.dialog {
+	/* define this property in local css and remove background-color
+	background-image: url("../../images/loading_bg.png"); */
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+	.dialog table {
+		width: 100%;
+		height: 100%;
+	}
+	
+	.dialog .box {
+		display: block;
+		margin: 0px auto;
+		width: 12em;
+	}
+	
+	.dialog span {
+		background-color: white;
+		width: auto;
+		margin: 0px auto;
+		padding: 10px;
+		font-size: 1.2em;
+		line-height: 2.4em;
+		text-align: center;
+	}
+	
+	#dialog_content {
+		text-align: center;
+	}
