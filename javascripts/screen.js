@@ -7,7 +7,13 @@ var Screen = {
 	RESOLUTION_QVGA_PORTRAIT : 2,   // 240x320
 	RESOLUTION_NHD_LANDSCAPE : 3,   // 640x360
 	RESOLUTION_NHD_PORTRAIT : 4,    // 360x640
-	RESOLUTION_HOME_SCREEN : 5,     // less than 75 % of the resolutions above	
+	RESOLUTION_HOME_SCREEN : 5,     // less than 75 % of the resolutions above
+	
+	KEY_LEFT : 37,
+	KEY_UP : 38,
+	KEY_RIGHT : 39,
+	KEY_DOWN : 40,
+	KEY_FIRE : 13,
 	
 	// TODO ovo bi se trebalo triggerati svaki put kada se promijeni velicina ekrana
 	onSizeChanged : null,
@@ -28,7 +34,8 @@ var Screen = {
 	},
 	
 	init : function(){
-		Screen.onResize()
+		Screen.onResize();
+		Screen.setKeys();
 	},
 	
 	onResize : function(){
@@ -98,5 +105,15 @@ var Screen = {
 	isTouch : function(){
 		var screenType = this.getType()
 		return screenType == this.RESOLUTION_NHD_LANDSCAPE || screenType == this.RESOLUTION_NHD_PORTRAIT;
-	}	
+	},
+
+	setKeys : function() {
+		if (navigator.userAgent.indexOf("Firefox") == -1) {
+			this.KEY_LEFT = 63495;
+			this.KEY_UP = 63497;
+			this.KEY_RIGHT = 63496;
+			this.KEY_DOWN = 63498;
+			this.KEY_FIRE = 63557;
+		}
+	}
 }
