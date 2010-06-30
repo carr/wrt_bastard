@@ -1,21 +1,23 @@
 // jquery ajax wrapper for wrt
 jQuery.oldAjax = jQuery.ajax;
 jQuery.ajax = function() {
-	try {
-		netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserRead');
-	} catch (e) {
-	}
-	$.oldAjax.apply($, arguments);
+  try {
+    netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserRead');
+  } catch (e) {
+  }
+  $.oldAjax.apply($, arguments);
 };
 
 // include a script file
-function includeJavaScript(src) {
-    document.write("<script type=\"text/javascript\" src=\"wrt_bastard/javascripts/" + src + ".js\"></script>");
+function includeJavaScript(src, path) {
+  path = path || 'wrt_bastard/javascripts/';
+  document.write("<script type=\"text/javascript\" src=\"" + path + src + ".js\"></script>");
 }
 
 // include a stylesheet
-function includeStylesheet(src) {
-    document.write("<style type=\"text/css\"> @import url(\"wrt_bastard/stylesheets/" +  src + ".css\"); </style>");
+function includeStylesheet(src, path) {
+  path = path || 'wrt_bastard/stylesheets/';
+  document.write("<style type=\"text/css\"> @import url(\"" + path + src + ".css\"); </style>");
 }
 
 // include all JavaScripts
@@ -24,10 +26,11 @@ includeJavaScript('device');
 includeJavaScript('display');
 includeJavaScript('i18n');
 includeJavaScript('rss');
+includeJavaScript('screen');
+includeJavaScript('tabbed_pane');
 includeJavaScript('templating');
 includeJavaScript('ui');
 includeJavaScript('utility');
-
 
 // include styles
 includeStylesheet('wrt_bastard');
