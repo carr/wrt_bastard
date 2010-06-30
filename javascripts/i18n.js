@@ -5,7 +5,7 @@ function i18nLoad(lang, callback){
 		url: 'strings/' + lang + '.txt',
 		success: function(data){
 			eval(data);
-			callback()				
+			callback();
 		}
-	})
+	});
 }

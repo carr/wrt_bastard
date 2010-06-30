@@ -3,12 +3,12 @@ var Dialog = {
 	
 	show : function(text){
 		// TODO refactor
-		$('#dialog_content').html(text)
-		$('#dialog').show()	
+		$('#dialog_content').html(text);
+		$('#dialog').show();
 	},
 
 	hide : function(){
-		$(this.selector).hide()
+		$(this.selector).hide();
 	},
 	
 	showLoading : function(text){

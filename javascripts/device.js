@@ -19,7 +19,7 @@ var Device = {
 		
 		var result = regexp.exec(str);
 		if(result){
-			version = new DeviceVersion(result[1], result[2])
+			version = new DeviceVersion(result[1], result[2]);
 		} 
 		
 		return version; 
@@ -43,7 +43,7 @@ var Device = {
 	supportsHomeScreen : function(){
 		return this.getModel == 'N97';
 	}
-}
+};
 
 function DeviceVersion(major, minor){
 	this.major = parseInt(major);
@@ -51,4 +51,4 @@ function DeviceVersion(major, minor){
 }
 DeviceVersion.prototype.toString = function(){
 	return "" + this.major + "." + this.minor;
-}
+};

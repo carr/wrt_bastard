@@ -78,7 +78,7 @@ var Display = {
 		}else{
 			//$('#log').append("new dimensions " + newDims.width + "x" + newDims.height)
 			//$('#log').append("new wdget " + newWidgetSize.width + "x" + newWidgetSize.height)
-			Utility.log(newWidgetSize.height);
+			//Utility.log(newWidgetSize.height);
 			if ( newWidgetSize.height < Display.MINI_VIEW_THRESHOLD ) {
 				$('body').addClass('home_screen');
 				$('body').removeClass('normal_screen');
