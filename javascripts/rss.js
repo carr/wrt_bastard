@@ -3,21 +3,21 @@ var Rss = {
 		$.ajax({
 			url: url,
 			success: function(data){				
-				var items = Rss.parse(data)
-				callback(items)
+				var items = Rss.parse(data);
+				callback(items);
 				
-				//console.log(data)
-				//$('#content').html(data.documentURI)				
+				//Utility.log(data);
+				//$('#content').html(data.documentURI);	
 		  	}
 		});	
 	},		
 		
 	parse : function(req){
 	    var items = [];	 
-		var itemElements = req.getElementsByTagName("item")
+		var itemElements = req.getElementsByTagName("item");
 		
 		for (var i = 0; i < itemElements.length; i++) {
-			var item = {}
+			var item = {};
             
             node = itemElements[i].firstChild;
             while (node != null) {
@@ -90,4 +90,4 @@ var Rss = {
 	    
 	    return strippedBuf;
 	}
-}
+};

@@ -12,12 +12,6 @@ var Display = {
 	RESOLUTION_NHD_PORTRAIT : 4,    // 360x640
 	RESOLUTION_HOME_SCREEN : 5,     // less than 75 % of the resolutions above
 	
-	KEY_LEFT : 37,
-	KEY_UP : 38,
-	KEY_RIGHT : 39,
-	KEY_DOWN : 40,
-	KEY_FIRE : 13,
-	
 	/** the width of the physical screen in the current orientation */
 	width : null,
 	
@@ -37,13 +31,13 @@ var Display = {
 	onEnterNormalView : null,
 	
 	init : function(){
-		window.onresize = Display.onResize
+		window.onresize = Display.onResize;
 		
-		var dims = this.detectDisplayDimensions()
+		var dims = this.detectDisplayDimensions();
 		this.width = dims.width;
 		this.height = dims.height;
 		
-		Display.onResize()
+		Display.onResize();
 	},
 	
 	/** detect the size of the physical display */
@@ -65,34 +59,34 @@ var Display = {
 	/** triggered every time the user enters/exits home view, rotates screens etc. */
 	onResize : function(){		
 		
-		var newDims = Display.detectDisplayDimensions()
-		var newWidgetSize = Display.getWidgetSize()
+		var newDims = Display.detectDisplayDimensions();
+		var newWidgetSize = Display.getWidgetSize();
 		
 		if(Display.isTouch()){
-			window.menu.hideSoftkeys() // TODO maknuti na bolje mjesto, ovdje je da ne prijavljuje krivu velicinu
-			Utility.setCssBodyFontSize(16)
+			window.menu.hideSoftkeys(); // TODO maknuti na bolje mjesto, ovdje je da ne prijavljuje krivu velicinu
+			Utility.setCssBodyFontSize(16);
 		}else{
 			if(Device.getBrowserVersion() == 413){
-				Utility.setCssBodyFontSize(9)	
+				Utility.setCssBodyFontSize(9)	;
 			}else{
-				Utility.setCssBodyFontSize(12)
+				Utility.setCssBodyFontSize(12);
 			}
 		}
 		
 		if (newDims.height == Display.width && newDims.width == Display.height){
-			Display.orientationChanged()
+			Display.orientationChanged();
 		}else{
 			//$('#log').append("new dimensions " + newDims.width + "x" + newDims.height)
 			//$('#log').append("new wdget " + newWidgetSize.width + "x" + newWidgetSize.height)
-			console.log(newWidgetSize.height)
+			Utility.log(newWidgetSize.height);
 			if ( newWidgetSize.height < Display.MINI_VIEW_THRESHOLD ) {
-				$('body').addClass('home_screen')
-				$('body').removeClass('normal_screen')
-				Display.onEnterHomeView()
+				$('body').addClass('home_screen');
+				$('body').removeClass('normal_screen');
+				Display.onEnterHomeView();
 			} else {
-				$('body').addClass('normal_screen')
-				$('body').removeClass('home_screen')
-				Display.onEnterNormalView()
+				$('body').addClass('normal_screen');
+				$('body').removeClass('home_screen');
+				Display.onEnterNormalView();
 			}
 		}
 		
@@ -106,11 +100,11 @@ var Display = {
 	orientationChanged : function(){
 		if(Display.w < Display.h){
 			if(this.onEnterPortrait){
-				this.onEnterPortrait()
+				this.onEnterPortrait();
 			}					
 		}else{
 			if(this.onEnterLandscape){
-				this.onEnterLandscape()
+				this.onEnterLandscape();
 			}		
 		}
 	},
@@ -131,7 +125,7 @@ var Display = {
 		return {
 			width: width,
 			height: height
-		}
+		};
 	},
 	
 	/** is the phone currently in landscape mode */
@@ -165,17 +159,7 @@ var Display = {
 	
 	/** returns true if this is a touch based phone (based on screen size) */
 	isTouch : function(){
-		var screenType = this.getType()
-		return screenType == this.RESOLUTION_NHD_LANDSCAPE || screenType == this.RESOLUTION_NHD_PORTRAIT;		
-	},
-
-	setKeys : function() {
-		if (navigator.userAgent.indexOf("Firefox") == -1) {
-			this.KEY_LEFT = 63495;
-			this.KEY_UP = 63497;
-			this.KEY_RIGHT = 63496;
-			this.KEY_DOWN = 63498;
-			this.KEY_FIRE = 63557;
-		}
+		var screenType = this.getType();
+		return screenType == this.RESOLUTION_NHD_LANDSCAPE || screenType == this.RESOLUTION_NHD_PORTRAIT;
 	}
-}
+};
