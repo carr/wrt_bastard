@@ -3,14 +3,33 @@ var Utility = {
 	setCssBodyFontSize : function(size) {
 		document.body.style.fontSize = "" + size + "px";
 	},		
+	
+	truncate : function(text, options){
+		if(options==undefined){
+			options = {}
+		}
+		if(!options.length){
+			options.length = 30
+		}
+		if(!options.omission){
+			options.omission = '...'
+		}
+		
+		if (text.length > options.length) {
+			text = text.substring(0, options.length);
+		    text = text.replace(/\w+$/, '');
+		    text += options.omission
+		}
+		return text;
+	},	
 		
 	showSlide : function(element){
 		// tu me jebalo nesto, element je ostajao nevidljiv pa je maknuto
-		if(Device.getBrowserVersion() == 413 || Screen.isTouch()){
-			//element.style.display = 'block'
-			element.style.display = 'table-row';
+		if(Device.getBrowserVersion() != 413 && !Display.isTouch()){
+			openItem.slideToggle()			
 		}else{
-			openItem.slideToggle()
+			//element.style.display = 'block'
+			element.style.display = 'table-row';			
 		}
 	},
 	
@@ -26,7 +45,7 @@ var Utility = {
 		bindClick : function(selector, callback){
 			var element = $(selector)
 			
-			if(Screen.isTouch()){
+			if(Display.isTouch()){
 				element.bind("mousedown", function(event) {					
 					callback(this);
 				});

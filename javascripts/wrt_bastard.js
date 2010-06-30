@@ -21,13 +21,15 @@ function includeStylesheet(src) {
 // include all JavaScripts
 includeJavaScript('commands');
 includeJavaScript('device');
+includeJavaScript('display');
+includeJavaScript('i18n');
 includeJavaScript('rss');
-includeJavaScript('screen');
 includeJavaScript('templating');
 includeJavaScript('ui');
 includeJavaScript('utility');
-includeStylesheet('wrt_bastard');
+
 
 // include styles
+includeStylesheet('wrt_bastard');
 includeStylesheet('tabs');
 includeStylesheet('dialog');

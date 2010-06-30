@@ -22,12 +22,12 @@ Commands.prototype.add = function(symbol, title, options){
 Commands.prototype.draw = function(callback){
 	var that = this;
 
-	var typeName = Screen.isTouch() ? 'touch' : 'keypad'
+	var typeName = Display.isTouch() ? 'touch' : 'keypad'
 
 	load_template('layout_' + typeName, function(data){
 		$('#layout')[0].innerHTML = data
 		
-		if(Screen.isTouch()){
+		if(Display.isTouch()){
 			$('body').addClass('touch')
 			that.drawTouch()
 		}else{
@@ -78,7 +78,8 @@ Commands.prototype.drawKeypad = function(){
 		for(var i in that.tabs){				
 			var command = new MenuItem(that.tabs[i].title, parseInt(i));
 			command.onSelect = function(id){
-				Dialog.showLoading('Učitavam')
+				// workaround for stupid X6 phone that doesn't get UTF				
+				Dialog.showLoading(i18n.loading)
 				that.click(that.tabs[id]);					
 			}
 			menu.append(command)
@@ -87,7 +88,7 @@ Commands.prototype.drawKeypad = function(){
 }
 
 Commands.prototype.clickTab = function(link){
-	Dialog.showLoading('Učitavam')	
+	Dialog.showLoading(i18n.loading)	
 	
 	var item = this.getItemByAction(link.action)
 	this.click(item)
