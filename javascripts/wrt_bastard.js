@@ -20,6 +20,12 @@ function includeStylesheet(src, path) {
   document.write("<style type=\"text/css\"> @import url(\"" + path + src + ".css\"); </style>");
 }
 
+// extend class
+function extend(extended, superclass) {
+  extended.prototype = new superclass();
+  extended.prototype.constructor = extended;
+}
+
 // include all JavaScripts
 includeJavaScript('commands');
 includeJavaScript('device');
