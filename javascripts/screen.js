@@ -1,29 +1,47 @@
-// uiManager manages screens.
-function uiManager() {
-  this.screenStack = [];
+// Screen is a superclass for various screens.
+function Screen(parent) {
+  this.DEFAULT_TEMPLATE = 'screen'
+  this.title = 'Screen'
+  this.parent = parent
+  this.data = {}
+  this.isBlocking = true
+  this.showHeader = true
+  this.clickItem = null
+  this.unloadItems = {}
 }
 
-uiManager.prototype.screenStack = null;
-uiManager.currentScreen = null;
-uiManager.prototype.setCurrent = function(screen, keepPrevious) {
-  if (keepPrevious) {
-    this.screenStack.push(this.currentScreen);
-  }
-  this.currentScreen = screen;
-};
-uiManager.prototype.back = function() {
-  if (this.screenStack.length > 0) {
-    this.currentScreen = this.screenStack.pop();
-  } else {
-    Utility.log('Back called, but no screen on stack!');
-  }
-};
+Screen.prototype.init = function() {
+  var that = this
 
-// Screen is a superclass for various screens. 
-function Screen() {
-  this.showHeader = true;
-  this.default_template = 'screen';
-};
+  if (this.isBlocking) {
+    Dialog.show('Loading')
+  }
+
+  this.loadData(function() {
+    if (that.isBlocking) {
+      Dialog.hide('Loading')
+    }
+  })
+}
+
+Screen.prototype.loadData = function(callback) {
+  callback()
+}
+
 Screen.prototype.show = function(callback) {
-  load_template(this.default_template, callback);
-};
+  if (this.showHeader) {
+    $('#header_text').html(this.title)
+    $('#header').show()
+  } else {
+    $('#header').hide()
+  }
+  this.render(callback)
+
+}
+
+Screen.prototype.render = function(callback) {
+  load_template(this.DEFAULT_TEMPLATE, callback)
+}
+
+Screen.prototype.unload = function() {
+}

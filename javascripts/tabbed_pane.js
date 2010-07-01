@@ -1,120 +1,129 @@
 function TabbedPane() {
-  this.type = Display.isTouch() ? 'touch' : 'keypad';
-  this.tabs = [];
+  this.type = Display.isTouch() ? 'touch' : 'keypad'
+  this.tabs = []
+  this.screenStack = []
+  this.currentScreen = null
 }
 
-TabbedPane.prototype.add = function(symbol, title, screen) {
-  this.tabs.push( {
-    symbol : symbol,
-    title : title,
-    screen : new screen()
-  });
-};
+TabbedPane.prototype.add = function(screen) {
+  this.tabs.push(new screen(this))
+}
 
 TabbedPane.prototype.draw = function(callback) {
-  var that = this;
+  var that = this
 
   load_template('layout_' + this.type, function(data) {
-    $('#layout')[0].innerHTML = data;
-    $('body').addClass(that.type);
+    $('#layout')[0].innerHTML = data
+    $('body').addClass(that.type)
 
     if (Display.isTouch()) {
-      that.drawTouch();
+      that.drawTouch()
     } else {
-      that.drawKeypad();
-      that.click(that.tabs[0]);
+      that.drawKeypad()
+      that.click(that.tabs[0])
     }
 
-    callback();
-  });
-};
+    callback()
+  })
+}
 
 TabbedPane.prototype.drawTouch = function() {
-  var that = this;
-  var tabs = this.tabs;
+  var that = this
 
-  render_collection($('#tab_row'), 'tabs', tabs, function() {
-    for ( var i in tabs) {
-      var link = $('.' + tabs[i].symbol);
-      link[0].action = tabs[i].symbol;
+  render_collection($('#tab_row'), 'tabs', this.tabs, function() {
+    for ( var i in that.tabs) {
+      that.tabs[i].clickItem = $($('.tab')[i])
 
-      link.bind('click', function() {
-        that.clickTab(this);
-      });
+      that.tabs[i].clickItem.click(function(num) {
+        return function() {
+          that.clickTab(num)
+        }
+      }(i))
     }
 
-    $('.tabs td').width(100 / tabs.length + '%');
-    that.clickTab($('.tabs a')[0]);
-  });
+    $('.tabs td').width(100 / that.tabs.length + '%');
+    that.clickTab(0)
+  })
 
   if (window.widget) {
-    window.menu.hideSoftkeys();
+    window.menu.hideSoftkeys()
   }
-};
+}
 
 TabbedPane.prototype.drawKeypad = function() {
-  var that = this;
+  var that = this
 
   if (window.widget) {
-    widget.setNavigationEnabled(false);
-    window.menu.setRightSoftkeyLabel("", null);
-    window.menu.showSoftkeys();
-    menu.clear();
+    widget.setNavigationEnabled(false)
+    window.menu.setRightSoftkeyLabel("", null)
+    window.menu.showSoftkeys()
+    menu.clear()
     for ( var i in that.tabs) {
-      var command = new MenuItem(that.tabs[i].title, parseInt(i));
-      command.onSelect = function(id) {
-        // workaround for stupid X6 phone that doesn't get UTF
-        Dialog.showLoading(i18n.loading);
-        that.click(that.tabs[id]);
-      };
-      menu.append(command);
+      uiManager.addMenuItem(that.tabs[i].title, i, function(id) {
+        return function() {
+          that.clickTab(id)
+        }
+      }(i))
     }
   }
-};
+}
 
-TabbedPane.prototype.clickTab = function(link) {
-  Dialog.showLoading(i18n.loading);
+TabbedPane.prototype.clickTab = function(id) {
+  var screen = this.tabs[id]
+  screen.init()
+  this.click(screen)
 
-  var item = this.getItemByAction(link.action);
-  this.click(item);
+  $('.tabs .current').removeClass('current')
+  $(screen.clickItem).addClass('current')
+  $(screen.clickItem).blur()
+}
 
-  $('.tabs .current').removeClass('current');
-  $(link).addClass('current');
-  $(link).blur();
-};
-
-TabbedPane.prototype.click = function(item) {
-  if (item.screen.showHeader) {
-    this.setTitle(item.title);
-    $('#header').show();
-  } else {
-    $('#header').hide();
-  }
-
-  $('#content').html('');
-
-  // setira content koji mu vrati funkcija
-  item.screen.show(function(data) {
-    $('#content').html(data);
-    Dialog.hide();
-  });
-};
-
-TabbedPane.prototype.getItemByAction = function(action) {
-  var item;
-  for ( var i in this.tabs) {
-    if (this.tabs[i].symbol == action) {
-      item = this.tabs[i];
-    }
-  }
-  return item;
-};
+TabbedPane.prototype.click = function(screen) {
+  this.setScreen(screen, false)
+  this.currentScreen.show(function(data) {
+    $('#content').html(data)
+  })
+}
 
 TabbedPane.prototype.setTitle = function(title) {
-  $('#header_text')[0].innerHTML = title;
-};
+  $('#header_text')[0].innerHTML = title
+}
 
 TabbedPane.prototype.clear = function() {
-  this.tabs = null;
-  this.onClick = null;
-};
+  this.tabs = null
+  this.screenStack = null
+  this.currentScreen = null
+}
+
+TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
+  if (this.currentScreen) {
+    this.currentScreen.unload()
+  }
+
+  if (keepPrevious) {
+    this.screenStack.push(this.currentScreen)
+  }
+
+  this.currentScreen = screen
+}
+
+TabbedPane.prototype.back = function() {
+  if (this.screenStack.length > 0) {
+    this.currentScreen.unload()
+    this.currentScreen = this.screenStack.pop()
+  } else {
+    Utility.log('Back called, but no screen on stack!')
+  }
+}
+
+TabbedPane.prototype.getContentSize = function() {
+  height = Display.getWidgetSize().height - $('#footer').height();
+  if (this.currentScreen.showHeader) {
+    height -= $('#header').height()
+  }
+
+  return {
+    width : $('body').width(),
+    height : height
+  }
+}
