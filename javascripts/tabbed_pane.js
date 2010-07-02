@@ -80,13 +80,7 @@ TabbedPane.prototype.clickTab = function(id) {
 
 TabbedPane.prototype.click = function(screen) {
   this.setScreen(screen, false)
-  this.currentScreen.show(function(data) {
-    $('#content').html(data)
-  })
-}
-
-TabbedPane.prototype.setTitle = function(title) {
-  $('#header_text')[0].innerHTML = title
+  this.reloadScreen()
 }
 
 TabbedPane.prototype.clear = function() {
@@ -107,10 +101,17 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
   this.currentScreen = screen
 }
 
+TabbedPane.prototype.reloadScreen = function() {
+  this.currentScreen.show(function(data) {
+    $('#content').html(data)
+  })
+}
+
 TabbedPane.prototype.back = function() {
   if (this.screenStack.length > 0) {
     this.currentScreen.unload()
     this.currentScreen = this.screenStack.pop()
+    this.reloadScreen()
   } else {
     Utility.log('Back called, but no screen on stack!')
   }
