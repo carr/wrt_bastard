@@ -1,64 +1,64 @@
 var Utility = {
 	// sets the base font size so everything else defined in 'em' units can be scaled
 	setCssBodyFontSize : function(size) {
-		document.body.style.fontSize = "" + size + "px";
-	},		
-	
-	truncate : function(text, options){
-		if(options==undefined){
-			options = {};
+		document.body.style.fontSize = "" + size + "px"
+	},
+
+	truncate : function(text, options) {
+		if (options == undefined) {
+			options = {}
 		}
-		if(!options.length){
-			options.length = 30;
+		if (!options.length) {
+			options.length = 30
 		}
-		if(!options.omission){
-			options.omission = '...';
+		if (!options.omission) {
+			options.omission = '...'
 		}
-		
+
 		if (text.length > options.length) {
-			text = text.substring(0, options.length);
-		    text = text.replace(/\w+$/, '');
-		    text += options.omission;
+			text = text.substring(0, options.length)
+		    text = text.replace(/\w+$/, '')
+		    text += options.omission
 		}
-		return text;
+		return text
 	},	
-		
-	showSlide : function(element){
+
+	showSlide : function(element) {
 		// tu me jebalo nesto, element je ostajao nevidljiv pa je maknuto
-		if(Device.getBrowserVersion() != 413 && !Display.isTouch()){
-			openItem.slideToggle();			
-		}else{
+		if (Device.getBrowserVersion() != 413 && !Display.isTouch()) {
+			openItem.slideToggle()
+		} else {
 			//element.style.display = 'block'
-			element.style.display = 'table-row';			
+			element.style.display = 'table-row'			
 		}
 	},
-	
-	show : function(element){
-		element.style.display = 'block';
+
+	show : function(element) {
+		element.style.display = 'block'
 	},
-	
-	hide : function(element){
-		element.style.display = 'none';
+
+	hide : function(element) {
+		element.style.display = 'none'
 	},
-		
+
 	// binds a "click" or "fire/enter" event so it works on keypad and touch phones
-	bindClick : function(selector, callback){
-		var element = $(selector);
-		
-		if(Display.isTouch()){
-			element.bind("mousedown", function(event) {					
-				callback(this);
-			});
-		}else{
+	bindClick : function(selector, callback) {
+		var element = $(selector)
+
+		if (Display.isTouch()) {
+			element.bind("mousedown", function(event) {
+				callback(this)
+			})
+		} else {
 			element.bind("keydown", function(event) {
-	            if (event.keyCode == 0 || event.keyCode == 13) {
-	            	callback(this);
-					return false;			            	
-	            }						
-			});
-		}	
+        if (event.keyCode == 0 || event.keyCode == 13) {
+          callback(this)
+          return false
+        }
+			})
+		}
 	},
-			
+
 	//escapes HTML/XML tags so they can be displayed in a web page
 	/*escapeHTML : function escapeHTML(str) {
 		return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -117,24 +117,24 @@ var Utility = {
 
       return str;
   },*/
-	  
+
   //Opens a URL.
   openURL : function(url) {
       if (window.widget) {
           // in WRT
-          widget.openURL(url);
+          widget.openURL(url)
       } else {
           // outside WRT
-          window.open(url, "NewWindow");
+          window.open(url, "NewWindow")
       }
   },
-  
+
   log : function(message) {
     if (navigator.userAgent.indexOf("Firefox") == -1) {
       // TODO: do logging in html
-      alert(message);
+      alert(message)
     } else {
-      console.log(message);
+      console.log(message)
     }
   }
-};
+}
