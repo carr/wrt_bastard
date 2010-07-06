@@ -31,10 +31,10 @@ Screen.prototype.loadData = function(callback) {
 Screen.prototype.show = function(callback) {
   if (this.showHeader) {
     this.resetHeaderButton()
-    $('#header_text').html(this.title)
-    $('#header').show()
+    $('#header_text').innerHTML = this.title
+    Utility.show($('#header')[0])
   } else {
-    $('#header').hide()
+    Utility.hide($('#header')[0])
   }
   this.render(callback)
 

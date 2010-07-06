@@ -57,9 +57,9 @@ TabbedPane.prototype.drawKeypad = function() {
     widget.setNavigationEnabled(false)
     window.menu.setRightSoftkeyLabel("", null)
     window.menu.showSoftkeys()
-    menu.clear()
+    window.menu.clear()
     for ( var i in that.tabs) {
-      uiManager.addMenuItem(that.tabs[i].title, i, function(id) {
+      uiManager.addMenuItem(that.tabs[i].title, parseInt(i), function(id) {
         return function() {
           that.clickTab(id)
         }
@@ -103,7 +103,7 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
 
 TabbedPane.prototype.reloadScreen = function() {
   this.currentScreen.show(function(data) {
-    $('#content').html(data)
+    $('#content')[0].innerHTML = data
   })
 }
 

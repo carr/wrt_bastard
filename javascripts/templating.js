@@ -30,7 +30,7 @@
       },
 
       this.render_cached_collection = function render_cached_collection(holder, name, collection, callback) {
-        holder.html('');
+        holder.innerHTML = '';
 
         for ( var i in collection) {
           holder.append(render(cachedTemplates[name], collection[i]));

@@ -2,6 +2,7 @@
 var uiManager = {
   init : function() {
     this.displayable = null
+    Input.setKeys()
   },
   setCurrent : function(displayable) {
     if (this.displayable !== null) {
@@ -19,6 +20,6 @@ var uiManager = {
       Dialog.showLoading(i18n.loading)
       callback(id)
     }
-    menu.append(command)
+    window.menu.append(command)
   }
 }
