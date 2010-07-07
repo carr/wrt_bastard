@@ -22,11 +22,13 @@ ScrollPane.prototype.render = function(callback) {
 
       if (Display.isTouch()) {
         $('#scroll_link').click(function(event) {
-          that.zoom(event);
+          that.zoom(event)
+          event.stopPropagation()
         })
       } else {
         $('#scroller').keypress(function(event) {
-          that.processKeyPressed(event);
+          that.processKeyPressed(event)
+          event.stopPropagation()
         })
       }
     })
