@@ -37,7 +37,6 @@ Screen.prototype.show = function(callback) {
     Utility.hide($('#header')[0])
   }
   this.render(callback)
-
 }
 
 Screen.prototype.render = function(callback) {

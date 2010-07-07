@@ -9,8 +9,8 @@ function ScrollPane(container, scrollable, width, height) {
 }
 
 ScrollPane.prototype.render = function(callback) {
-  that = this
-  size = this.container.getContentSize()
+  var that = this
+  var size = this.container.getContentSize()
 
   load_template('scroll_pane', function(data) {
     callback(data)
@@ -36,12 +36,12 @@ ScrollPane.prototype.render = function(callback) {
 }
 
 ScrollPane.prototype.zoom = function(event) {
-  scrollable = $('#scrollable')
-  scroller = $('#scroller')
-  scrollbar_left = scroller.scrollLeft()
-  scrollbar_top = scroller.scrollTop()
-  scroller_width = scroller.innerWidth()
-  scroller_height = scroller.innerHeight()
+  var scrollable = $('#scrollable')
+  var scroller = $('#scroller')
+  var scrollbar_left = scroller.scrollLeft()
+  var scrollbar_top = scroller.scrollTop()
+  var scroller_width = scroller.innerWidth()
+  var scroller_height = scroller.innerHeight()
 
   if (Display.isTouch()) {
     if (scrollable.width() == this.scrollable.width) {
@@ -77,9 +77,9 @@ ScrollPane.prototype.zoom = function(event) {
 }
 
 ScrollPane.prototype.processKeyPressed = function(event) {
-  scroller = $('#scroller')
-  scrollbar_left = scroller.scrollLeft()
-  scrollbar_top = scroller.scrollTop()
+  var scroller = $('#scroller')
+  var scrollbar_left = scroller.scrollLeft()
+  var scrollbar_top = scroller.scrollTop()
 
   switch (parseInt(event.keyCode)) {
     case Input.KEY_LEFT:
