@@ -6,7 +6,8 @@ function TabbedPane() {
 }
 
 TabbedPane.prototype.add = function(screen) {
-  this.tabs.push(new screen(this))
+  var id = this.tabs.push(new screen(this))
+  return this.tabs[id - 1]
 }
 
 TabbedPane.prototype.draw = function(callback) {
@@ -20,7 +21,7 @@ TabbedPane.prototype.draw = function(callback) {
       that.drawTouch()
     } else {
       that.drawKeypad()
-      that.click(that.tabs[0])
+      that.clickTab(0)
     }
 
     callback()
@@ -51,11 +52,14 @@ TabbedPane.prototype.drawTouch = function() {
 }
 
 TabbedPane.prototype.drawKeypad = function() {
-  var that = this
+  this.setKeypadMenu()
+}
 
+TabbedPane.prototype.setKeypadMenu = function() {
+  var that = this
   if (window.widget) {
     widget.setNavigationEnabled(false)
-    window.menu.setRightSoftkeyLabel("", null)
+    window.menu.setRightSoftkeyLabel('', null)
     window.menu.showSoftkeys()
     window.menu.clear()
     for ( var i in that.tabs) {
@@ -96,6 +100,12 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
 
   if (keepPrevious) {
     this.screenStack.push(this.currentScreen)
+    if (this.type == 'keypad') {
+      var that = this
+      window.menu.setRightSoftkeyLabel('Back', function() {
+        that.back()
+      })
+    }
   }
 
   this.currentScreen = screen
@@ -111,8 +121,14 @@ TabbedPane.prototype.back = function() {
   if (this.screenStack.length > 0) {
     this.currentScreen.unload()
     this.currentScreen = this.screenStack.pop()
+    if (this.screenStack.length == 0 && this.type == 'keypad') {
+      window.menu.setRightSoftkeyLabel('', null)
+    }
     this.reloadScreen()
   } else {
+    if (this.type == 'keypad') {
+      window.menu.setRightSoftkeyLabel('', null)
+    }
     Utility.log('Back called, but no screen on stack!')
   }
 }

@@ -3,7 +3,7 @@ var Dialog = {
 	
 	show : function(text){
 		// TODO refactor
-		$('#dialog_content').innerHTML = text
+		$('#dialog_content')[0].innerHTML = text
 		Utility.show($('#dialog')[0])
 	},
 

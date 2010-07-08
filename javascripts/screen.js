@@ -31,7 +31,7 @@ Screen.prototype.loadData = function(callback) {
 Screen.prototype.show = function(callback) {
   if (this.showHeader) {
     this.resetHeaderButton()
-    $('#header_text').innerHTML = this.title
+    $('#header_text')[0].innerHTML = this.title
     Utility.show($('#header')[0])
   } else {
     Utility.hide($('#header')[0])
@@ -44,9 +44,6 @@ Screen.prototype.render = function(callback) {
 }
 
 Screen.prototype.resetHeaderButton = function() {
-  this.setHeaderButton('i.png', function() {
-    Utility.log('About screen')
-  })
 }
 
 Screen.prototype.setHeaderButton = function(image, callback) {
