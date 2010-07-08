@@ -37,4 +37,4 @@ For debugging purposes in Firefox, you need to enable cross site scripting. This
 Author
 ======
 
-Copyright © 2010 Tomislav Car, Josip Biščan (Infinum)
+Copyright © 2010 Tomislav Car, Josip Bišćan (Infinum)
