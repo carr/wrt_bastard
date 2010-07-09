@@ -26,6 +26,17 @@ function extend(extended, superclass) {
   extended.prototype.constructor = extended
 }
 
+function count(object) {
+  var count = 0;
+  for (var property in object) {
+    if (object.hasOwnProperty(property)) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
 // include all JavaScripts
 includeJavaScript('commands')
 includeJavaScript('device')
