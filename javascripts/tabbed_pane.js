@@ -74,12 +74,15 @@ TabbedPane.prototype.setKeypadMenu = function() {
 
 TabbedPane.prototype.clickTab = function(id) {
   var screen = this.tabs[id]
-  screen.init()
-  this.click(screen)
+  var that = this
 
-  $('.tabs .current').removeClass('current')
-  $(screen.clickItem).addClass('current')
-  $(screen.clickItem).blur()
+  screen.init(function() {
+    that.click(screen)
+
+    $('.tabs .current').removeClass('current')
+    $(screen.clickItem).addClass('current')
+    $(screen.clickItem).blur()
+  })
 }
 
 TabbedPane.prototype.click = function(screen) {
@@ -102,7 +105,7 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
     this.screenStack.push(this.currentScreen)
     if (this.type == 'keypad') {
       var that = this
-      window.menu.setRightSoftkeyLabel('Back', function() {
+      window.menu.setRightSoftkeyLabel(i18n.Back, function() {
         that.back()
       })
     }

@@ -10,16 +10,18 @@ function Screen(parent) {
   this.unloadItems = {}
 }
 
-Screen.prototype.init = function() {
+Screen.prototype.init = function(callback) {
   var that = this
 
   if (this.isBlocking) {
-    Dialog.show('Loading')
+    Dialog.showLoading()
   }
 
   this.loadData(function() {
+    callback()
+
     if (that.isBlocking) {
-      Dialog.hide('Loading')
+      Dialog.hide()
     }
   })
 }

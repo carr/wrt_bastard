@@ -26,7 +26,7 @@ var uiManager = {
     var command = new MenuItem(title, id)
     command.onSelect = function(id) {
       // workaround for stupid X6 phone that doesn't get UTF
-      Dialog.showLoading(i18n.loading)
+      Dialog.showLoading()
       callback(id)
     }
     window.menu.append(command)
