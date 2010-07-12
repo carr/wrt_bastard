@@ -12,6 +12,9 @@ var Dialog = {
 	},
 	
 	showLoading : function(text){
+	  if (text == undefined) {
+	    text = i18n.loading
+	  }
 		this.show('<span><img src="images/spinner4.gif" /> ' + text + '</span>')
 	}	
 }
