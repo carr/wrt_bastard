@@ -136,5 +136,13 @@ var Utility = {
     } else {
       console.log(message)
     }
+  },
+  
+  parseJSON : function(text) {
+    if (Device.getBrowserVersion() == 413) {
+      return eval("(" + text + ")")
+    } else {
+      return JSON.parse(text)
+    }
   }
 }
