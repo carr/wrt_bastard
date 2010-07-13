@@ -76,8 +76,8 @@ TabbedPane.prototype.clickTab = function(id) {
   var screen = this.tabs[id]
   var that = this
 
-  screen.init(function() {
-    that.click(screen)
+  screen.init(function(callback) {
+    that.click(screen, callback)
 
     $('.tabs .current').removeClass('current')
     $(screen.clickItem).addClass('current')
@@ -85,9 +85,9 @@ TabbedPane.prototype.clickTab = function(id) {
   })
 }
 
-TabbedPane.prototype.click = function(screen) {
+TabbedPane.prototype.click = function(screen, callback) {
   this.setScreen(screen, false)
-  this.reloadScreen()
+  this.reloadScreen(callback)
 }
 
 TabbedPane.prototype.clear = function() {
@@ -114,20 +114,32 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
   this.currentScreen = screen
 }
 
-TabbedPane.prototype.reloadScreen = function() {
+TabbedPane.prototype.reloadScreen = function(callback) {
   this.currentScreen.show(function(data) {
     $('#content')[0].innerHTML = data
+
+    callback()
   })
 }
 
 TabbedPane.prototype.back = function() {
   if (this.screenStack.length > 0) {
     this.currentScreen.unload()
-    this.currentScreen = this.screenStack.pop()
+    var screen = this.currentScreen = this.screenStack.pop()
+
     if (this.screenStack.length == 0 && this.type == 'keypad') {
       window.menu.setRightSoftkeyLabel('', null)
     }
-    this.reloadScreen()
+
+    if (screen.isBlocking) {
+      Dialog.showLoading()
+    }
+
+    this.reloadScreen(function() {
+      if (screen.isBlocking) {
+        Dialog.hide()
+      }
+    })
   } else {
     if (this.type == 'keypad') {
       window.menu.setRightSoftkeyLabel('', null)
