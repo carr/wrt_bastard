@@ -10,13 +10,13 @@ jQuery.ajax = function() {
 
 // include a script file
 function includeJavaScript(src, path) {
-  path = path || 'wrt_bastard/javascripts/';
+  path = path || 'wrt_bastard/javascripts/'
   document.write("<script type=\"text/javascript\" src=\"" + path + src + ".js\"></script>")
 }
 
 // include a stylesheet
 function includeStylesheet(src, path) {
-  path = path || 'wrt_bastard/stylesheets/';
+  path = path || 'wrt_bastard/stylesheets/'
   document.write("<style type=\"text/css\"> @import url(\"" + path + src + ".css\"); </style>")
 }
 
@@ -27,14 +27,14 @@ function extend(extended, superclass) {
 }
 
 function count(object) {
-  var count = 0;
+  var count = 0
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
-      count++;
+      count++
     }
   }
 
-  return count;
+  return count
 }
 
 // include all JavaScripts

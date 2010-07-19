@@ -42,7 +42,7 @@ TabbedPane.prototype.drawTouch = function() {
       }(i))
     }
 
-    $('.tabs td').width(100 / that.tabs.length + '%');
+    $('.tabs td').width(100 / that.tabs.length + '%')
     that.clickTab(0)
   })
 
@@ -149,7 +149,7 @@ TabbedPane.prototype.back = function() {
 }
 
 TabbedPane.prototype.getContentSize = function() {
-  var height = Display.getWidgetSize().height - $('#footer').height();
+  var height = Display.getWidgetSize().height - $('#footer').height()
   if (this.currentScreen.showHeader) {
     height -= $('#header').height()
   }

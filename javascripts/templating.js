@@ -1,6 +1,6 @@
 (function() {
-  var cache = {};
-  var cachedTemplates = {};
+  var cache = {}
+  var cachedTemplates = {}
 
   // loads a new template from templates/name.html file, caches it in
   // cachedTemplates and invokes a callback
@@ -9,10 +9,10 @@
           url : "templates/" + name + ".html",
           context : document.body,
           success : function(data) {
-            cachedTemplates[name] = data;
-            callback(data);
+            cachedTemplates[name] = data
+            callback(data)
           }
-        });
+        })
       },
 
       // renders a collection of hashes, rendering each hash with the "render"
@@ -22,22 +22,22 @@
       this.render_collection = function render_collection(holder, name, collection, callback) {
         if (cachedTemplates[name] == null) {
           this.load_template(name, function() {
-            render_cached_collection(holder, name, collection, callback);
-          });
+            render_cached_collection(holder, name, collection, callback)
+          })
         } else {
-          render_cached_collection(holder, name, collection, callback);
+          render_cached_collection(holder, name, collection, callback)
         }
       },
 
       this.render_cached_collection = function render_cached_collection(holder, name, collection, callback) {
-        holder.innerHTML = '';
+        holder.innerHTML = ''
 
         for ( var i in collection) {
-          holder.append(render(cachedTemplates[name], collection[i]));
+          holder.append(render(cachedTemplates[name], collection[i]))
         }
 
         if (callback != undefined) {
-          callback();
+          callback()
         }
       },
 
@@ -56,9 +56,9 @@
                 // Convert the template into pure JavaScript
                 str.replace(/[\r\t\n]/g, " ").split("<%").join("\t").replace(/((^|%>)[^\t]*)'/g, "$1\r").replace(
                     /\t=(.*?)%>/g, "',$1,'").split("\t").join("');").split("%>").join("p.push('").split("\r").join(
-                    "\\'") + "');}return p.join('');");
+                    "\\'") + "');}return p.join('');")
 
         // Provide some basic currying to the user
-        return data ? fn(data) : fn;
-      };
-})();
+        return data ? fn(data) : fn
+      }
+})()

@@ -31,135 +31,135 @@ var Display = {
 	onEnterNormalView : null,
 	
 	init : function(){
-		window.onresize = Display.onResize;
+		window.onresize = Display.onResize
 		
-		var dims = this.detectDisplayDimensions();
-		this.width = dims.width;
-		this.height = dims.height;
+		var dims = this.detectDisplayDimensions()
+		this.width = dims.width
+		this.height = dims.height
 		
-		Display.onResize();
+		Display.onResize()
 	},
 	
 	/** detect the size of the physical display */
 	detectDisplayDimensions : function(){
-		var w, h;
+		var w, h
 					
-		w = screen.width;
-		h = screen.height;
+		w = screen.width
+		h = screen.height
 			
 		// obviously the widget is running on a computer
 		if(w > 700 && h > 700){			
-			w = window.innerWidth;
-			h = window.innerHeight;
+			w = window.innerWidth
+			h = window.innerHeight
 		}	
 		
-		return {width: w, height: h};
+		return {width: w, height: h}
 	},
 	
 	/** triggered every time the user enters/exits home view, rotates screens etc. */
 	onResize : function(){		
 		
-		var newDims = Display.detectDisplayDimensions();
-		var newWidgetSize = Display.getWidgetSize();
+		var newDims = Display.detectDisplayDimensions()
+		var newWidgetSize = Display.getWidgetSize()
 		
 		if(Display.isTouch()){
-			window.menu.hideSoftkeys(); // TODO maknuti na bolje mjesto, ovdje je da ne prijavljuje krivu velicinu
-			Utility.setCssBodyFontSize(16);
+			window.menu.hideSoftkeys() // TODO maknuti na bolje mjesto, ovdje je da ne prijavljuje krivu velicinu
+			Utility.setCssBodyFontSize(16)
 		}else{
 			if(Device.getBrowserVersion() == 413){
-				Utility.setCssBodyFontSize(9)	;
+				Utility.setCssBodyFontSize(9)
 			}else{
-				Utility.setCssBodyFontSize(12);
+				Utility.setCssBodyFontSize(12)
 			}
 		}
 		
 		if (newDims.height == Display.width && newDims.width == Display.height){
-			Display.orientationChanged();
+			Display.orientationChanged()
 		}else{
 			//$('#log').append("new dimensions " + newDims.width + "x" + newDims.height)
 			//$('#log').append("new wdget " + newWidgetSize.width + "x" + newWidgetSize.height)
-			//Utility.log(newWidgetSize.height);
+			//Utility.log(newWidgetSize.height)
 			if ( newWidgetSize.height < Display.MINI_VIEW_THRESHOLD ) {
-				$('body').addClass('home_screen');
-				$('body').removeClass('normal_screen');
-				Display.onEnterHomeView();
+				$('body').addClass('home_screen')
+				$('body').removeClass('normal_screen')
+				Display.onEnterHomeView()
 			} else {
-				$('body').addClass('normal_screen');
-				$('body').removeClass('home_screen');
-				Display.onEnterNormalView();
+				$('body').addClass('normal_screen')
+				$('body').removeClass('home_screen')
+				Display.onEnterNormalView()
 			}
 		}
 		
-		Display.width = newDims.width;
-		Display.height = newDims.height;		
+		Display.width = newDims.width
+		Display.height = newDims.height
 		
-		window.scrollTo(0, 0);				
+		window.scrollTo(0, 0)
 	},
 	
 	/** called when the screen orientation has changed */
 	orientationChanged : function(){
 		if(Display.w < Display.h){
 			if(this.onEnterPortrait){
-				this.onEnterPortrait();
+				this.onEnterPortrait()
 			}					
 		}else{
 			if(this.onEnterLandscape){
-				this.onEnterLandscape();
+				this.onEnterLandscape()
 			}		
 		}
 	},
 	
 	/** get the size of the widget (not the screen) */	
 	getWidgetSize: function() {
-		var height;
-		var width;
+		var height
+		var width
 		
 		if(window.widget){
-		    width = window.innerWidth;
-		    height = window.innerHeight;			
+		    width = window.innerWidth
+		    height = window.innerHeight
 		}else{
-			width = screen.width;
-			height = screen.height;
-		}		
+			width = screen.width
+			height = screen.height
+		}
 
 		return {
 			width: width,
 			height: height
-		};
+		}
 	},
 	
 	/** is the phone currently in landscape mode */
 	isLandscape: function() {
-		return ( Display.width > Display.height );	
+		return ( Display.width > Display.height )
 	},
 	
 	/** get resolution type based on current screen orientation */
 	getType : function(){
-		var resolution;	    
+		var resolution
 	    
-		var width = Display.detectDisplayDimensions().width;
-		var height = Display.detectDisplayDimensions().height;		
+		var width = Display.detectDisplayDimensions().width
+		var height = Display.detectDisplayDimensions().height
 		
 		if(height < 100){
-	        resolution = this.RESOLUTION_HOME_SCREEN;
+	        resolution = this.RESOLUTION_HOME_SCREEN
 	    } else if (width == 240 && height == 320) {
-	        resolution = this.RESOLUTION_QVGA_PORTRAIT;
+	        resolution = this.RESOLUTION_QVGA_PORTRAIT
 	    } else if (width == 320 && height == 240) {
-	        resolution = this.RESOLUTION_QVGA_LANDSCAPE;
+	        resolution = this.RESOLUTION_QVGA_LANDSCAPE
 	    } else if (width > 300 && height > 570) {
-	        resolution = this.RESOLUTION_NHD_PORTRAIT;
+	        resolution = this.RESOLUTION_NHD_PORTRAIT
 	    } else if (width > 570 && height > 300) {
-	        resolution = this.RESOLUTION_NHD_LANDSCAPE;
+	        resolution = this.RESOLUTION_NHD_LANDSCAPE
 	    } else {
-	        resolution = this.RESOLUTION_UNDEFINED;
+	        resolution = this.RESOLUTION_UNDEFINED
 	    }
 		
-		return resolution;
+		return resolution
 	},
 	
 	/** returns true if this is a touch based phone (based on screen size) */
 	isTouch : function(){
-		var screenType = this.getType();
-		return screenType == this.RESOLUTION_NHD_LANDSCAPE || screenType == this.RESOLUTION_NHD_PORTRAIT;
+		var screenType = this.getType()
+		return screenType == this.RESOLUTION_NHD_LANDSCAPE || screenType == this.RESOLUTION_NHD_PORTRAIT
 	}
-};
+}

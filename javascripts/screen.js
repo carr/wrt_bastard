@@ -51,7 +51,7 @@ Screen.prototype.resetHeaderButton = function() {
 Screen.prototype.setHeaderButton = function(image, callback) {
   $('.header_button').unbind('click')
   $('.header_button').click(callback)
-  $('.header_button img').attr('src', 'images/' + image);
+  $('.header_button img').attr('src', 'images/' + image)
 }
 
 Screen.prototype.unload = function() {

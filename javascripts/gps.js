@@ -12,15 +12,13 @@ var Gps = {
 
   init : function() {
     try {
-      this.so = device.getServiceObject('Service.Location', 'ILocation');
+      this.so = device.getServiceObject('Service.Location', 'ILocation')
     } catch (e) {
       this.so = null
-//      Utility.log(e)
     }
   },
 
   getLocation : function(callback) {
-    Utility.log('entered get location')
     var that = this
 
     try {
@@ -31,27 +29,23 @@ var Gps = {
         },
         'PartialUpdates' : false
       }, function(transId, eventCode, result) {
-        Utility.log('entering callback')
         if (eventCode == 4) {
-          Utility.log('event 4')
           if (++that.timeout >= that.timeouts.length) {
-            Utility.log('callback timeout')
             callback( {
               'error' : 'Timeout'
             })
+            that.timeout = 0
           } else {
-            Utility.log('new get location')
             that.getLocation(callback)
           }
         } else {
-          Utility.log('return data')
           callback( {
             'data' : result.ReturnValue
           })
         }
       })
     } catch (e) {
-      Utility.log('GetLocation e: ' + e)
+      //Utility.log('GetLocation e: ' + e)
     }
   }
 }
