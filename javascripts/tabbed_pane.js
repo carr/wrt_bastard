@@ -13,7 +13,7 @@ TabbedPane.prototype.add = function(screen) {
 TabbedPane.prototype.draw = function(callback) {
   var that = this
 
-  load_template('layout_' + this.type, function(data) {
+  T.loadTemplate('layout_' + this.type, function(data) {
     $('#layout')[0].innerHTML = data
     $('body').addClass(that.type)
 
@@ -31,7 +31,7 @@ TabbedPane.prototype.draw = function(callback) {
 TabbedPane.prototype.drawTouch = function() {
   var that = this
 
-  render_collection($('#tab_row'), 'tabs', this.tabs, function() {
+  T.renderCollectionIn($('#tab_row'), 'tabs', this.tabs, function() {
     for ( var i in that.tabs) {
       that.tabs[i].clickItem = $($('.tab')[i])
 

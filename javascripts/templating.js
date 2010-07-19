@@ -35,7 +35,7 @@
         })
 
         for ( var i in collection) {
-          holder.append(render(cachedTemplates[name], collection[i]))
+          holder.append(render(cachedTemplates[name], collection[i]))        	
         }
 
         if (callback != undefined) {

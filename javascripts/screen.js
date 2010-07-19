@@ -17,8 +17,8 @@ Screen.prototype.init = function(callback) {
     Dialog.showLoading()
   }
 
-  this.loadData(function() {
-    callback(function() {
+  this.loadData(function() {	  
+    callback(function() {    	
       if (that.isBlocking) {
         Dialog.hide()
       }
@@ -42,7 +42,7 @@ Screen.prototype.show = function(callback) {
 }
 
 Screen.prototype.render = function(callback) {
-  load_template(this.DEFAULT_TEMPLATE, callback)
+  T.loadTemplate(this.DEFAULT_TEMPLATE, callback)
 }
 
 Screen.prototype.resetHeaderButton = function() {
