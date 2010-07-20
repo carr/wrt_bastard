@@ -17,7 +17,7 @@ Screen.prototype.init = function(callback) {
     Dialog.showLoading()
   }
 
-  this.loadData(function() {	  
+  this.loadData(function() {
     callback(function() {    	
       if (that.isBlocking) {
         Dialog.hide()
