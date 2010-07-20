@@ -16,8 +16,8 @@ ScrollPane.prototype.render = function(callback) {
     callback(data)
     $('#scroller').width(size.width)
     $('#scroller').height(size.height)
-    
-    T.loadTemplate(that.scrollable.element, function(data) {
+        
+    T.renderTemplate(that.scrollable.element, {timestamp : (new Date()).getTime()}, function(data) {
       $('#scroll_link')[0].innerHTML = data
 
       if (Display.isTouch()) {
