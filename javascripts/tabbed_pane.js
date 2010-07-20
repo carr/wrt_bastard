@@ -34,7 +34,7 @@ TabbedPane.prototype.drawTouch = function() {
   T.renderCollectionIn($('#tab_row'), 'tabs', this.tabs, function() {
     for ( var i in that.tabs) {
       that.tabs[i].clickItem = $($('.tab')[i])
-
+      
       that.tabs[i].clickItem.click(function(num) {
         return function() {
           that.clickTab(num)

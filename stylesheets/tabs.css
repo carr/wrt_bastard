@@ -17,7 +17,13 @@
 		text-decoration: none;
 		display: table-cell;
 		line-height: 60px;
+		height: 84px;
 	}
+	
+	.tabs .icon{
+		background-repeat: no-repeat;
+		background-position: center top;
+	}	
 	
 	.tabs .tab:focus,.tabs .tab.current {
 		/* define this property in local css and remove background-color

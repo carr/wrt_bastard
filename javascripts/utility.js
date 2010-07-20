@@ -3,6 +3,11 @@ var Utility = {
 	setCssBodyFontSize : function(size) {
 		document.body.style.fontSize = "" + size + "px"
 	},
+	
+	// converts all <a href="www.url.com">bla</a> links contained in element to window.open so it doesn't break the WRT app
+	convertLinksToExternal : function(element){
+		
+	},
 
 	truncate : function(text, options) {
 		if (options == undefined) {
@@ -46,6 +51,7 @@ var Utility = {
 		var element = $(selector)
 
 		if (Display.isTouch()) {
+			console.log(element)
 			element.bind("mousedown", function(event) {
 				callback(this)
 			})
