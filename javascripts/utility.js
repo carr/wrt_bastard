@@ -51,7 +51,6 @@ var Utility = {
 		var element = $(selector)
 
 		if (Display.isTouch()) {
-			console.log(element)
 			element.bind("mousedown", function(event) {
 				callback(this)
 			})

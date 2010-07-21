@@ -53,10 +53,12 @@ includeJavaScript('scroll_pane')
 includeJavaScript('tabbed_pane')
 //includeJavaScript('templating')
 includeJavaScript('template')
+includeJavaScript('toast')
 includeJavaScript('ui_manager')
 includeJavaScript('utility')
 
 // include styles
 includeStylesheet('dialog')
 includeStylesheet('tabs')
+includeStylesheet('toast')
 includeStylesheet('wrt_bastard')
