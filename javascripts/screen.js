@@ -31,14 +31,16 @@ Screen.prototype.loadData = function(callback) {
 }
 
 Screen.prototype.show = function(callback) {
+  widget.prepareForTransition("fade");
   if (this.showHeader) {
     this.resetHeaderButton()
-    $('#header_text')[0].innerHTML = this.title
-    Utility.show($('#header')[0])
+    $('#header_text').html(this.title)
+    $('#header').show()
   } else {
-    Utility.hide($('#header')[0])
+    $('#header').hide()
   }
   this.render(callback)
+  widget.performTransition()
 }
 
 Screen.prototype.render = function(callback) {

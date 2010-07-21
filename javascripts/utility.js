@@ -6,7 +6,14 @@ var Utility = {
 	
 	// converts all <a href="www.url.com">bla</a> links contained in element to window.open so it doesn't break the WRT app
 	convertLinksToExternal : function(element){
-		
+		element.find('a').each(function(index){
+			var link = $(this)
+			var url = link.attr('href')
+			link.attr('href', 'javascript:;')
+			Utility.bindClick($(this), function(){
+				Utility.openURL(url)				
+			})			
+		})
 	},
 
 	truncate : function(text, options) {
@@ -39,11 +46,13 @@ var Utility = {
 	},
 
 	show : function(element) {
-		element.style.display = 'block'
+		debugger
+		throw 'The show function is deprecated'
 	},
 
 	hide : function(element) {
-		element.style.display = 'none'
+		debugger
+		throw 'The hide function is deprecated'		
 	},
 
 	// binds a "click" or "fire/enter" event so it works on keypad and touch phones

@@ -8,6 +8,31 @@ jQuery.ajax = function() {
   $.oldAjax.apply($, arguments)
 }
 
+// jquery plugin for plain html that works on s60 browsers
+jQuery.fn.extend({  
+    html: function(value) {
+        if (value == undefined) {  
+            return (this[0] ? this[0].innerHTML : null);  
+        }  
+        else if(this[0]) {  
+            try {  
+                this[0].innerHTML = value;  
+            } catch(e) {}  
+            return this;  
+        }  
+    }  
+});
+
+// overriding of show method for s60 browsers that doesn't crash
+jQuery.show = function(element){
+	element.css({display: 'none'})
+}
+
+//overriding of show method for s60 browsers that doesn't crash
+jQuery.hide = function(element){
+	element.css({display: 'block'})
+}
+
 // include a script file
 function includeJavaScript(src, path) {
   path = path || 'wrt_bastard/javascripts/'
@@ -51,7 +76,6 @@ includeJavaScript('rss')
 includeJavaScript('screen')
 includeJavaScript('scroll_pane')
 includeJavaScript('tabbed_pane')
-//includeJavaScript('templating')
 includeJavaScript('template')
 includeJavaScript('toast')
 includeJavaScript('ui_manager')

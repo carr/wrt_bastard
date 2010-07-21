@@ -2,9 +2,8 @@ var Dialog = {
 	selector : '#dialog',
 	
 	show : function(text){
-		// TODO refactor
-		$('#dialog_content')[0].innerHTML = text
-		Utility.show($('#dialog')[0])
+		$('#dialog_content').html(text)
+		$('#dialog').show()
 	},
 
 	hide : function(){
