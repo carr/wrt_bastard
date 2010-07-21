@@ -1,6 +1,8 @@
 var Toast = {
   DEFAULT_DURATION : 2000,
 
+  MIN_DURATION : 800,
+
   stack : [],
 
   current : null,
@@ -9,32 +11,37 @@ var Toast = {
     if (typeof (duration) == 'undefined') {
       duration = this.DEFAULT_DURATION
     }
-    this.stack.push( {
+
+    if (duration < Toast.MIN_DURATION) {
+      duration = Toast.MIN_DURATION
+    }
+
+    Toast.stack.push( {
       text : text,
       duration : duration
     })
 
-    if (this.current == null) {
-      this.play()
+    if (Toast.current == null) {
+      Toast.play()
     }
   },
 
   play : function() {
-    this.current = this.stack.shift()
+    Toast.current = Toast.stack.shift()
 
-    $('#toast_content')[0].innerHTML = this.current.text
-    Utility.show($('#toast')[0])
+    $('#toast_content')[0].innerHTML = Toast.current.text
+    $('#toast').fadeIn('slow')
 
-    setTimeout("Toast.stop()", this.current.duration)
+    setTimeout("Toast.stop()", Toast.current.duration)
   },
 
   stop : function() {
-    this.current = null
-    
-    $('#toast').hide()
+    Toast.current = null
 
-    if (this.stack.length > 0) {
-      this.play()
+    $('#toast').fadeOut('slow')
+
+    if (Toast.stack.length > 0) {
+      Toast.play()
     }
   }
 }
