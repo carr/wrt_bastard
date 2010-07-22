@@ -18,7 +18,7 @@ Screen.prototype.init = function(callback) {
   }
 
   this.loadData(function() {
-    callback(function() {    	
+    callback(function() {
       if (that.isBlocking) {
         Dialog.hide()
       }
@@ -39,8 +39,10 @@ Screen.prototype.show = function(callback) {
   } else {
     $('#header').hide()
   }
-  this.render(callback)
-  widget.performTransition()
+  this.render(function(data) {
+    callback(data)
+    widget.performTransition()
+  })
 }
 
 Screen.prototype.render = function(callback) {

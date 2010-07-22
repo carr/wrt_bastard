@@ -29,7 +29,7 @@ var Toast = {
   play : function() {
     Toast.current = Toast.stack.shift()
 
-    $('#toast_content')[0].innerHTML = Toast.current.text
+    $('#toast_content').html(Toast.current.text)
     $('#toast').fadeIn('slow')
 
     setTimeout("Toast.stop()", Toast.current.duration)
