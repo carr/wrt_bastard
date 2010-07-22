@@ -39,8 +39,10 @@ Screen.prototype.show = function(callback) {
   } else {
     $('#header').hide()
   }
-  this.render(callback)
-  widget.performTransition()
+  this.render(function(data) {
+    callback(data)
+    widget.performTransition()
+  })
 }
 
 Screen.prototype.render = function(callback) {

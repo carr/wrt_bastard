@@ -14,7 +14,7 @@ TabbedPane.prototype.draw = function(callback) {
   var that = this
 
   T.loadTemplate('layout_' + this.type, function(data) {
-    $('#layout')[0].innerHTML = data
+    $('#layout').html(data)
     $('body').addClass(that.type)
 
     if (Display.isTouch()) {
@@ -116,7 +116,7 @@ TabbedPane.prototype.setScreen = function(screen, keepPrevious) {
 
 TabbedPane.prototype.reloadScreen = function(callback) {
   this.currentScreen.show(function(data) {
-    $('#content')[0].innerHTML = data
+    $('#content').html(data)
 
     callback()
   })
