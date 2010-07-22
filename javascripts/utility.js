@@ -10,7 +10,7 @@ var Utility = {
 			var link = $(this)
 			var url = link.attr('href')
 			link.attr('href', 'javascript:;')
-			Utility.bindClick($(this), function(){
+			$(this).bindClick(function(){
 				Utility.openURL(url)				
 			})			
 		})
@@ -46,31 +46,16 @@ var Utility = {
 	},
 
 	show : function(element) {
-		debugger
-		throw 'The show function is deprecated'
+		Utility.log('The show function is deprecated')
 	},
 
 	hide : function(element) {
-		debugger
-		throw 'The hide function is deprecated'		
+		Utility.log('The hide function is deprecated')		
 	},
 
 	// binds a "click" or "fire/enter" event so it works on keypad and touch phones
 	bindClick : function(selector, callback) {
-		var element = $(selector)
-
-		if (Display.isTouch()) {
-			element.bind("mousedown", function(event) {
-				callback(this)
-			})
-		} else {
-			element.bind("keydown", function(event) {
-        if (event.keyCode == 0 || event.keyCode == 13) {
-          callback(this)
-          return false
-        }
-			})
-		}
+	  Utility.log('The bindClick function is deprecated')
 	},
 
 	//escapes HTML/XML tags so they can be displayed in a web page

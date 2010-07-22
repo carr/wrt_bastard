@@ -9,31 +9,44 @@ jQuery.ajax = function() {
 }
 
 // jquery plugin for plain html that works on s60 browsers
-jQuery.fn.extend({
-  html: function(value) {
+jQuery.fn.extend( {
+  html : function(value) {
     if (value == undefined) {
-        return (this[0] ? this[0].innerHTML : null)
+      return (this[0] ? this[0].innerHTML : null)
     } else if (this[0]) {
       try {
-        for (var i = 0; i < this.length; i++) {
+        for ( var i = 0; i < this.length; i++) {
           this[i].innerHTML = value
         }
-      } catch(e) {
+      } catch (e) {
       }
       return this
     }
+  },
+
+  show : function() {
+    this.css('display', 'block')
+  },
+
+  hide : function() {
+    this.css('display', 'none')
+  },
+
+  bindClick : function(callback) {
+    if (Display.isTouch()) {
+      this.bind("mousedown", function(event) {
+        callback(this)
+      })
+    } else {
+      this.bind("keydown", function(event) {
+        if (event.keyCode == 0 || event.keyCode == 13) {
+          callback(this)
+          return false
+        }
+      })
+    }
   }
 })
-
-// overriding of show method for s60 browsers that doesn't crash
-jQuery.show = function(element){
-	element.css({display: 'none'})
-}
-
-//overriding of show method for s60 browsers that doesn't crash
-jQuery.hide = function(element){
-	element.css({display: 'block'})
-}
 
 // include a script file
 function includeJavaScript(src, path) {
@@ -55,7 +68,7 @@ function extend(extended, superclass) {
 
 function count(object) {
   var count = 0
-  for (var property in object) {
+  for ( var property in object) {
     if (object.hasOwnProperty(property)) {
       count++
     }
