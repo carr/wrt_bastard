@@ -5,14 +5,19 @@ var T = {
 	// loads a template file from templates/<name>.html and returns the contents with callback(data)
 	loadTemplate : function(name, callback){
 		var that = this
-	    $.ajax({
-	        url : "templates/" + name + ".html",
-	        context : document.body,
-	        success : function(data) {
-	          that.cachedTemplates[name] = data
-	          callback(data)
-	        }
-	    })	
+		
+		if(that.cachedTemplates[name] == null){
+		    $.ajax({
+		        url : "templates/" + name + ".html",
+		        context : document.body,
+		        success : function(data) {
+		          that.cachedTemplates[name] = data
+		          callback(data)
+		        }
+		    })	
+		}else{
+			callback(that.cachedTemplates[name])
+		}
 	},
 
 	// render the 'str' template with the data from the object literal 'data'
