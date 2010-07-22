@@ -9,19 +9,21 @@ jQuery.ajax = function() {
 }
 
 // jquery plugin for plain html that works on s60 browsers
-jQuery.fn.extend({  
-    html: function(value) {
-        if (value == undefined) {  
-            return (this[0] ? this[0].innerHTML : null);  
-        }  
-        else if(this[0]) {  
-            try {  
-                this[0].innerHTML = value;  
-            } catch(e) {}  
-            return this;  
-        }  
-    }  
-});
+jQuery.fn.extend({
+  html: function(value) {
+    if (value == undefined) {
+        return (this[0] ? this[0].innerHTML : null)
+    } else if (this[0]) {
+      try {
+        for (var i = 0; i < this.length; i++) {
+          this[i].innerHTML = value
+        }
+      } catch(e) {
+      }
+      return this
+    }
+  }
+})
 
 // overriding of show method for s60 browsers that doesn't crash
 jQuery.show = function(element){
