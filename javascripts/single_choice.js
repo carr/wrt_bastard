@@ -10,11 +10,11 @@ function SingleChoice(options){
 	this.current = $(this.items[0])
 	this.clickCallback = options.onClick
 	
-	this.items.bind('click', function(event){
+	this.items.bindClick(function(element){
 		that.items.removeClass('current')
-		$(this).addClass('current')
+		$(element).addClass('current')
 		if(that.clickCallback){
-			that.clickCallback($(this))
+			that.clickCallback($(element))
 		}
 	})
 	
