@@ -30,7 +30,11 @@ var Toast = {
     Toast.current = Toast.stack.shift()
 
     $('#toast_content').html(Toast.current.text)
-    $('#toast').fadeIn('slow')
+    if (Device.getBrowserVersion() == 413) {
+      $('#toast').show()
+    } else {
+      $('#toast').fadeIn('slow')
+    }
 
     setTimeout("Toast.stop()", Toast.current.duration)
   },
@@ -38,7 +42,11 @@ var Toast = {
   stop : function() {
     Toast.current = null
 
-    $('#toast').fadeOut('slow')
+    if (Device.getBrowserVersion() == 413) {
+      $('#toast').hide()
+    } else {
+      $('#toast').fadeOut('slow')
+    }
 
     if (Toast.stack.length > 0) {
       Toast.play()

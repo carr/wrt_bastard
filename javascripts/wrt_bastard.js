@@ -41,7 +41,7 @@ jQuery.fn.extend( {
       this.bind("keydown", function(event) {
         if (event.keyCode == 0 || event.keyCode == 13) {
           callback(this)
-          return false
+          event.stopPropagation()
         }
       })
     }
