@@ -129,11 +129,11 @@ var Utility = {
   },
 
   log : function(message) {
-    if (navigator.userAgent.indexOf("Firefox") == -1) {
-      // TODO: do logging in html
-      alert(message)
+    // TODO: do logging in html
+	if(Device.isEmulator()){
+		console.log(message)
     } else {
-      console.log(message)
+    	alert(message)
     }
   },
   

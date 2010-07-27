@@ -85,7 +85,9 @@ var T = {
 		var that = this
 		this.renderTemplate(name, data, function(rendered){
 			holder.html(that.renderCachedTemplate(name, data))
-			callback()
+			if(callback){
+				callback()
+			}
 		})	    
 	},
 	
@@ -98,7 +100,9 @@ var T = {
 	renderCollectionIn : function(holder, name, collection, callback){
 	    this.renderCollection(name, collection, function(data){
 	    	holder.html(data)
-	    	callback()
+	    	if(callback){
+	    		callback()
+	    	}
 	    })
 	},
 	

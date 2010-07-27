@@ -1,6 +1,11 @@
 var Device = {
 	browserVersion: null,
 
+	// is the widget running on an emulator (a web browser on a PC)
+	isEmulator : function(){
+		return navigator.userAgent.indexOf('SymbianOS')==-1;
+	},
+	
 	user_agents : [
 	  ['NokiaN95_8GB', 'N95']
 	],
