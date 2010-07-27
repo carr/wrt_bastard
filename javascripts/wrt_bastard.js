@@ -24,6 +24,18 @@ jQuery.fn.extend( {
     }
   },
 
+  appendHTML : function(value) {
+    if (value == undefined) {
+      return null
+    } else if (this[0]) {
+      for ( var i = 0; i < this.length; i++) {
+        this[i].innerHTML += value
+      }
+
+      return this
+    }
+  },
+
   show : function() {
     this.css('display', 'block')
   },
