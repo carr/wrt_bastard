@@ -32,6 +32,7 @@ Screen.prototype.loadData = function(callback) {
 
 Screen.prototype.show = function(callback) {
   widget.prepareForTransition("fade");
+  window.scrollTo(0, 0);
   if (this.showHeader) {
     this.resetHeaderButton()
     $('#header_text').html(this.title)
