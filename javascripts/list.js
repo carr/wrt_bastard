@@ -1,12 +1,12 @@
 /**
- * The SingleChoice is a list of elements where only one can be current at a given time, something like a list of 
- * radio buttons
+ * A list of elements where only one can be current (focused) at a given time
  */
-function SingleChoice(options){
+function List(options){
 	var that = this
 	
 	this.element = options.element
 	this.items = this.element.find('a')
+	
 	this.current = $(this.items[0])
 	this.clickCallback = options.onClick
 	
@@ -21,6 +21,6 @@ function SingleChoice(options){
     this.current.addClass('current')
 }
 
-SingleChoice.prototype.setCurrent = function(item){
+List.prototype.setCurrent = function(item){
 	// TODO
 }

@@ -98,9 +98,9 @@ includeJavaScript('gps')
 includeJavaScript('i18n')
 includeJavaScript('input')
 includeJavaScript('json2')
+includeJavaScript('list')
 includeJavaScript('router')
 includeJavaScript('rss')
-includeJavaScript('single_choice')
 includeJavaScript('screen')
 includeJavaScript('scroll_pane')
 includeJavaScript('soap')
@@ -115,3 +115,17 @@ includeStylesheet('dialog')
 includeStylesheet('tabs')
 includeStylesheet('toast')
 includeStylesheet('wrt_bastard')
+
+
+if(ENV != undefined && ENV == 'production'){
+  includeStylesheet('bundle', 'app/stylesheets/')
+  includeJavaScript('bundle', 'app/javascripts/')
+}else{
+  for(var i in config.stylesheets){
+    includeStylesheet(config.stylesheets[i].filename, config.stylesheets[i].path)
+  }
+
+  for(var i in config.javascripts){
+    includeJavaScript(config.javascripts[i].filename, config.javascripts[i].path)
+  }
+}

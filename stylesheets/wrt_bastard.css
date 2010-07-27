@@ -2,3 +2,7 @@
 a:hover, a:focus {
 	outline: none;
 }
+/** remove underline from all links */
+a{
+  text-decoration: none;
+}
