@@ -111,4 +111,4 @@ class BastardDeployer
 end
 
 b = BastardDeployer.new
-b.deploy 
+b.deploy

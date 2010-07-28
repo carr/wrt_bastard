@@ -116,16 +116,15 @@ includeStylesheet('tabs')
 includeStylesheet('toast')
 includeStylesheet('wrt_bastard')
 
-
-if(ENV != undefined && ENV == 'production'){
+if (ENV != undefined && ENV == 'production') {
   includeStylesheet('bundle', 'app/stylesheets/')
   includeJavaScript('bundle', 'app/javascripts/')
-}else{
-  for(var i in config.stylesheets){
+} else {
+  for ( var i in config.stylesheets) {
     includeStylesheet(config.stylesheets[i].filename, config.stylesheets[i].path)
   }
 
-  for(var i in config.javascripts){
+  for ( var i in config.javascripts) {
     includeJavaScript(config.javascripts[i].filename, config.javascripts[i].path)
   }
 }
