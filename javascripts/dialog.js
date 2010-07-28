@@ -3,17 +3,17 @@ var Dialog = {
 	
 	show : function(text){
 		$('#dialog_content').html(text)
-		$('#dialog').show()
+		$(Dialog.selector).show()
 	},
 
 	hide : function(){
-		$(this.selector).hide()
+		$(Dialog.selector).hide()
 	},
 	
 	showLoading : function(text){
 	  if (text == undefined) {
 	    text = i18n.loading
 	  }
-		this.show('<span><img src="images/spinner4.gif" /> ' + text + '</span>')
+		Dialog.show('<span><img src="images/spinner4.gif" /> ' + text + '</span>')
 	}	
 }

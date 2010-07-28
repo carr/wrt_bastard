@@ -9,7 +9,7 @@ var Toast = {
 
   show : function(text, duration) {
     if (typeof (duration) == 'undefined') {
-      duration = this.DEFAULT_DURATION
+      duration = Toast.DEFAULT_DURATION
     }
 
     if (duration < Toast.MIN_DURATION) {

@@ -5,16 +5,14 @@ var T = {
   // loads a template file from templates/<name>.html and returns the contents with callback(data)
   loadTemplate : function(name, callback) {
     if (T.cachedTemplates[name] == null) {
-      $.ajax( {
-        url : "templates/" + name + ".html",
-        context : document.body,
-        success : function(data) {
-          T.cachedTemplates[name] = data
-          callback(data)
-        }
+      $.get('templates/' + name + '.html', function(data) {
+        T.cachedTemplates[name] = data
+        callback(data)
       })
     } else {
-      callback(T.cachedTemplates[name])
+      setTimeout(function() {
+        callback(T.cachedTemplates[name])
+      }, 50)
     }
   },
 
@@ -42,7 +40,7 @@ var T = {
     return data ? fn(data) : fn
   },
 
-// render a template with the specific name, load the template if necessary, return rendered contents via callback method
+  // render a template with the specific name, load the template if necessary, return rendered contents via callback method
   renderTemplate : function(name, data, callback) {
     if (T.cachedTemplates[name] == null) {
       T.loadTemplate(name, function() {
