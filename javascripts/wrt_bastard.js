@@ -90,7 +90,7 @@ function count(object) {
 }
 
 // include all JavaScripts
-includeJavaScript('commands')
+//includeJavaScript('commands')
 includeJavaScript('device')
 includeJavaScript('dialog')
 includeJavaScript('display')
@@ -109,6 +109,11 @@ includeJavaScript('template')
 includeJavaScript('toast')
 includeJavaScript('ui_manager')
 includeJavaScript('utility')
+
+// dependency resolution idea, do not delete
+/*for(var i=0; i<toLoad.javascripts.length; i++){
+  includeJavaScript(toLoad.javascripts[i].filename, toLoad.javascripts[i].path)
+}*/
 
 // include styles
 includeStylesheet('dialog')
