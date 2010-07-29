@@ -42,7 +42,7 @@ TabbedPane.prototype.drawTouch = function() {
       }(i))
     }
 
-    $('.tabs td').width(100 / that.tabs.length + '%')
+    $('.tabs td').width(Display.getWidgetSize().width / that.tabs.length + 'px')
     that.clickTab(0)
   })
 
