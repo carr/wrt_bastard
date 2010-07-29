@@ -4,6 +4,10 @@
 function List(options){
 	var that = this
 	
+	if(!options.element){
+		throw "No element specified for list"
+	}
+	
 	this.element = options.element
 	this.items = this.element.find('a')
 	
