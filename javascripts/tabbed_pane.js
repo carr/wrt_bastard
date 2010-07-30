@@ -75,6 +75,12 @@ TabbedPane.prototype.setKeypadMenu = function() {
 TabbedPane.prototype.clickTab = function(id) {
   var screen = this.tabs[id]
   var that = this
+  this.screenStack = []
+  this.currentScreen = null
+  
+  if (this.type == 'keypad') {
+    window.menu.setRightSoftkeyLabel('', null)
+  }
 
   screen.init(function(callback) {
     that.click(screen, callback)
