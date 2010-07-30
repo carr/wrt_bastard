@@ -74,7 +74,7 @@ function includeStylesheet(src, path) {
 
 // extend class
 function extend(extended, superclass) {
-  extended.prototype = new superclass()
+  extended.prototype = new superclass()  
   extended.prototype.constructor = extended
 }
 
@@ -90,15 +90,17 @@ function count(object) {
 }
 
 // include all JavaScripts
-includeJavaScript('commands')
+//includeJavaScript('commands')
 includeJavaScript('device')
 includeJavaScript('dialog')
 includeJavaScript('display')
+
 includeJavaScript('gps')
 includeJavaScript('i18n')
 includeJavaScript('input')
 includeJavaScript('json2')
 includeJavaScript('list')
+includeJavaScript('expandable_list')
 includeJavaScript('router')
 includeJavaScript('rss')
 includeJavaScript('screen')
@@ -109,6 +111,11 @@ includeJavaScript('template')
 includeJavaScript('toast')
 includeJavaScript('ui_manager')
 includeJavaScript('utility')
+
+// dependency resolution idea, do not delete
+/*for(var i=0; i<toLoad.javascripts.length; i++){
+  includeJavaScript(toLoad.javascripts[i].filename, toLoad.javascripts[i].path)
+}*/
 
 // include styles
 includeStylesheet('dialog')
