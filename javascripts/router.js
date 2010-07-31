@@ -44,5 +44,9 @@ Router.prototype.get = function(routeName, params){
 		url = url.replace(param, params[param.replace(/^:{1}/g, '')])
 	}
 	
+	var cacheBuster = url.indexOf('?')==-1 ? '?' : '&'
+	cacheBuster += 'cachebuster=' + (new Date()).getTime()
+	 // TODO implement
+	 //+ cacheBuster
 	return this.server + url;
 }

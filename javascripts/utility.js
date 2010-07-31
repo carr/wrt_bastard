@@ -61,11 +61,11 @@ var Utility = {
 	//escapes HTML/XML tags so they can be displayed in a web page
 	/*escapeHTML : function escapeHTML(str) {
 		return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-	},
+	},*/
 	
 	// dumps an object for easy inspection
 	inspect : function(obj, maxLevels, level){
-    var str = '', type, msg;
+      var str = '', type, msg;
 
       // Start Input Validations
       // Don't touch, we start iterating at level zero
@@ -115,7 +115,7 @@ var Utility = {
         str += '</ul>';
 
       return str;
-  },*/
+  },
 
   //Opens a URL.
   openURL : function(url) {
