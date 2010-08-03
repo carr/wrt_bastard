@@ -46,11 +46,11 @@ jQuery.fn.extend( {
 
   bindClick : function(callback) {
     if (Display.isTouch()) {
-      this.bind("mousedown", function(event) {
+      this.mousedown(function(event) {
         callback(this)
       })
     } else {
-      this.bind("keydown", function(event) {
+      this.keydown(function(event) {
         if (event.keyCode == 0 || event.keyCode == 13) {
           callback(this)
           event.stopPropagation()
@@ -74,7 +74,7 @@ function includeStylesheet(src, path) {
 
 // extend class
 function extend(extended, superclass) {
-  extended.prototype = new superclass()  
+  extended.prototype = new superclass()
   extended.prototype.constructor = extended
 }
 
@@ -93,8 +93,8 @@ function count(object) {
 //includeJavaScript('commands')
 includeJavaScript('device')
 includeJavaScript('dialog')
+includeJavaScript('dialog_box')
 includeJavaScript('display')
-
 includeJavaScript('gps')
 includeJavaScript('i18n')
 includeJavaScript('input')
@@ -119,6 +119,7 @@ includeJavaScript('utility')
 
 // include styles
 includeStylesheet('dialog')
+includeStylesheet('dialog_box')
 includeStylesheet('tabs')
 includeStylesheet('toast')
 includeStylesheet('wrt_bastard')

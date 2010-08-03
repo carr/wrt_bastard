@@ -25,7 +25,8 @@
 		background-position: center top;
 	}	
 	
-	.tabs .tab:focus,.tabs .tab.current {
+	.tabs .tab:focus,
+	.tabs .tab.current {
 		/* define this property in local css and remove background-color
 		background: url('../../images/tab_bg.png');*/
 		background-repeat : no-repeat;

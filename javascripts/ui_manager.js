@@ -5,6 +5,7 @@ var uiManager = {
   init : function() {
     this.displayable = null
     Input.setKeys()
+    DialogBox.init()
   },
 
   getCurrent : function() {
