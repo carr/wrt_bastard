@@ -6,30 +6,40 @@ var DialogBox = {
   },
 
   show : function(params) {
-    var dialogText = params.dialogText
-    var positiveText = params.positiveText
-    var negativeText = params.negativeText
-    var positiveCallback = params.positiveCallback
-    var negativeCallback = params.negativeCallback
+    var dialogText
+    var positiveText
+    var negativeText
+    var positiveCallback
+    var negativeCallback
 
-    if (typeof (dialogText) == 'undefined') {
+    if (typeof (params) == 'undefined' || typeof (params.dialogText) == 'undefined') {
       dialogText = i18n.dialogText
+    } else {
+      dialogText = params.dialogText
     }
 
-    if (typeof (positiveText) == 'undefined') {
+    if (typeof (params) == 'undefined' || typeof (params.positiveText) == 'undefined') {
       positiveText = i18n.positiveText
+    } else {
+      positiveText = params.positiveText
     }
 
-    if (typeof (negativeText) == 'undefined') {
+    if (typeof (params) == 'undefined' || typeof (params.negativeText) == 'undefined') {
       negativeText = i18n.negativeText
+    } else {
+      negativeText = params.negativeText
     }
 
-    if (typeof (positiveCallback) == 'undefined') {
+    if (typeof (params) == 'undefined' || typeof (params.positiveCallback) == 'undefined') {
       positiveCallback = DialogBox.positiveCallback
+    } else {
+      positiveCallback = params.positiveCallback
     }
 
-    if (typeof (negativeCallback) == 'undefined') {
+    if (typeof (params) == 'undefined' || typeof (params.negativeCallback) == 'undefined') {
       negativeCallback = DialogBox.negativeCallback
+    } else {
+      negativeCallback = params.negativeCallback
     }
 
     $('#dialog_box_text').html(dialogText)

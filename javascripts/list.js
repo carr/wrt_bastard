@@ -3,9 +3,9 @@
  */
 
 function List(options) {
-  var that = this
-
   if (typeof (options) != 'undefined') {
+    var that = this
+
     if (!options.element) {
       throw "No element specified for list"
     }
