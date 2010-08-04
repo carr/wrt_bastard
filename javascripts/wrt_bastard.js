@@ -76,6 +76,7 @@ function includeStylesheet(src, path) {
 function extend(extended, superclass) {
   extended.prototype = new superclass()
   extended.prototype.constructor = extended
+  extended.prototype.parent = superclass.prototype
 }
 
 function count(object) {
@@ -101,6 +102,7 @@ includeJavaScript('input')
 includeJavaScript('json2')
 includeJavaScript('list')
 includeJavaScript('expandable_list')
+includeJavaScript('panel')
 includeJavaScript('router')
 includeJavaScript('rss')
 includeJavaScript('screen')
