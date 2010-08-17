@@ -143,5 +143,15 @@ var Utility = {
     } else {
       return JSON.parse(text)
     }
+  },
+
+  isEmpty : function(object) {
+    for (var i in object) {
+      if (object.hasOwnProperty(i)) {
+        return false
+      }
+    }
+
+    return true
   }
 }
