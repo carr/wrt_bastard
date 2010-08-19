@@ -2,6 +2,7 @@ function Panel() {
   this.type = Display.isTouch() ? 'touch' : 'keypad'
   this.screenStack = []
   this.currentScreen = null
+  this.menuItems = []
 }
 
 Panel.prototype.back = function() {
@@ -33,6 +34,7 @@ Panel.prototype.back = function() {
 Panel.prototype.clear = function() {
   this.screenStack = null
   this.currentScreen = null
+  this.menuItems = null
 }
 
 Panel.prototype.draw = function(callback) {
@@ -43,12 +45,11 @@ Panel.prototype.draw = function(callback) {
     $('body').addClass(that.type)
 
     if (that.type == 'keypad') {
-      window.menu.setRightSoftkeyLabel('', null)
+      $('.touch').remove()
+      that.drawKeypadMenu()
     }
 
-    that.currentScreen.init(function(callback) {
-      that.reloadScreen(callback)
-    })
+    that.clickMenuItem(0)
   })
 }
 
@@ -88,4 +89,51 @@ Panel.prototype.setScreen = function(screen, keepPrevious) {
   }
 
   this.currentScreen = screen
+}
+
+Panel.prototype.loadScreen = function(screen, callback) {
+  this.setScreen(screen, false)
+  this.reloadScreen(callback)
+}
+
+Panel.prototype.addMenuItem = function(screen) {
+  var id = this.menuItems.push(new screen(this))
+  return this.menuItems[id - 1]
+}
+
+Panel.prototype.drawKeypadMenu = function() {
+  var that = this
+
+  if (window.widget) {
+    widget.setNavigationEnabled(false)
+    window.menu.setRightSoftkeyLabel('', null)
+    window.menu.showSoftkeys()
+    window.menu.clear()
+    for ( var i in this.menuItems) {
+      uiManager.addMenuItem(this.menuItems[i].title, parseInt(i), function(id) {
+        return function() {
+          that.clickMenuItem(id)
+        }
+      }(i))
+    }
+  }
+}
+
+Panel.prototype.clickMenuItem = function(id) {
+  var screen = this.menuItems[id]
+  var that = this
+  this.screenStack = []
+  this.currentScreen = null
+
+  if (this.type == 'keypad') {
+    window.menu.setRightSoftkeyLabel('', null)
+  }
+
+  screen.init(function(callback) {
+    that.menuItemOnInit(screen, callback)
+  })
+}
+
+Panel.prototype.menuItemOnInit = function(screen, callback) {
+  this.loadScreen(screen, callback)
 }
