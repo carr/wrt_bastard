@@ -15,7 +15,7 @@ function List(options) {
     }
 
     this.element = options.element
-    this.items = this.element.find('a')
+    this.items = this.element.find('.item_link')
     this.data = options.data
 
     this.setCurrent(options.current ? options.current : 0)
@@ -24,8 +24,7 @@ function List(options) {
     this.items.bindClick(function(element) {
       for ( var i = 0; i < that.items.length; i++) {
         if (that.items[i] == element) {
-          that.element.removeClass('current')
-          $(that.element[i]).addClass('current')
+          that.applyCurrent(i);
           if (that.clickCallback) {
             that.clickCallback($(element))
           }

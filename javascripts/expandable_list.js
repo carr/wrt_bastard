@@ -6,13 +6,27 @@
 extend(ExpandableList, List)
 
 function ExpandableList(options) {
-  console.log(this.constructor)
+  if (typeof (options) != 'undefined') {
+    if (!options.element) {
+      throw "No element specified for list"
+    }
+    this.element = options.element
+
+    this.expanders = this.element.find('.expander')
+    this.expandeds = this.element.find('.expanded')
+
+    this.parent.constructor.call(this, options)
+
+    this.autoClose = options.autoClose ? options.autoClose : true
+  }
 }
 
-ExpandableList.prototype.constructor = function() {
-
-}
-
-ExpandableList.prototype.setCurrent = function(item) {
-  // TODO
+ExpandableList.prototype.applyCurrent = function(index) {
+  this.element.removeClass('current')
+  this.current = $(this.element[index])
+  this.current.addClass('current')
+  if (this.autoClose) {
+    this.expandeds.hide()
+  }
+  $(this.expandeds[index]).show()
 }
