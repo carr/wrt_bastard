@@ -50,6 +50,7 @@ Panel.prototype.draw = function(callback) {
     }
 
     that.clickMenuItem(0)
+    callback()
   })
 }
 
