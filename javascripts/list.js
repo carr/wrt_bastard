@@ -10,24 +10,58 @@ function List(options) {
       throw "No element specified for list"
     }
 
+    if (!options.data) {
+      throw "No data specified for list"
+    }
+
     this.element = options.element
     this.items = this.element.find('a')
+    this.data = options.data
 
-    this.current = $(this.items[0])
+    this.setCurrent(options.current ? options.current : 0)
     this.clickCallback = options.onClick
 
     this.items.bindClick(function(element) {
-      that.items.removeClass('current')
-      $(element).addClass('current')
-      if (that.clickCallback) {
-        that.clickCallback($(element))
+      for ( var i = 0; i < that.items.length; i++) {
+        if (that.items[i] == element) {
+          that.element.removeClass('current')
+          $(that.element[i]).addClass('current')
+          if (that.clickCallback) {
+            that.clickCallback($(element))
+          }
+          break
+        }
       }
-    })
 
-    this.current.addClass('current')
+    })
   }
 }
 
 List.prototype.setCurrent = function(item) {
-  // TODO
+  if (typeof (item) == 'number') {
+    if (item >= 0 && item < this.element.length) {
+      this.applyCurrent(item)
+    } else {
+      throw "Unknown item number: " + item
+    }
+  } else {
+    if (this.data[0][item.key]) {
+      var counter = 0
+      for ( var i in this.data) {
+        if (this.data[i][item.key] == item.value) {
+          this.applyCurrent(counter)
+          break
+        }
+        counter++
+      }
+    } else {
+      throw "Unknown key: " + item.key
+    }
+  }
+}
+
+List.prototype.applyCurrent = function(index) {
+  this.element.removeClass('current')
+  this.current = $(this.element[index])
+  this.current.addClass('current')
 }
