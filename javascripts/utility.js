@@ -119,12 +119,12 @@ var Utility = {
 
   //Opens a URL.
   openURL : function(url) {
-      if (window.widget) {
-          // in WRT
-          widget.openURL(url)
+      if (Device.isEmulator()) {
+        // outside WRT
+        window.open(url, "NewWindow")
       } else {
-          // outside WRT
-          window.open(url, "NewWindow")
+        // in WRT
+        widget.openURL(url)
       }
   },
 
