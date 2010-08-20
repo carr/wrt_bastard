@@ -124,7 +124,6 @@ Panel.prototype.clickMenuItem = function(id) {
   var screen = this.menuItems[id]
   var that = this
   this.screenStack = []
-  this.currentScreen = null
 
   if (this.type == 'keypad') {
     window.menu.setRightSoftkeyLabel('', null)
