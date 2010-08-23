@@ -6,6 +6,7 @@
 var Router = function(options) {
   this.server = options.server
   this.routes = {}
+  this.defaultParams = options.defaultParams ? options.defaultParams : null
 }
 
 // register a new route for a URL.
@@ -40,6 +41,10 @@ Router.prototype.get = function(routeName, params) {
 
   var url = route.url
 
+  if (this.defaultParams) {
+    url += '?' + $.param(this.defaultParams)
+  }
+
   for ( var i in route.options.parameters) {
     var param = route.options.parameters[i]
     var name = param.replace(/^:{1}/g, '')
@@ -53,7 +58,6 @@ Router.prototype.get = function(routeName, params) {
 
   var cacheBuster = url.indexOf('?') == -1 ? '?' : '&'
   cacheBuster += 'cachebuster=' + (new Date()).getTime()
-  // TODO implement
-  //+ cacheBuster
+  // TODO implement cacheBuster
   return this.server + url;
 }
