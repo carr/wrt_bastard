@@ -8,7 +8,6 @@ jQuery.ajax = function() {
   $.oldAjax.apply($, arguments)
 }
 
-// jquery plugin for plain html that works on s60 browsers
 jQuery.fn.extend( {
   html : function(value) {
     if (value == undefined) {
@@ -60,6 +59,34 @@ jQuery.fn.extend( {
   }
 })
 
+jQuery.extend( {
+  get : function(url, data, callback, type, options) {
+    if (jQuery.isFunction(data)) {
+      options = type
+      type = callback
+      callback = data
+      data = null
+    }
+
+    if (typeof (type) != 'string') {
+      options = type
+      type = null
+    }
+
+    if (options && options.cached) {
+      Cache.get(url, callback, options)
+    } else {
+      return jQuery.ajax( {
+        type : "GET",
+        url : url,
+        data : data,
+        success : callback,
+        dataType : type
+      })
+    }
+  }
+})
+
 // include a script file
 function includeJavaScript(src, path) {
   path = path || 'wrt_bastard/javascripts/'
@@ -92,6 +119,7 @@ function count(object) {
 
 // include all JavaScripts
 //includeJavaScript('commands')
+includeJavaScript('cache')
 includeJavaScript('device')
 includeJavaScript('dialog')
 includeJavaScript('dialog_box')
