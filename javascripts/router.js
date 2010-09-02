@@ -58,6 +58,6 @@ Router.prototype.get = function(routeName, params) {
 
   var cacheBuster = url.indexOf('?') == -1 ? '?' : '&'
   cacheBuster += 'cachebuster=' + (new Date()).getTime()
-  
+
   return this.server + url + cacheBuster;
 }

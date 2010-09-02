@@ -1,64 +1,60 @@
 var Device = {
-	browserVersion: null,
+  browserVersion : null,
 
-	// is the widget running on an emulator (a web browser on a PC)
-	isEmulator : function(){
-		return navigator.userAgent.indexOf('SymbianOS')==-1;
-	},
-	
-	user_agents : [
-	  ['NokiaN95_8GB', 'N95']
-	],
+  isEmulator : function() {
+    return navigator.userAgent.indexOf('SymbianOS') == -1;
+  },
 
-	getModel : function() {
-	},
+  user_agents : [ [ 'NokiaN95_8GB', 'N95' ] ],
 
-	getVersion : function() {
-		var version = null
+  getModel : function() {
+  },
 
-		var str = "SymbianOS/9.2; Series60/3.1 NokiaN95_8GB"
-		str = navigator.userAgent
-		Utility.log(str)
-		var regexp = /Series[\d]{2}\/([\d]{1})\.([\d]{1})/
+  getVersion : function() {
+    var version = null
 
-		var result = regexp.exec(str)
-		if (result) {
-			version = new DeviceVersion(result[1], result[2])
-		}
+    var str = "SymbianOS/9.2; Series60/3.1 NokiaN95_8GB"
+    str = navigator.userAgent
+    Utility.log(str)
+    var regexp = /Series[\d]{2}\/([\d]{1})\.([\d]{1})/
 
-		return version
-	},
+    var result = regexp.exec(str)
+    if (result) {
+      version = new DeviceVersion(result[1], result[2])
+    }
 
-	getBrowserVersion : function() {
-		if (this.browserVersion == null) {
-			var str = navigator.userAgent
-			//str = "AppleWebKit/413 (KHTML, like Gecko)"
-			var regexp = /AppleWebKit\/([\d]+)/
+    return version
+  },
 
-			var result = regexp.exec(str)
-			if (result) {
-				this.browserVersion = parseInt(result[1])
-			}
-		}
+  getBrowserVersion : function() {
+    if (this.browserVersion == null) {
+      var str = navigator.userAgent
+      var regexp = /AppleWebKit\/([\d]+)/
 
-		return this.browserVersion
-	},
+      var result = regexp.exec(str)
+      if (result) {
+        this.browserVersion = parseInt(result[1])
+      }
+    }
 
-	supportsHomeScreen : function() {
-		return this.getModel == 'N97'
-	},
+    return this.browserVersion
+  },
 
-	hasGps : function() {
-	  Gps.init()
-	  return Gps.so != null
-	}
+  supportsHomeScreen : function() {
+    return this.getModel == 'N97'
+  },
+
+  hasGps : function() {
+    Gps.init()
+    return Gps.so != null
+  }
 }
 
 function DeviceVersion(major, minor) {
-	this.major = parseInt(major)
-	this.minor = parseInt(minor)
+  this.major = parseInt(major)
+  this.minor = parseInt(minor)
 }
 
 DeviceVersion.prototype.toString = function() {
-	return "" + this.major + "." + this.minor
+  return "" + this.major + "." + this.minor
 }

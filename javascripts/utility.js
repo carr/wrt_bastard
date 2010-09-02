@@ -153,5 +153,16 @@ var Utility = {
     }
 
     return true
+  },
+  
+  count : function(object) {
+    var count = 0
+    for ( var property in object) {
+      if (object.hasOwnProperty(property)) {
+        count++
+      }
+    }
+
+    return count
   }
 }
