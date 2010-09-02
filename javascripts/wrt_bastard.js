@@ -11,7 +11,10 @@ function includeStylesheet(src, path) {
 }
 
 // include all JavaScripts
+includeJavaScript('sizzle')
 includeJavaScript('js_ext-touch-debug')
+includeJavaScript('js_ext_templates')
+includeJavaScript('js_ext_extensions')
 includeJavaScript('cache')
 includeJavaScript('device')
 includeJavaScript('dialog')
@@ -22,7 +25,6 @@ includeJavaScript('input')
 includeJavaScript('json2')
 includeJavaScript('router')
 includeJavaScript('rss')
-includeJavaScript('sizzle')
 includeJavaScript('soap')
 includeJavaScript('toast')
 includeJavaScript('utility')
