@@ -9,7 +9,7 @@ var Cache = {
     }
   },
 
-  get : function(key, callback, options) {
+  get : function(key, options) {
     var data
 
     if (options.persistent || Cache.persistent) {
@@ -22,20 +22,14 @@ var Cache = {
       data = Utility.parseJSON(data)
 
       if (options.timeout && (new Date()).getTime() > data.time + options.timeout) {
-        Cache.retrieve(key, callback, options)
+        Cache.clear(key)
+        return null
       } else {
-        callback(data.value)
+        return data.value
       }
     } else {
-      Cache.retrieve(key, callback, options)
+      return null
     }
-  },
-
-  retrieve : function(key, callback, options) {
-    $.get(key, function(data) {
-      Cache.set(key, data, options)
-      callback(data)
-    })
   },
 
   set : function(key, data, options) {

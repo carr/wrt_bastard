@@ -61,6 +61,7 @@ jQuery.fn.extend( {
 
 jQuery.extend( {
   get : function(url, data, callback, type, options) {
+    var returnValue = null
     if (jQuery.isFunction(data)) {
       options = type
       type = callback
@@ -74,7 +75,19 @@ jQuery.extend( {
     }
 
     if (options && options.cached) {
-      Cache.get(url, callback, options)
+      returnValue = Cache.get(url, options)
+
+      if (returnValue == null) {
+        var oldCallback = callback
+        callback = function(data) {
+          Cache.set(url, data, options)
+          oldCallback(data)
+        }
+      }
+    }
+
+    if (returnValue != null) {
+      callback(returnValue)
     } else {
       return jQuery.ajax( {
         type : "GET",
