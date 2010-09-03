@@ -1,3 +1,10 @@
+// define selector with sizzle if not defined in browser
+if (typeof (document.querySelectorAll) == 'undefined') {
+  document.querySelectorAll = Element.prototype.querySelectorAll = function(selectors) {
+    return Sizzle(selectors, this)
+  }
+}
+
 // include a script file
 function includeJavaScript(src, path) {
   path = path || 'wrt_bastard/javascripts/'
@@ -11,12 +18,13 @@ function includeStylesheet(src, path) {
 }
 
 // include all JavaScripts
-includeJavaScript('sizzle')
 includeJavaScript('js_ext-touch-debug')
+includeJavaScript('device')
+includeJavaScript('utility')
+includeJavaScript('sizzle')
 includeJavaScript('js_ext_templates')
 includeJavaScript('js_ext_extensions')
 includeJavaScript('cache')
-includeJavaScript('device')
 includeJavaScript('dialog')
 includeJavaScript('dialog_box')
 includeJavaScript('display')
@@ -27,7 +35,6 @@ includeJavaScript('router')
 includeJavaScript('rss')
 includeJavaScript('soap')
 includeJavaScript('toast')
-includeJavaScript('utility')
 
 // dependency resolution idea, do not delete
 /*for(var i=0; i<toLoad.javascripts.length; i++){
