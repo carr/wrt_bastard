@@ -45,12 +45,12 @@ Wrt.initTemplates = function() {
   })
 }
 Wrt.log = function(message) {
-    // TODO: do logging in html
-    if(Device.isEmulator()){
-        console.log(message)
-    } else {
-        alert(message)
-    }
+  // TODO: do logging in html
+  if(Device.isEmulator()){
+      console.log(message)
+  } else {
+      alert(message)
+  }
 }
 Wrt.exit = function(){
   window.close()
@@ -67,6 +67,7 @@ includeBastardJavaScript('input')
 includeBastardJavaScript('json2')
 includeBastardJavaScript('router')
 includeBastardJavaScript('rss')
+includeBastardJavaScript('rpc')
 includeBastardJavaScript('soap')
 includeBastardJavaScript('toast')
 includeBastardJavaScript('utility')
