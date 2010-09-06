@@ -12,27 +12,16 @@ var Tpl = {
       }
    });
   },*/
-  
-  init : function(){
-    Ext.KeyButton = Ext.extend(Ext.Button, {
-      renderTpl : new Ext.XTemplate(Tpl.get('keyButton'), {
-        compiled : true
-      })
-    })    
-  },
 
   get : function(tplId) {
     if (!Tpl.cache[tplId]) {
-      var tpl = Ext.get(tplId)
-      //var tpl = frame.document.getElementById(tplId)      
-      if(tpl == null){
-        alert("No such template " + tplId)
-        return
+      try {
+        Tpl.cache[tplId] = Ext.get(tplId).getHTML().trim()
+      } catch (e) {
+        Wrt.log('Template "' + tplId + '" not defined!')
       }
-      //tpl = new Ext.Element(tpl)
-      Tpl.cache[tplId] = tpl.getHTML().trim()
     }
-    
+
     return Tpl.cache[tplId]
   }
 }

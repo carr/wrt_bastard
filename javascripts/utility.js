@@ -127,15 +127,6 @@ var Utility = {
         widget.openURL(url)
       }
   },
-
-  log : function(message) {
-    // TODO: do logging in html
-	if(Device.isEmulator()){
-		console.log(message)
-    } else {
-    	alert(message)
-    }
-  },
   
   parseJSON : function(text) {
     if (Device.getBrowserVersion() == 413) {

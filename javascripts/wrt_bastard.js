@@ -1,3 +1,9 @@
+// define selector with sizzle if not defined in browser
+if (typeof (document.querySelectorAll) == 'undefined') {
+  document.querySelectorAll = Element.prototype.querySelectorAll = function(selectors) {
+    return Sizzle(selectors, this)
+  }
+}
 // include a script file
 function includeJavaScript(src, path) {
   document.write("<script type=\"text/javascript\" src=\"" + path + src + ".js\"></script>")
@@ -18,12 +24,11 @@ function includeBastardStylesheet(src){
 includeBastardJavaScript('sizzle')
 includeBastardJavaScript('js_ext-touch-debug')
 includeBastardJavaScript('js_ext_templates')
-includeBastardJavaScript('js_ext_extensions')
 
 var Wrt = {}
 Wrt.setup = function(){
   //Tpl.loadAll(function(){
-    Tpl.init() 
+    Wrt.initTemplates() 
     
     if (window.widget) {
       window.menu.hideSoftkeys();
@@ -31,6 +36,21 @@ Wrt.setup = function(){
         Utility.setCssBodyFontSize(22)
     }     
   //})
+}
+Wrt.initTemplates = function() {
+  Ext.KeyButton = Ext.extend(Ext.Button, {
+    renderTpl : new Ext.XTemplate(Tpl.get('keyButton'), {
+      compiled : true
+    })
+  })
+}
+Wrt.log = function(message) {
+    // TODO: do logging in html
+    if(Device.isEmulator()){
+        console.log(message)
+    } else {
+        alert(message)
+    }
 }
 Wrt.exit = function(){
   window.close()
