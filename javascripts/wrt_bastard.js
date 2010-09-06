@@ -13,48 +13,55 @@ function includeStylesheet(src, path) {
   document.write("<style type=\"text/css\"> @import url(\"" + path + src + ".css\"); </style>")
 }
 
-function includeBastardJavaScript(src){
+function includeBastardJavaScript(src) {
   includeJavaScript(src, 'wrt_bastard/javascripts/')
 }
 
-function includeBastardStylesheet(src){
+function includeBastardStylesheet(src) {
   includeStylesheet(src, 'wrt_bastard/stylesheets/')
 }
 
 includeBastardJavaScript('sizzle')
 includeBastardJavaScript('js_ext-touch-debug')
 includeBastardJavaScript('js_ext_templates')
+includeBastardJavaScript('js_ext_extensions')
 
 var Wrt = {}
-Wrt.setup = function(){
+
+Wrt.setup = function() {
   //Tpl.loadAll(function(){
-    Wrt.initTemplates() 
-    
-    if (window.widget) {
-      window.menu.hideSoftkeys();
-      if(!Device.isEmulator())
-        Utility.setCssBodyFontSize(22)
-    }     
+  Wrt.initTemplates()
+
+  if (window.widget) {
+    window.menu.hideSoftkeys()
+    if (!Device.isEmulator()) {
+      Utility.setCssBodyFontSize(22)
+    }
+
+    if (!Display.isTouch()) {
+      window.widget.setNavigationEnabled(false)
+    }
+  }
   //})
 }
+
 Wrt.initTemplates = function() {
-  Ext.KeyButton = Ext.extend(Ext.Button, {
-    renderTpl : new Ext.XTemplate(Tpl.get('keyButton'), {
-      compiled : true
-    })
-  })
+  initExtensions()
 }
+
 Wrt.log = function(message) {
-    // TODO: do logging in html
-    if(Device.isEmulator()){
-        console.log(message)
-    } else {
-        alert(message)
-    }
+  // TODO: do logging in html
+  if (Device.isEmulator()) {
+    console.log(message)
+  } else {
+    alert(message)
+  }
 }
-Wrt.exit = function(){
+
+Wrt.exit = function() {
   window.close()
 }
+
 Wrt.lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur dictum eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius lorem a nisi pharetra in aliquet leo pharetra. Nam orci odio, aliquam aliquet dignissim id, vulputate in metus. Sed in mauris in dui suscipit hendrerit sed sed tellus. Morbi ullamcorper sapien eget nunc varius feugiat. Pellentesque fringilla auctor felis, sed sagittis nulla aliquam in. Suspendisse urna sapien, aliquet non auctor a, scelerisque eu neque. Maecenas molestie tincidunt ornare. Ut condimentum suscipit fringilla. Vivamus at turpis et odio sollicitudin pretium. Vestibulum auctor metus vitae lacus imperdiet tincidunt ornare nec ligula.'
 
 includeBastardJavaScript('cache')
