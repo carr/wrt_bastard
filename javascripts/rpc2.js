@@ -1,19 +1,3 @@
-Wrt.rpc = function(url, config){
-  this.url = url
-}
-
-Wrt.rpc.prototype.call = function(method, config){
-  config.method = method
-  Ext.Ajax.request({
-    url: this.url,
-    method: 'post',
-    jsonData: { jsonrpc: "2.0", method: method, params: config.params, "id": 2 },
-    success: function(msg){
-      config.success(JSON.parse(msg.responseText).result)
-    }
-  })
-}
-
 /**
  * Proxy for RPC requests. Config accepts "rpcMethod" parameter for the rpc method to call. Also accepts params for rpc params
  */
