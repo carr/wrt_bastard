@@ -12,7 +12,7 @@ var Dialog = {
 
   showLoading : function(text) {
     if (text == undefined) {
-      text = "TODO: ovdje ubaciti neku verziju i18n.loading"
+      text = qtn_Loading
     }
     Dialog.show('<span><img src="images/spinner4.gif" /> ' + text + '</span>')
   }
