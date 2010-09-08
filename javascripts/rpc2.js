@@ -1,8 +1,7 @@
 /**
  * Proxy for RPC requests. Config accepts "rpcMethod" parameter for the rpc method to call. Also accepts params for rpc params
  */
-Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
-    
+Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {  
     actionMethods: {
         create : 'POST',
         read   : 'POST',
@@ -10,18 +9,15 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
         destroy: 'POST'
     },
     
-    
     doRequest: function(operation, callback, scope) {
         var writer  = this.getWriter(),
             request = writer.write(this.buildRequest(operation, callback, scope));
         
-        var method = 'getEpgData'
         Ext.apply(request, {
-            scope   : this,
-            callback: this.createRequestCallback(request, operation, callback, scope),
-            //method  : this.getMethod(request),
+          scope   : this,
+          callback: this.createRequestCallback(request, operation, callback, scope),
     	    method: 'post',
-    	    jsonData: { jsonrpc: "2.0", method: this.rpcMethod, params: this.params, "id": 2 }	            
+    	    jsonData: { jsonrpc: "2.0", method: this.rpcMethod, params: this.params, "id": 1 }	            
         });
         	    	
         Ext.Ajax.request(request)	    	
