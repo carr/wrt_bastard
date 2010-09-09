@@ -2,7 +2,7 @@ function initExtensions() {
   Ext.currentStackable = null
 
   Ext.StackablePanel = Ext.Panel.extend( {
-    cardStack : [],
+    cardStack : null,
 
     layout : 'card',
 
@@ -14,18 +14,19 @@ function initExtensions() {
       this.cardStack.push(card)
       this.setCard(card)
     },
-    
+
     // TODO i don't think this is working right; discuss with bjosip
-    stackTop : function(){
+    stackTop : function() {
       return this.cardStack[this.cardStack.length - 1];
     },
 
     back : function() {
       if (this.cardStack.length > 1) {
-        var card = this.cardStack.pop()
-        if(card.back){
-          card.back() 
+        var oldCard = this.cardStack.pop()
+        if (oldCard.back) {
+          oldCard.back()
         }
+
         this.setCard(this.cardStack[this.cardStack.length - 1])
       } else {
         throw "Called back with only 1 card on stack!"
@@ -34,21 +35,14 @@ function initExtensions() {
 
     listeners : {
       beforeshow : function() {
+        if (this.cardStack == null) {
+          this.cardStack = []
+        }
+
         if (this.cardStack.length == 0 && this.items.length > 0) {
           this.stack(this.getActiveItem())
         }
         Ext.currentStackable = this
-      },
-
-      beforehide : function() {
-        if (this.cardStack.length > 1) {
-          var card = this.cardStack.pop()
-          if(card.back){
-            card.back() 
-          }
-          this.cardStack.splice(1, this.cardStack.length - 1)
-          this.setCard(this.cardStack[0])
-        }
       }
     }
   })
