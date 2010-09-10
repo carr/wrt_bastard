@@ -1,7 +1,7 @@
 function initExtensions() {
   Ext.currentStackable = null
 
-  Ext.StackablePanel = Ext.Panel.extend( {
+  Ext.StackablePanel = Ext.Panel.extend({
     cardStack : null,
 
     layout : 'card',
@@ -51,5 +51,42 @@ function initExtensions() {
     renderTpl : new Ext.XTemplate(Tpl.get('keyButton'), {
       compiled : true
     })
+  })
+
+  Ext.MessageBox = Ext.extend(Ext.Panel, {
+    width : Display.getWidgetSize().width * 0.8,
+    height : Display.getWidgetSize().height * 0.6,
+    floating : true,
+    centered : true,
+    modal : true,
+    scroll : 'vertical',
+    styleHtmlContent : true,
+    items : [ {
+      id : 'msgBoxMsg',
+      style : 'padding: 10px;',
+      html : ''
+    } ],
+    dockedItems : [ {
+      id : 'msgBoxTitle',
+      xtype : 'toolbar',
+      title : qtn_Info,
+      dock : 'top'
+    }, new Ext.KeyButton({
+      width : 60,
+      text : qtn_Ok,
+      handler : function() {
+        this.ownerCt.hide();
+      },
+      dock : 'bottom'
+    }) ],
+    showMessage : function(message) {
+      Ext.getCmp('msgBoxMsg').html = message
+      this.show()
+    },
+    showMessageWithTitle : function(title, message) {
+      Ext.getCmp('msgBoxTitle').setTitle(title)
+      Ext.getCmp('msgBoxMsg').html = message
+      this.show()
+    }
   })
 }
