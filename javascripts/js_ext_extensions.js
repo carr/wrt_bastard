@@ -43,6 +43,10 @@ function initExtensions() {
           this.stack(this.getActiveItem())
         }
         Ext.currentStackable = this
+      },
+
+      change : function() {
+        this.getActiveItem().fireEvent('beforeshow')
       }
     }
   })
