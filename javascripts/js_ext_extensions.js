@@ -12,7 +12,9 @@ function initExtensions() {
       }
 
       this.cardStack.push(card)
-      this.setCard(card)
+      if (options && !options.skipSetCard) {
+        this.setCard(card)
+      }
     },
 
     // TODO i don't think this is working right; discuss with bjosip
@@ -40,7 +42,9 @@ function initExtensions() {
         }
 
         if (this.cardStack.length == 0 && this.items.length > 0) {
-          this.stack(this.getActiveItem())
+          this.stack(this.getActiveItem(), {
+            skipSetCard : true
+          })
         }
         Ext.currentStackable = this
       },
