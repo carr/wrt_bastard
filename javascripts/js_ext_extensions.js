@@ -7,7 +7,7 @@ function initExtensions() {
     layout : 'card',
 
     stack : function(card, options) {
-      if (options && !options.keepPrevious && this.cardStack.length > 0) {
+      if ((options && !options.keepPrevious || !options) && this.cardStack.length > 0) {
         this.cardStack.pop()
       }
 
@@ -41,8 +41,8 @@ function initExtensions() {
           this.cardStack = []
         }
 
-        if (this.cardStack.length == 0 && this.items.length > 0) {
-          this.stack(this.getActiveItem(), {
+        if (this.cardStack.length == 0 && this.items.items.length > 0) {
+          this.stack(this.items.items[0], {
             skipSetCard : true
           })
         }
