@@ -12,7 +12,7 @@ function initExtensions() {
       }
 
       this.cardStack.push(card)
-      if (options && !options.skipSetCard) {
+      if (options && !options.skipSetCard || !options) {
         this.setCard(card)
       }
     },
