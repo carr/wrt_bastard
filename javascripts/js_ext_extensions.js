@@ -67,7 +67,6 @@ function initExtensions() {
     floating : true,
     centered : true,
     modal : true,
-    scroll : 'vertical',
     styleHtmlContent : true,
     items : [ {
       id : 'msgBoxMsg',
