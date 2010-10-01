@@ -67,10 +67,10 @@ function initExtensions() {
     floating : true,
     centered : true,
     modal : true,
-    styleHtmlContent : true,
+    hideOnMaskTap : false,
+    cls : 'msgBox',
     items : [ {
       id : 'msgBoxMsg',
-      style : 'padding: 10px;',
       html : ''
     } ],
     dockedItems : [ {
@@ -78,14 +78,17 @@ function initExtensions() {
       xtype : 'toolbar',
       title : qtn_Info,
       dock : 'top'
-    }, new Ext.KeyButton({
-      width : 60,
-      text : qtn_Ok,
-      handler : function() {
-        this.ownerCt.hide();
-      },
-      dock : 'bottom'
-    }) ],
+    }, {
+      dock : 'bottom',
+      items : [ new Ext.KeyButton({
+        cls : 'button',
+        text : qtn_Ok,
+        handler : function() {
+          this.ownerCt.ownerCt.hide()
+          this.ownerCt.ownerCt.destroy()
+        }
+      }) ]
+    } ],
     showMessage : function(message) {
       Ext.getCmp('msgBoxMsg').html = message
       this.show()
@@ -95,5 +98,22 @@ function initExtensions() {
       Ext.getCmp('msgBoxMsg').html = message
       this.show()
     }
+  })
+
+  Ext.LoadingBox = Ext.extend(Ext.Panel, {
+    id : 'loadingBox',
+    width : 180,
+    height : 100,
+    floating : true,
+    centered : true,
+    modal : true,
+    hideOnMaskTap : false,
+    cls : 'loadingBox',
+    data : {
+      message : qtn_Loading
+    },
+    tpl : new Ext.Template(Tpl.get('loadingBoxTpl'), {
+      compiled : true
+    })
   })
 }
