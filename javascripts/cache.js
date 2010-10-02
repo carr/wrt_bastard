@@ -38,7 +38,7 @@ var Cache = {
       value : data
     })
 
-    if (options.persistent || Cache.persistent) {
+    if (options && options.persistent || Cache.persistent) {
       window.widget.setPreferenceForKey(object, key)
     } else {
       Cache.nonPersistent[key] = object

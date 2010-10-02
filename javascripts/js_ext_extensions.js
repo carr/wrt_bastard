@@ -4,6 +4,8 @@ function initExtensions() {
   Ext.StackablePanel = Ext.Panel.extend({
     cardStack : null,
 
+    showedFirstTime : false,
+
     layout : 'card',
 
     stack : function(card, options) {
@@ -17,7 +19,6 @@ function initExtensions() {
       }
     },
 
-    // TODO i don't think this is working right; discuss with bjosip
     stackTop : function() {
       return this.cardStack[this.cardStack.length - 1];
     },
@@ -50,7 +51,11 @@ function initExtensions() {
       },
 
       change : function() {
-        this.getActiveItem().fireEvent('beforeshow')
+        if (this.showedFirstTime) {
+          this.stackTop().fireEvent('beforeshow')
+        } else {
+          this.showedFirstTime = true
+        }
       }
     }
   })
