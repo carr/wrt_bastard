@@ -12,7 +12,7 @@ var Cache = {
   get : function(key, options) {
     var data
 
-    if (options.persistent || Cache.persistent) {
+    if (options && options.persistent || Cache.persistent) {
       data = window.widget.preferenceForKey(key)
     } else {
       data = Cache.nonPersistent[key]
@@ -21,7 +21,7 @@ var Cache = {
     if (typeof (data) != 'undefined') {
       data = Utility.parseJSON(data)
 
-      if (options.timeout && (new Date()).getTime() > data.time + options.timeout) {
+      if (options && options.timeout && (new Date()).getTime() > data.time + options.timeout) {
         Cache.clear(key)
         return null
       } else {
