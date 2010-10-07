@@ -74,6 +74,7 @@ function initExtensions() {
     modal : true,
     hideOnMaskTap : false,
     cls : 'msgBox',
+    btnCallback : null,
     items : [ {
       id : 'msgBoxMsg',
       html : ''
@@ -91,6 +92,9 @@ function initExtensions() {
         handler : function() {
           this.ownerCt.ownerCt.hide()
           this.ownerCt.ownerCt.destroy()
+          if (this.ownerCt.ownerCt.btnCallback) {
+            this.ownerCt.ownerCt.btnCallback()
+          }
         }
       }) ]
     } ],
