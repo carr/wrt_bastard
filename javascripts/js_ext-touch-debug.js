@@ -3507,126 +3507,126 @@ Ext.TouchEventObjectImpl = Ext.extend(Object, {
 
 Ext.TouchEventObject = new Ext.TouchEventObjectImpl();
 
-Ext.util.OfflineDebug = function() {
-    var cacheStatuses = ['uncached', 'idle', 'checking', 'downloading', 'updateready', 'obsolete'],
-        cacheEvents = ['cached', 'checking', 'downloading', 'error', 'noupdate', 'obsolete', 'progress', 'updateready'],
-        appcache = window.applicationCache;
+//Ext.util.OfflineDebug = function() {
+//    var cacheStatuses = ['uncached', 'idle', 'checking', 'downloading', 'updateready', 'obsolete'],
+//        cacheEvents = ['cached', 'checking', 'downloading', 'error', 'noupdate', 'obsolete', 'progress', 'updateready'],
+//        appcache = window.applicationCache;
+//
+//    var logEvent = function(e){
+//        var online = (navigator.onLine) ? 'yes' : 'no',
+//            status = cacheStatuses[appcache.status],
+//            type = e.type;
+//
+//        var message = 'online: ' + online;
+//        message += ', event: ' + type;
+//        message += ', status: ' + status;
+//
+//        if (type == 'error' && navigator.onLine) {
+//            message += ' There was an unknown error, check your Cache Manifest.';
+//        }
+//        if(console && console.log) {
+//            console.log(message);
+//        }
+//    };
+//
+//    
+//    for (var i = cacheEvents.length - 1; i >= 0; i--) {
+//        appcache.addEventListener(cacheEvents[i], logEvent, false);
+//    }
+//
+//    appcache.addEventListener('updateready', function(e) {
+//        
+//        if (cacheStatuses[cache.status] != 'idle') {
+//            cache.swapCache();
+//            console.log('Swapped/updated the Cache Manifest.');
+//        }
+//    }, false);
+//
+//    return {
+//        checkForUpdates: function(){
+//            appcache.update();
+//        }
+//    };
+//};
 
-    var logEvent = function(e){
-        var online = (navigator.onLine) ? 'yes' : 'no',
-            status = cacheStatuses[appcache.status],
-            type = e.type;
 
-        var message = 'online: ' + online;
-        message += ', event: ' + type;
-        message += ', status: ' + status;
-
-        if (type == 'error' && navigator.onLine) {
-            message += ' There was an unknown error, check your Cache Manifest.';
-        }
-        if(console && console.log) {
-            console.log(message);
-        }
-    };
-
-    
-    for (var i = cacheEvents.length - 1; i >= 0; i--) {
-        appcache.addEventListener(cacheEvents[i], logEvent, false);
-    }
-
-    appcache.addEventListener('updateready', function(e) {
-        
-        if (cacheStatuses[cache.status] != 'idle') {
-            cache.swapCache();
-            console.log('Swapped/updated the Cache Manifest.');
-        }
-    }, false);
-
-    return {
-        checkForUpdates: function(){
-            appcache.update();
-        }
-    };
-};
-
-
-Ext.util.GeoLocation = Ext.extend(Ext.util.Observable, {
-    
-    coords: null,
-
-    
-    hasGeoLocation: false,
-
-    
-    autoUpdate: true,
-
-    
-    constructor : function(config) {
-        config = config || {};
-        Ext.apply(this, config);
-
-        this.hasGeoLocation = !!navigator.geolocation;
-
-        
-        this.addEvents('beforeupdate','update');
-
-        Ext.util.GeoLocation.superclass.constructor.call(this);
-
-        if (this.autoUpdate) {
-            this.updateLocation();
-        }
-    },
-
-    
-    getLocation : function(callback, scope) {
-        var me = this;
-        if (me.hasGeoLocation && !me.coords) {
-            me.updateLocation(callback, scope);
-        }
-        else if (me.hasGeoLocation && callback) {
-            setTimeout(function() {
-                callback.call(scope || me, me.coords, me);
-            }, 0);
-        }
-        else if (callback) {
-            setTimeout(function() {
-                callback.call(scope || me, null, me);
-            }, 0);
-        }
-    },
-
-    
-    updateLocation : function(callback, scope) {
-        var me = this;
-        if (me.hasGeoLocation) {
-            me.fireEvent('beforeupdate', me);
-            navigator.geolocation.getCurrentPosition(function(position) {
-                me.coords = me.parseCoords(position);
-                if (callback) {
-                    callback.call(scope || me, me.coords, me);
-                }
-                me.fireEvent('update', me.coords, me);
-            });
-        }
-        else {
-            setTimeout(function() {
-                if (callback) {
-                    callback.call(scope || me, null, me);
-                }
-                me.fireEvent('update', false, me);
-            }, 0);
-        }
-    },
-
-    
-    parseCoords : function(location) {
-        return {
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            original: location
-        };
-    }
-});
+//Ext.util.GeoLocation = Ext.extend(Ext.util.Observable, {
+//    
+//    coords: null,
+//
+//    
+//    hasGeoLocation: false,
+//
+//    
+//    autoUpdate: true,
+//
+//    
+//    constructor : function(config) {
+//        config = config || {};
+//        Ext.apply(this, config);
+//
+//        this.hasGeoLocation = !!navigator.geolocation;
+//
+//        
+//        this.addEvents('beforeupdate','update');
+//
+//        Ext.util.GeoLocation.superclass.constructor.call(this);
+//
+//        if (this.autoUpdate) {
+//            this.updateLocation();
+//        }
+//    },
+//
+//    
+//    getLocation : function(callback, scope) {
+//        var me = this;
+//        if (me.hasGeoLocation && !me.coords) {
+//            me.updateLocation(callback, scope);
+//        }
+//        else if (me.hasGeoLocation && callback) {
+//            setTimeout(function() {
+//                callback.call(scope || me, me.coords, me);
+//            }, 0);
+//        }
+//        else if (callback) {
+//            setTimeout(function() {
+//                callback.call(scope || me, null, me);
+//            }, 0);
+//        }
+//    },
+//
+//    
+//    updateLocation : function(callback, scope) {
+//        var me = this;
+//        if (me.hasGeoLocation) {
+//            me.fireEvent('beforeupdate', me);
+//            navigator.geolocation.getCurrentPosition(function(position) {
+//                me.coords = me.parseCoords(position);
+//                if (callback) {
+//                    callback.call(scope || me, me.coords, me);
+//                }
+//                me.fireEvent('update', me.coords, me);
+//            });
+//        }
+//        else {
+//            setTimeout(function() {
+//                if (callback) {
+//                    callback.call(scope || me, null, me);
+//                }
+//                me.fireEvent('update', false, me);
+//            }, 0);
+//        }
+//    },
+//
+//    
+//    parseCoords : function(location) {
+//        return {
+//            latitude: location.coords.latitude,
+//            longitude: location.coords.longitude,
+//            original: location
+//        };
+//    }
+//});
 
 
 Ext.util.MixedCollection = function(allowFunctions, keyFn) {
@@ -4056,97 +4056,97 @@ Ext.extend(Ext.util.MixedCollection, Ext.util.Observable, {
 
 Ext.util.MixedCollection.prototype.get = Ext.util.MixedCollection.prototype.item;
 
-Ext.util.TapRepeater = Ext.extend(Ext.util.Observable, {
-
-    constructor: function(el, config) {
-        this.el = Ext.get(el);
-
-        Ext.apply(this, config);
-
-        this.addEvents(
-        
-        "touchstart",
-        
-        "tap",
-        
-        "touchend"
-        );
-
-        this.el.on({
-            touchstart: this.onTouchStart,
-            touchend: this.onTouchEnd,
-            scope: this
-        });
-
-        if (this.preventDefault || this.stopDefault) {
-            this.el.on('tap', this.eventOptions, this);
-        }
-
-        Ext.util.TapRepeater.superclass.constructor.call(this);
-    },
-
-    interval: 10,
-    delay: 250,
-    preventDefault: true,
-    stopDefault: false,
-    timer: 0,
-
-    
-    eventOptions: function(e) {
-        if (this.preventDefault) {
-            e.preventDefault();
-        }
-        if (this.stopDefault) {
-            e.stopEvent();
-        }
-    },
-
-    
-    destroy: function() {
-        Ext.destroy(this.el);
-        this.purgeListeners();
-    },
-
-    
-    onTouchStart: function(e) {
-        clearTimeout(this.timer);
-        if (this.pressClass) {
-            this.el.addClass(this.pressClass);
-        }
-        this.tapStartTime = new Date();
-
-        this.fireEvent("touchstart", this, e);
-        this.fireEvent("tap", this, e);
-
-        
-        if (this.accelerate) {
-            this.delay = 400;
-        }
-        this.timer = this.tap.defer(this.delay || this.interval, this, [e]);
-    },
-
-    
-    tap: function(e) {
-        this.fireEvent("tap", this, e);
-        this.timer = this.tap.defer(this.accelerate ? this.easeOutExpo(this.tapStartTime.getElapsed(),
-            400,
-            -390,
-            12000) : this.interval, this, [e]);
-    },
-
-    
-    
-    easeOutExpo: function(t, b, c, d) {
-        return (t == d) ? b + c : c * ( - Math.pow(2, -10 * t / d) + 1) + b;
-    },
-
-    
-    onTouchEnd: function(e) {
-        clearTimeout(this.timer);
-        this.el.removeClass(this.pressClass);
-        this.fireEvent("touchend", this, e);
-    }
-});
+//Ext.util.TapRepeater = Ext.extend(Ext.util.Observable, {
+//
+//    constructor: function(el, config) {
+//        this.el = Ext.get(el);
+//
+//        Ext.apply(this, config);
+//
+//        this.addEvents(
+//        
+//        "touchstart",
+//        
+//        "tap",
+//        
+//        "touchend"
+//        );
+//
+//        this.el.on({
+//            touchstart: this.onTouchStart,
+//            touchend: this.onTouchEnd,
+//            scope: this
+//        });
+//
+//        if (this.preventDefault || this.stopDefault) {
+//            this.el.on('tap', this.eventOptions, this);
+//        }
+//
+//        Ext.util.TapRepeater.superclass.constructor.call(this);
+//    },
+//
+//    interval: 10,
+//    delay: 250,
+//    preventDefault: true,
+//    stopDefault: false,
+//    timer: 0,
+//
+//    
+//    eventOptions: function(e) {
+//        if (this.preventDefault) {
+//            e.preventDefault();
+//        }
+//        if (this.stopDefault) {
+//            e.stopEvent();
+//        }
+//    },
+//
+//    
+//    destroy: function() {
+//        Ext.destroy(this.el);
+//        this.purgeListeners();
+//    },
+//
+//    
+//    onTouchStart: function(e) {
+//        clearTimeout(this.timer);
+//        if (this.pressClass) {
+//            this.el.addClass(this.pressClass);
+//        }
+//        this.tapStartTime = new Date();
+//
+//        this.fireEvent("touchstart", this, e);
+//        this.fireEvent("tap", this, e);
+//
+//        
+//        if (this.accelerate) {
+//            this.delay = 400;
+//        }
+//        this.timer = this.tap.defer(this.delay || this.interval, this, [e]);
+//    },
+//
+//    
+//    tap: function(e) {
+//        this.fireEvent("tap", this, e);
+//        this.timer = this.tap.defer(this.accelerate ? this.easeOutExpo(this.tapStartTime.getElapsed(),
+//            400,
+//            -390,
+//            12000) : this.interval, this, [e]);
+//    },
+//
+//    
+//    
+//    easeOutExpo: function(t, b, c, d) {
+//        return (t == d) ? b + c : c * ( - Math.pow(2, -10 * t / d) + 1) + b;
+//    },
+//
+//    
+//    onTouchEnd: function(e) {
+//        clearTimeout(this.timer);
+//        this.el.removeClass(this.pressClass);
+//        this.fireEvent("touchend", this, e);
+//    }
+//});
 
 
 Ext.util.Region = Ext.extend(Object, {
@@ -6902,215 +6902,215 @@ Ext.util.Droppable = Ext.extend(Ext.util.Observable, {
 });
 
 
-Ext.util.Sortable = Ext.extend(Ext.util.Observable, {
-    baseCls: 'x-sortable',
-
-    
-    direction: 'vertical',
-
-    
-    cancelSelector: null,
-
-    
-    
-    
-    
-
-    
-    constrain: window,
-    
-    group: 'base',
-
-    
-    revert: true,
-
-    
-    itemSelector: null,
-
-    
-    handleSelector: null,
-
-    
-    disabled: false,
-
-    
-    delay: 0,
-
-    
-
-    
-    sorting: false,
-
-    
-    vertical: false,
-
-    
-    horizontal: false,
-
-    constructor : function(el, config) {
-        config = config || {};
-        Ext.apply(this, config);
-
-        this.addEvents(
-            
-            'sortstart',
-            
-            'sortend',
-            
-            'sortchange'
-
-            
-            
-            
-            
-            
-            
-            
-            
-        );
-
-        this.el = Ext.get(el);
-        Ext.util.Sortable.superclass.constructor.call(this);
-
-        if (this.direction == 'horizontal') {
-            this.horizontal = true;
-        }
-        else if (this.direction == 'vertical') {
-            this.vertical = true;
-        }
-        else {
-            this.horizontal = this.vertical = true;
-        }
-
-        this.el.addClass(this.baseCls);
-        this.tapEvent = (this.delay > 0) ? 'taphold' : 'tapstart';
-        if (!this.disabled) {
-            this.enable();
-        }
-    },
-
-    
-    onTapEvent : function(e, t) {
-        if (this.cancelSelector && e.getTarget(this.cancelSelector)) {
-            return;
-        }
-
-        if (this.handleSelector && !e.getTarget(this.handleSelector)) {
-            return;
-        }
-
-        if (!this.sorting && (e.type === 'tapstart' || e.deltaTime >= this.delay)) {
-            var item = e.getTarget(this.itemSelector);
-            if ( item ) {
-                this.onSortStart(e, item);
-            }
-        }
-    },
-
-    
-    onSortStart : function(e, t) {
-        this.sorting = true;
-        var draggable = new Ext.util.Draggable(t, {
-            delay: this.delay,
-            revert: this.revert,
-            direction: this.direction,
-            constrain: this.constrain === true ? this.el : this.constrain
-        });
-        draggable.on({
-            drag: this.onDrag,
-            dragend: this.onDragEnd,
-            scope: this
-        });
-
-        this.dragEl = t;
-        this.calculateBoxes();
-        draggable.canDrag = true;
-        this.fireEvent('sortstart', this, e);
-    },
-
-    
-    calculateBoxes : function() {
-        this.items = [];
-        var els = this.el.select(this.itemSelector, false),
-            ln = els.length, i, item, el, box;
-
-        for (i = 0; i < ln; i++) {
-            el = els[i];
-            if (el != this.dragEl) {
-                item = Ext.fly(el).getPageBox(true);
-                item.el = el;
-                this.items.push(item);
-            }
-        }
-    },
-
-    
-    onDrag : function(draggable, e) {
-        var items = this.items,
-            ln = items.length,
-            region = draggable.region,
-            sortChange = false,
-            i, intersect, overlap, item;
-
-        for (i = 0; i < ln; i++) {
-            item = items[i];
-            intersect = region.intersect(item);
-            if (intersect) {
-                if (this.vertical && Math.abs(intersect.top - intersect.bottom) > (region.bottom - region.top) / 2) {
-                    if (region.bottom > item.top && item.top > region.top) {
-                        draggable.el.insertAfter(item.el);
-                    }
-                    else {
-                        draggable.el.insertBefore(item.el);
-                    }
-                    sortChange = true;
-                }
-                else if (this.horizontal && Math.abs(intersect.left - intersect.right) > (region.right - region.left) / 2) {
-                    if (region.right > item.left && item.left > region.left) {
-                        draggable.el.insertAfter(item.el);
-                    }
-                    else {
-                        draggable.el.insertBefore(item.el);
-                    }
-                    sortChange = true;
-                }
-
-                if (sortChange) {
-                    
-                    draggable.reset();
-
-                    
-                    
-                    draggable.moveTo(region.left, region.top);
-
-                    
-                    this.calculateBoxes();
-                    this.fireEvent('sortchange', this, draggable.el, this.el.select(this.itemSelector, false).indexOf(draggable.el.dom));
-                    return;
-                }
-            }
-        }
-    },
-
-    
-    onDragEnd : function(draggable, e) {
-        draggable.destroy();
-        this.sorting = false;
-        this.fireEvent('sortend', this, draggable, e);
-    },
-
-    
-    enable : function() {
-        this.el.on(this.tapEvent, this.onTapEvent, this);
-        this.disabled = false;
-    },
-
-    
-    disable : function() {
-        this.el.un(this.tapEvent, this.onTapEvent, this);
-        this.disabled = true;
-    }
-});
+//Ext.util.Sortable = Ext.extend(Ext.util.Observable, {
+//    baseCls: 'x-sortable',
+//
+//    
+//    direction: 'vertical',
+//
+//    
+//    cancelSelector: null,
+//
+//    
+//    
+//    
+//    
+//
+//    
+//    constrain: window,
+//    
+//    group: 'base',
+//
+//    
+//    revert: true,
+//
+//    
+//    itemSelector: null,
+//
+//    
+//    handleSelector: null,
+//
+//    
+//    disabled: false,
+//
+//    
+//    delay: 0,
+//
+//    
+//
+//    
+//    sorting: false,
+//
+//    
+//    vertical: false,
+//
+//    
+//    horizontal: false,
+//
+//    constructor : function(el, config) {
+//        config = config || {};
+//        Ext.apply(this, config);
+//
+//        this.addEvents(
+//            
+//            'sortstart',
+//            
+//            'sortend',
+//            
+//            'sortchange'
+//
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//        );
+//
+//        this.el = Ext.get(el);
+//        Ext.util.Sortable.superclass.constructor.call(this);
+//
+//        if (this.direction == 'horizontal') {
+//            this.horizontal = true;
+//        }
+//        else if (this.direction == 'vertical') {
+//            this.vertical = true;
+//        }
+//        else {
+//            this.horizontal = this.vertical = true;
+//        }
+//
+//        this.el.addClass(this.baseCls);
+//        this.tapEvent = (this.delay > 0) ? 'taphold' : 'tapstart';
+//        if (!this.disabled) {
+//            this.enable();
+//        }
+//    },
+//
+//    
+//    onTapEvent : function(e, t) {
+//        if (this.cancelSelector && e.getTarget(this.cancelSelector)) {
+//            return;
+//        }
+//
+//        if (this.handleSelector && !e.getTarget(this.handleSelector)) {
+//            return;
+//        }
+//
+//        if (!this.sorting && (e.type === 'tapstart' || e.deltaTime >= this.delay)) {
+//            var item = e.getTarget(this.itemSelector);
+//            if ( item ) {
+//                this.onSortStart(e, item);
+//            }
+//        }
+//    },
+//
+//    
+//    onSortStart : function(e, t) {
+//        this.sorting = true;
+//        var draggable = new Ext.util.Draggable(t, {
+//            delay: this.delay,
+//            revert: this.revert,
+//            direction: this.direction,
+//            constrain: this.constrain === true ? this.el : this.constrain
+//        });
+//        draggable.on({
+//            drag: this.onDrag,
+//            dragend: this.onDragEnd,
+//            scope: this
+//        });
+//
+//        this.dragEl = t;
+//        this.calculateBoxes();
+//        draggable.canDrag = true;
+//        this.fireEvent('sortstart', this, e);
+//    },
+//
+//    
+//    calculateBoxes : function() {
+//        this.items = [];
+//        var els = this.el.select(this.itemSelector, false),
+//            ln = els.length, i, item, el, box;
+//
+//        for (i = 0; i < ln; i++) {
+//            el = els[i];
+//            if (el != this.dragEl) {
+//                item = Ext.fly(el).getPageBox(true);
+//                item.el = el;
+//                this.items.push(item);
+//            }
+//        }
+//    },
+//
+//    
+//    onDrag : function(draggable, e) {
+//        var items = this.items,
+//            ln = items.length,
+//            region = draggable.region,
+//            sortChange = false,
+//            i, intersect, overlap, item;
+//
+//        for (i = 0; i < ln; i++) {
+//            item = items[i];
+//            intersect = region.intersect(item);
+//            if (intersect) {
+//                if (this.vertical && Math.abs(intersect.top - intersect.bottom) > (region.bottom - region.top) / 2) {
+//                    if (region.bottom > item.top && item.top > region.top) {
+//                        draggable.el.insertAfter(item.el);
+//                    }
+//                    else {
+//                        draggable.el.insertBefore(item.el);
+//                    }
+//                    sortChange = true;
+//                }
+//                else if (this.horizontal && Math.abs(intersect.left - intersect.right) > (region.right - region.left) / 2) {
+//                    if (region.right > item.left && item.left > region.left) {
+//                        draggable.el.insertAfter(item.el);
+//                    }
+//                    else {
+//                        draggable.el.insertBefore(item.el);
+//                    }
+//                    sortChange = true;
+//                }
+//
+//                if (sortChange) {
+//                    
+//                    draggable.reset();
+//
+//                    
+//                    
+//                    draggable.moveTo(region.left, region.top);
+//
+//                    
+//                    this.calculateBoxes();
+//                    this.fireEvent('sortchange', this, draggable.el, this.el.select(this.itemSelector, false).indexOf(draggable.el.dom));
+//                    return;
+//                }
+//            }
+//        }
+//    },
+//
+//    
+//    onDragEnd : function(draggable, e) {
+//        draggable.destroy();
+//        this.sorting = false;
+//        this.fireEvent('sortend', this, draggable, e);
+//    },
+//
+//    
+//    enable : function() {
+//        this.el.on(this.tapEvent, this.onTapEvent, this);
+//        this.disabled = false;
+//    },
+//
+//    
+//    disable : function() {
+//        this.el.un(this.tapEvent, this.onTapEvent, this);
+//        this.disabled = true;
+//    }
+//});
 
 
 Ext.util.Format = function() {
@@ -15628,135 +15628,135 @@ Ext.List = Ext.extend(Ext.DataView, {
 
 Ext.reg('list', Ext.List);
 
-Ext.IndexBar = Ext.extend(Ext.DataPanel, {
-    cmpCls: 'x-indexbar',
-    direction: 'vertical',
-    tpl: '<tpl for="."><span class="x-indexbar-item">{value}</span></tpl>',
-    itemSelector: 'span.x-indexbar-item',
-    
-    
-    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-
-    
-    initComponent : function() {
-        
-        this.componentLayout = new Ext.layout.AutoComponentLayout();
-
-        if (!this.store) {
-            this.store = new Ext.data.Store({
-                model: 'IndexBarModel'
-            });
-        }
-
-        if (this.alphabet == true) {
-            this.ui = this.ui || 'alphabet';
-        }
-
-        if (this.direction == 'horizontal') {
-            this.horizontal = true;
-        }
-        else {
-            this.vertical = true;
-        }
-
-        this.addEvents('index');
-
-        Ext.IndexBar.superclass.initComponent.call(this);
-    },
-
-    
-    afterRender : function() {
-        Ext.IndexBar.superclass.afterRender.call(this);
-
-        if (this.alphabet === true) {
-            this.loadAlphabet();
-        }
-
-        if (this.vertical) {
-            this.el.addClass(this.cmpCls + '-vertical');
-        }
-        else if (this.horizontal) {
-            this.el.addClass(this.cmpCls + '-horizontal');
-        }
-    },
-
-    
-    loadAlphabet : function() {
-        var letters = this.letters,
-            len = letters.length,
-            data = [],
-            i, letter;
-
-        for (i = 0; i < len; i++) {
-            letter = letters[i];
-            data.push({key: letter.toLowerCase(), value: letter});
-        }
-
-        this.store.loadData(data);
-    },
-
-    
-    initEvents : function() {
-        Ext.IndexBar.superclass.initEvents.call(this);
-
-        this.mon(this.body, {
-            touchstart: this.onTouchStart,
-            touchend: this.onTouchEnd,
-            touchmove: this.onTouchMove,
-            scope: this
-        });
-    },
-
-    
-    onTouchStart : function(e, t) {
-        this.el.addClass(this.cmpCls + '-pressed');
-        this.pageBox = this.body.getPageBox();
-        this.onTouchMove(e);
-    },
-
-    
-    onTouchEnd : function(e, t) {
-        this.el.removeClass(this.cmpCls + '-pressed');
-    },
-
-    
-    onTouchMove : function(e) {
-        var target,
-            me = this,
-            record,
-            pageBox = me.pageBox;
-            
-        if (!pageBox) {
-            pageBox = me.pageBox = me.body.getPageBox();
-        }
-
-        if (me.vertical) {
-            if (e.pageY > pageBox.bottom || e.pageY < pageBox.top) {
-                return;
-            }
-            target = Ext.Element.fromPoint(pageBox.left + (pageBox.width / 2), e.pageY);
-        }
-        else if (me.horizontal) {
-            if (e.pageX > pageBox.right || e.pageX < pageBox.left) {
-                return;
-            }
-            target = Ext.Element.fromPoint(e.pageX, pageBox.top + (pageBox.height / 2));
-        }
-
-        if (target) {
-            record = me.getRecord(target.dom);
-            if (record) {
-                me.fireEvent('index', record, target, me.indexOf(target));
-            }
-        }
-    }
-});
-
-Ext.reg('indexbar', Ext.IndexBar);
-
-Ext.regModel('IndexBarModel', {
-    fields: ['key', 'value']
-});
+//Ext.IndexBar = Ext.extend(Ext.DataPanel, {
+//    cmpCls: 'x-indexbar',
+//    direction: 'vertical',
+//    tpl: '<tpl for="."><span class="x-indexbar-item">{value}</span></tpl>',
+//    itemSelector: 'span.x-indexbar-item',
+//    
+//    
+//    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+//
+//    
+//    initComponent : function() {
+//        
+//        this.componentLayout = new Ext.layout.AutoComponentLayout();
+//
+//        if (!this.store) {
+//            this.store = new Ext.data.Store({
+//                model: 'IndexBarModel'
+//            });
+//        }
+//
+//        if (this.alphabet == true) {
+//            this.ui = this.ui || 'alphabet';
+//        }
+//
+//        if (this.direction == 'horizontal') {
+//            this.horizontal = true;
+//        }
+//        else {
+//            this.vertical = true;
+//        }
+//
+//        this.addEvents('index');
+//
+//        Ext.IndexBar.superclass.initComponent.call(this);
+//    },
+//
+//    
+//    afterRender : function() {
+//        Ext.IndexBar.superclass.afterRender.call(this);
+//
+//        if (this.alphabet === true) {
+//            this.loadAlphabet();
+//        }
+//
+//        if (this.vertical) {
+//            this.el.addClass(this.cmpCls + '-vertical');
+//        }
+//        else if (this.horizontal) {
+//            this.el.addClass(this.cmpCls + '-horizontal');
+//        }
+//    },
+//
+//    
+//    loadAlphabet : function() {
+//        var letters = this.letters,
+//            len = letters.length,
+//            data = [],
+//            i, letter;
+//
+//        for (i = 0; i < len; i++) {
+//            letter = letters[i];
+//            data.push({key: letter.toLowerCase(), value: letter});
+//        }
+//
+//        this.store.loadData(data);
+//    },
+//
+//    
+//    initEvents : function() {
+//        Ext.IndexBar.superclass.initEvents.call(this);
+//
+//        this.mon(this.body, {
+//            touchstart: this.onTouchStart,
+//            touchend: this.onTouchEnd,
+//            touchmove: this.onTouchMove,
+//            scope: this
+//        });
+//    },
+//
+//    
+//    onTouchStart : function(e, t) {
+//        this.el.addClass(this.cmpCls + '-pressed');
+//        this.pageBox = this.body.getPageBox();
+//        this.onTouchMove(e);
+//    },
+//
+//    
+//    onTouchEnd : function(e, t) {
+//        this.el.removeClass(this.cmpCls + '-pressed');
+//    },
+//
+//    
+//    onTouchMove : function(e) {
+//        var target,
+//            me = this,
+//            record,
+//            pageBox = me.pageBox;
+//            
+//        if (!pageBox) {
+//            pageBox = me.pageBox = me.body.getPageBox();
+//        }
+//
+//        if (me.vertical) {
+//            if (e.pageY > pageBox.bottom || e.pageY < pageBox.top) {
+//                return;
+//            }
+//            target = Ext.Element.fromPoint(pageBox.left + (pageBox.width / 2), e.pageY);
+//        }
+//        else if (me.horizontal) {
+//            if (e.pageX > pageBox.right || e.pageX < pageBox.left) {
+//                return;
+//            }
+//            target = Ext.Element.fromPoint(e.pageX, pageBox.top + (pageBox.height / 2));
+//        }
+//
+//        if (target) {
+//            record = me.getRecord(target.dom);
+//            if (record) {
+//                me.fireEvent('index', record, target, me.indexOf(target));
+//            }
+//        }
+//    }
+//});
+//
+//Ext.reg('indexbar', Ext.IndexBar);
+//
+//Ext.regModel('IndexBarModel', {
+//    fields: ['key', 'value']
+//});
 
 
 Ext.Toolbar = Ext.extend(Ext.Container, {
@@ -16111,361 +16111,361 @@ Ext.TabPanel = Ext.extend(Ext.Panel, {
 Ext.reg('tabpanel', Ext.TabPanel);
 
 
-Ext.Carousel = Ext.extend(Ext.Panel, {
-    
-
-    
-    cmpCls: 'x-carousel',
-
-    
-    indicator: true,
-
-    
-    ui: null,
-
-    
-    direction: 'horizontal',
-
-    
-
-    
-    initComponent: function() {
-        this.layout = {
-            type: 'card',
-            
-            sizeAllCards: true,
-            
-            hideInactive: false,
-            extraCls: 'x-carousel-item',
-            targetCls: 'x-carousel-body',
-            setOwner : function(owner) {
-                Ext.layout.CardLayout.superclass.setOwner.call(this, owner);
-            }
-        };
-         
-        if (this.indicator) {
-            var cfg = Ext.isObject(this.indicator) ? this.indicator : {};
-            this.indicator = new Ext.Carousel.Indicator(Ext.apply({}, cfg, {
-                direction: this.direction,
-                carousel: this,
-                ui: this.ui
-            }));
-        }
-
-        Ext.Carousel.superclass.initComponent.call(this);
-    },
-
-    
-    afterRender: function() {
-        Ext.Carousel.superclass.afterRender.call(this);
-
-        
-        this.body.on({
-            scroll: this.onScroll,
-            scrollend: this.onScrollEnd,
-            horizontal: this.direction == 'horizontal',
-            vertical: this.direction == 'vertical',
-            scope: this
-        });
-        
-        this.el.addClass(this.cmpCls + '-' + this.direction);
-    },
-    
-        
-    afterLayout : function() {
-        Ext.Carousel.superclass.afterLayout.apply(this, arguments);
-        
-        this.currentSize = this.body.getSize();
-        this.currentScroll = {x: 0, y: 0};
-        
-        this.updateCardPositions();
-        
-        var activeItem = this.layout.getActiveItem();        
-        if (activeItem && this.indicator) {  
-            this.indicator.onBeforeCardSwitch(this, activeItem, null, this.items.indexOf(activeItem));
-        }
-    },
-
-        
-    onScroll : function(e) {
-        this.currentScroll = {
-            x: e.deltaX,
-            y: e.deltaY
-        };
-
-        
-        var activeIndex = this.items.items.indexOf(this.layout.activeItem);    
-        
-        
-        if (this.direction == 'horizontal' && (
-            
-            (activeIndex == 0 && e.deltaX > 0) || 
-            
-            (activeIndex == this.items.length - 1 && e.deltaX < 0)
-        )) {
-            
-            this.currentScroll.x = e.deltaX / 2;
-        }
-        
-        else if (this.direction == 'vertical' && (
-            
-            (activeIndex == 0 && e.deltaY > 0) || 
-            
-            (activeIndex == this.items.length - 1 && e.deltaY < 0)
-        )) {
-            
-            this.currentScroll.y = e.deltaY / 2;           
-        }
-        
-        
-        this.updateCardPositions();
-    },
-
-    
-    updateCardPositions : function(animate) {
-        var cards = this.items.items,
-            ln = cards.length,
-            i, card, el, style;
-        
-        
-        
-        
-        for (i = 0; i < ln; i++) {
-            card = cards[i];  
-            
-            
-            if (this.isCardInRange(card)) {
-                if (card.hidden) {
-                    card.show();
-                }
-                
-                el = card.el;
-                style = el.dom.style;
-                
-                if (animate) {
-                    if (card === this.layout.activeItem) {
-                        el.on('webkitTransitionEnd', this.onTransitionEnd, this, {single: true});
-                    }
-                    style.webkitTransitionDuration = '300ms';
-                }
-                else {
-                    style.webkitTransitionDuration = '0ms';
-                }
-
-                if (this.direction == 'horizontal') {
-                    style.webkitTransform = 'translate3d(' + this.getCardOffset(card) + 'px, 0, 0)';
-                }
-                else {
-                    style.webkitTransform = 'translate3d(0, ' + this.getCardOffset(card) + 'px, 0)';
-                }
-            }
-            else if (!card.hidden) {
-                
-                card.hide();
-            }
-        }
-    },
-
-        
-    getCardOffset : function(card) {
-        var cardOffset = this.getCardIndexOffset(card),
-            currentSize = this.currentSize,
-            currentScroll = this.currentScroll;
-            
-        return this.direction == 'horizontal' ?
-            (cardOffset * currentSize.width) + currentScroll.x :
-            (cardOffset * currentSize.height) + currentScroll.y;
-    },
-
-            
-    getCardIndexOffset : function(card) {
-        return this.items.items.indexOf(card) - this.getActiveIndex();
-    },
-
-        
-    isCardInRange : function(card) {
-        return Math.abs(this.getCardIndexOffset(card)) <= 2;
-    },
-
-        
-    getActiveIndex : function() {
-        return this.items.indexOf(this.layout.activeItem);
-    },
-
-            
-    onScrollEnd : function(e, t) {
-        var previousDelta, deltaOffset; 
-            
-        if (this.direction == 'horizontal') {
-            deltaOffset = e.deltaX;
-            previousDelta = e.previousDeltaX;
-        }
-        else {
-            deltaOffset = e.deltaY;
-            previousDelta = e.previousDeltaY;
-        }
-            
-        
-        if (deltaOffset < 0 && Math.abs(deltaOffset) > 3 && previousDelta <= 0 && this.layout.getNext()) {
-            this.next();
-        }
-        
-        else if (deltaOffset > 0 && Math.abs(deltaOffset) > 3 && previousDelta >= 0 && this.layout.getPrev()) {
-            this.prev();
-        }
-        else {
-            
-            this.scrollToCard(this.layout.activeItem);
-        }
-    },
-
-    
-    onBeforeCardSwitch : function(newCard) {
-        if (!this.customScroll && this.items.indexOf(newCard) != -1) {
-            var style = newCard.el.dom.style;
-            style.webkitTransitionDuration = null;
-            style.webkitTransform = null;
-        }
-        return Ext.Carousel.superclass.onBeforeCardSwitch.apply(this, arguments);
-    },
-
-        
-    scrollToCard : function(newCard) {
-        this.currentScroll = {x: 0, y: 0};
-        this.oldCard = this.layout.activeItem;
-        
-        if (newCard != this.oldCard && this.isCardInRange(newCard) && this.onBeforeCardSwitch(newCard, this.oldCard, this.items.indexOf(newCard), true) !== false) {
-            this.layout.activeItem = newCard;
-            if (this.direction == 'horizontal') {
-                this.currentScroll.x = -this.getCardOffset(newCard);
-            }
-            else {
-                this.currentScroll.y = -this.getCardOffset(newCard);
-            }
-        }
-        
-        this.updateCardPositions(true);
-    },    
-    
-    onTransitionEnd : function(e, t) {
-        this.customScroll = false;
-        this.currentScroll = {x: 0, y: 0};
-        if (this.oldCard && this.layout.activeItem != this.oldCard) {
-            this.onCardSwitch(this.layout.activeItem, this.oldCard, this.items.indexOf(this.layout.activeItem), true);
-        }
-        delete this.oldCard;
-    },
-        
-    
-    onCardSwitch : function(newCard, oldCard, index, animated) {
-        this.currentScroll = {x: 0, y: 0};
-        this.updateCardPositions();
-        Ext.Carousel.superclass.onCardSwitch.apply(this, arguments);
-    },
-
-    
-    next: function() {
-        var next = this.layout.getNext();
-        if (next) {
-            this.customScroll = true;
-            this.scrollToCard(next);
-        }
-        return this;
-    },
-
-    
-    prev: function() {
-        var prev = this.layout.getPrev();
-        if (prev) {
-            this.customScroll = true;
-            this.scrollToCard(prev);
-        }
-        return this;
-    }
-});
-
-Ext.reg('carousel', Ext.Carousel);
-
-
-Ext.Carousel.Indicator = Ext.extend(Ext.Component, {
-    baseCls: 'x-carousel-indicator',
-
-    initComponent: function() {
-        if (this.carousel.rendered) {
-            this.render(this.carousel.body);
-            this.onBeforeCardSwitch(null, null, this.carousel.items.indexOf(this.carousel.layout.getActiveItem()));
-        }
-        else {
-            this.carousel.on('render', function() {
-                this.render(this.carousel.body);
-            }, this, {single: true});
-        }
-        Ext.Carousel.Indicator.superclass.initComponent.call(this);
-    },
-
-    
-    onRender: function() {
-        Ext.Carousel.Indicator.superclass.onRender.apply(this, arguments);
-
-        for (var i = 0, ln = this.carousel.items.length; i < ln; i++) {
-            this.createIndicator();
-        }
-
-        this.mon(this.carousel, {
-            beforecardswitch: this.onBeforeCardSwitch,
-            add: this.onCardAdd,
-            remove: this.onCardRemove,
-            scope: this
-        });
-
-        this.mon(this.el, {
-            tap: this.onTap,
-            scope: this
-        });
-        
-        this.el.addClass(this.baseCls + '-' + this.direction);
-    },
-
-    
-    onTap: function(e, t) {
-        var box = this.el.getPageBox(),
-            centerX = box.left + (box.width / 2);
-
-        if (e.pageX > centerX) {
-            this.carousel.next();
-        }
-        else {
-            this.carousel.prev();
-        }
-    },
-
-    
-    createIndicator: function() {
-        this.indicators = this.indicators || [];
-        this.indicators.push(this.el.createChild({
-            tag: 'span'
-        }));
-    },
-
-    
-    onBeforeCardSwitch: function(carousel, card, old, index) {
-        if (Ext.isNumber(index) && index != -1 && this.indicators[index]) {
-            this.indicators[index].radioClass('x-carousel-indicator-active');
-        }
-    },
-
-    
-    onCardAdd: function() {
-        this.createIndicator();
-    },
-
-    
-    onCardRemove: function() {
-        this.indicators.pop().remove();
-    }
-});
-
-Ext.reg('carouselindicator', Ext.Carousel.Indicator);
+//Ext.Carousel = Ext.extend(Ext.Panel, {
+//    
+//
+//    
+//    cmpCls: 'x-carousel',
+//
+//    
+//    indicator: true,
+//
+//    
+//    ui: null,
+//
+//    
+//    direction: 'horizontal',
+//
+//    
+//
+//    
+//    initComponent: function() {
+//        this.layout = {
+//            type: 'card',
+//            
+//            sizeAllCards: true,
+//            
+//            hideInactive: false,
+//            extraCls: 'x-carousel-item',
+//            targetCls: 'x-carousel-body',
+//            setOwner : function(owner) {
+//                Ext.layout.CardLayout.superclass.setOwner.call(this, owner);
+//            }
+//        };
+//         
+//        if (this.indicator) {
+//            var cfg = Ext.isObject(this.indicator) ? this.indicator : {};
+//            this.indicator = new Ext.Carousel.Indicator(Ext.apply({}, cfg, {
+//                direction: this.direction,
+//                carousel: this,
+//                ui: this.ui
+//            }));
+//        }
+//
+//        Ext.Carousel.superclass.initComponent.call(this);
+//    },
+//
+//    
+//    afterRender: function() {
+//        Ext.Carousel.superclass.afterRender.call(this);
+//
+//        
+//        this.body.on({
+//            scroll: this.onScroll,
+//            scrollend: this.onScrollEnd,
+//            horizontal: this.direction == 'horizontal',
+//            vertical: this.direction == 'vertical',
+//            scope: this
+//        });
+//        
+//        this.el.addClass(this.cmpCls + '-' + this.direction);
+//    },
+//    
+//        
+//    afterLayout : function() {
+//        Ext.Carousel.superclass.afterLayout.apply(this, arguments);
+//        
+//        this.currentSize = this.body.getSize();
+//        this.currentScroll = {x: 0, y: 0};
+//        
+//        this.updateCardPositions();
+//        
+//        var activeItem = this.layout.getActiveItem();        
+//        if (activeItem && this.indicator) {  
+//            this.indicator.onBeforeCardSwitch(this, activeItem, null, this.items.indexOf(activeItem));
+//        }
+//    },
+//
+//        
+//    onScroll : function(e) {
+//        this.currentScroll = {
+//            x: e.deltaX,
+//            y: e.deltaY
+//        };
+//
+//        
+//        var activeIndex = this.items.items.indexOf(this.layout.activeItem);    
+//        
+//        
+//        if (this.direction == 'horizontal' && (
+//            
+//            (activeIndex == 0 && e.deltaX > 0) || 
+//            
+//            (activeIndex == this.items.length - 1 && e.deltaX < 0)
+//        )) {
+//            
+//            this.currentScroll.x = e.deltaX / 2;
+//        }
+//        
+//        else if (this.direction == 'vertical' && (
+//            
+//            (activeIndex == 0 && e.deltaY > 0) || 
+//            
+//            (activeIndex == this.items.length - 1 && e.deltaY < 0)
+//        )) {
+//            
+//            this.currentScroll.y = e.deltaY / 2;           
+//        }
+//        
+//        
+//        this.updateCardPositions();
+//    },
+//
+//    
+//    updateCardPositions : function(animate) {
+//        var cards = this.items.items,
+//            ln = cards.length,
+//            i, card, el, style;
+//        
+//        
+//        
+//        
+//        for (i = 0; i < ln; i++) {
+//            card = cards[i];  
+//            
+//            
+//            if (this.isCardInRange(card)) {
+//                if (card.hidden) {
+//                    card.show();
+//                }
+//                
+//                el = card.el;
+//                style = el.dom.style;
+//                
+//                if (animate) {
+//                    if (card === this.layout.activeItem) {
+//                        el.on('webkitTransitionEnd', this.onTransitionEnd, this, {single: true});
+//                    }
+//                    style.webkitTransitionDuration = '300ms';
+//                }
+//                else {
+//                    style.webkitTransitionDuration = '0ms';
+//                }
+//
+//                if (this.direction == 'horizontal') {
+//                    style.webkitTransform = 'translate3d(' + this.getCardOffset(card) + 'px, 0, 0)';
+//                }
+//                else {
+//                    style.webkitTransform = 'translate3d(0, ' + this.getCardOffset(card) + 'px, 0)';
+//                }
+//            }
+//            else if (!card.hidden) {
+//                
+//                card.hide();
+//            }
+//        }
+//    },
+//
+//        
+//    getCardOffset : function(card) {
+//        var cardOffset = this.getCardIndexOffset(card),
+//            currentSize = this.currentSize,
+//            currentScroll = this.currentScroll;
+//            
+//        return this.direction == 'horizontal' ?
+//            (cardOffset * currentSize.width) + currentScroll.x :
+//            (cardOffset * currentSize.height) + currentScroll.y;
+//    },
+//
+//            
+//    getCardIndexOffset : function(card) {
+//        return this.items.items.indexOf(card) - this.getActiveIndex();
+//    },
+//
+//        
+//    isCardInRange : function(card) {
+//        return Math.abs(this.getCardIndexOffset(card)) <= 2;
+//    },
+//
+//        
+//    getActiveIndex : function() {
+//        return this.items.indexOf(this.layout.activeItem);
+//    },
+//
+//            
+//    onScrollEnd : function(e, t) {
+//        var previousDelta, deltaOffset; 
+//            
+//        if (this.direction == 'horizontal') {
+//            deltaOffset = e.deltaX;
+//            previousDelta = e.previousDeltaX;
+//        }
+//        else {
+//            deltaOffset = e.deltaY;
+//            previousDelta = e.previousDeltaY;
+//        }
+//            
+//        
+//        if (deltaOffset < 0 && Math.abs(deltaOffset) > 3 && previousDelta <= 0 && this.layout.getNext()) {
+//            this.next();
+//        }
+//        
+//        else if (deltaOffset > 0 && Math.abs(deltaOffset) > 3 && previousDelta >= 0 && this.layout.getPrev()) {
+//            this.prev();
+//        }
+//        else {
+//            
+//            this.scrollToCard(this.layout.activeItem);
+//        }
+//    },
+//
+//    
+//    onBeforeCardSwitch : function(newCard) {
+//        if (!this.customScroll && this.items.indexOf(newCard) != -1) {
+//            var style = newCard.el.dom.style;
+//            style.webkitTransitionDuration = null;
+//            style.webkitTransform = null;
+//        }
+//        return Ext.Carousel.superclass.onBeforeCardSwitch.apply(this, arguments);
+//    },
+//
+//        
+//    scrollToCard : function(newCard) {
+//        this.currentScroll = {x: 0, y: 0};
+//        this.oldCard = this.layout.activeItem;
+//        
+//        if (newCard != this.oldCard && this.isCardInRange(newCard) && this.onBeforeCardSwitch(newCard, this.oldCard, this.items.indexOf(newCard), true) !== false) {
+//            this.layout.activeItem = newCard;
+//            if (this.direction == 'horizontal') {
+//                this.currentScroll.x = -this.getCardOffset(newCard);
+//            }
+//            else {
+//                this.currentScroll.y = -this.getCardOffset(newCard);
+//            }
+//        }
+//        
+//        this.updateCardPositions(true);
+//    },    
+//    
+//    onTransitionEnd : function(e, t) {
+//        this.customScroll = false;
+//        this.currentScroll = {x: 0, y: 0};
+//        if (this.oldCard && this.layout.activeItem != this.oldCard) {
+//            this.onCardSwitch(this.layout.activeItem, this.oldCard, this.items.indexOf(this.layout.activeItem), true);
+//        }
+//        delete this.oldCard;
+//    },
+//        
+//    
+//    onCardSwitch : function(newCard, oldCard, index, animated) {
+//        this.currentScroll = {x: 0, y: 0};
+//        this.updateCardPositions();
+//        Ext.Carousel.superclass.onCardSwitch.apply(this, arguments);
+//    },
+//
+//    
+//    next: function() {
+//        var next = this.layout.getNext();
+//        if (next) {
+//            this.customScroll = true;
+//            this.scrollToCard(next);
+//        }
+//        return this;
+//    },
+//
+//    
+//    prev: function() {
+//        var prev = this.layout.getPrev();
+//        if (prev) {
+//            this.customScroll = true;
+//            this.scrollToCard(prev);
+//        }
+//        return this;
+//    }
+//});
+//
+//Ext.reg('carousel', Ext.Carousel);
+//
+//
+//Ext.Carousel.Indicator = Ext.extend(Ext.Component, {
+//    baseCls: 'x-carousel-indicator',
+//
+//    initComponent: function() {
+//        if (this.carousel.rendered) {
+//            this.render(this.carousel.body);
+//            this.onBeforeCardSwitch(null, null, this.carousel.items.indexOf(this.carousel.layout.getActiveItem()));
+//        }
+//        else {
+//            this.carousel.on('render', function() {
+//                this.render(this.carousel.body);
+//            }, this, {single: true});
+//        }
+//        Ext.Carousel.Indicator.superclass.initComponent.call(this);
+//    },
+//
+//    
+//    onRender: function() {
+//        Ext.Carousel.Indicator.superclass.onRender.apply(this, arguments);
+//
+//        for (var i = 0, ln = this.carousel.items.length; i < ln; i++) {
+//            this.createIndicator();
+//        }
+//
+//        this.mon(this.carousel, {
+//            beforecardswitch: this.onBeforeCardSwitch,
+//            add: this.onCardAdd,
+//            remove: this.onCardRemove,
+//            scope: this
+//        });
+//
+//        this.mon(this.el, {
+//            tap: this.onTap,
+//            scope: this
+//        });
+//        
+//        this.el.addClass(this.baseCls + '-' + this.direction);
+//    },
+//
+//    
+//    onTap: function(e, t) {
+//        var box = this.el.getPageBox(),
+//            centerX = box.left + (box.width / 2);
+//
+//        if (e.pageX > centerX) {
+//            this.carousel.next();
+//        }
+//        else {
+//            this.carousel.prev();
+//        }
+//    },
+//
+//    
+//    createIndicator: function() {
+//        this.indicators = this.indicators || [];
+//        this.indicators.push(this.el.createChild({
+//            tag: 'span'
+//        }));
+//    },
+//
+//    
+//    onBeforeCardSwitch: function(carousel, card, old, index) {
+//        if (Ext.isNumber(index) && index != -1 && this.indicators[index]) {
+//            this.indicators[index].radioClass('x-carousel-indicator-active');
+//        }
+//    },
+//
+//    
+//    onCardAdd: function() {
+//        this.createIndicator();
+//    },
+//
+//    
+//    onCardRemove: function() {
+//        this.indicators.pop().remove();
+//    }
+//});
+//
+//Ext.reg('carouselindicator', Ext.Carousel.Indicator);
 
 
 Ext.Map = Ext.extend(Ext.Component, {
@@ -18311,194 +18311,194 @@ Ext.form.SearchField = Ext.extend(Ext.form.Field, {
 Ext.reg('searchfield', Ext.form.SearchField);
 
 
-Ext.form.NumberField = Ext.extend(Ext.form.Field, {
-    inputType: 'number',
-    
-    minValue : undefined,
-    
-    maxValue : undefined,
-    
-    stepValue : undefined,
-    
-    renderTpl: [
-        '<div <tpl if="id">id="{id}" </tpl>class="{baseCls} {cls} {cmpCls}<tpl if="ui"> {uiBase}-{ui}</tpl> <tpl if="label">{labelAlign}</tpl>" <tpl if="style"> style="{style}"</tpl>>',
-            '<tpl if="label"><label <tpl if="fieldEl">for="{inputId}"</tpl>>{label}</label></tpl>',
-            '<tpl if="fieldEl"><input id="{inputId}" type="{type}" name="{name}" class="{fieldCls}"',
-                '<tpl if="tabIndex">tabIndex="{tabIndex}" </tpl>',
-                '<tpl if="placeholder">placeholder="{placeholder}" </tpl>',
-                '<tpl if="style">style="{style}" </tpl>',
-                '<tpl if="minValue != undefined">min="{minValue}" </tpl>',
-                '<tpl if="maxValue != undefined">max="{maxValue}" </tpl>',
-                '<tpl if="stepValue != undefined">step="{stepValue}" </tpl>',
-                '<tpl if="autoComplete">autocomplete="{autoComplete}" </tpl>',
-                '<tpl if="autoCapitalize">autocapitalize="{autoCapitalize}" </tpl>',
-            '/></tpl>',
-            '<tpl if="showClear"><div class="x-field-clear x-hidden-display"></div></tpl>',
-        '</div>'
-    ],
-    
-    ui: 'number',
-    maskField: Ext.platform.isIPhoneOS,
-    
-    
-    onRender : function(ct, position) {
-        Ext.apply(this.renderData, {
-            maxValue : this.maxValue,
-            minValue : this.minValue,
-            stepValue : this.stepValue 
-        });
-        Ext.form.NumberField.superclass.onRender.call(this, ct, position);
-    }
-});
+//Ext.form.NumberField = Ext.extend(Ext.form.Field, {
+//    inputType: 'number',
+//    
+//    minValue : undefined,
+//    
+//    maxValue : undefined,
+//    
+//    stepValue : undefined,
+//    
+//    renderTpl: [
+//        '<div <tpl if="id">id="{id}" </tpl>class="{baseCls} {cls} {cmpCls}<tpl if="ui"> {uiBase}-{ui}</tpl> <tpl if="label">{labelAlign}</tpl>" <tpl if="style"> style="{style}"</tpl>>',
+//            '<tpl if="label"><label <tpl if="fieldEl">for="{inputId}"</tpl>>{label}</label></tpl>',
+//            '<tpl if="fieldEl"><input id="{inputId}" type="{type}" name="{name}" class="{fieldCls}"',
+//                '<tpl if="tabIndex">tabIndex="{tabIndex}" </tpl>',
+//                '<tpl if="placeholder">placeholder="{placeholder}" </tpl>',
+//                '<tpl if="style">style="{style}" </tpl>',
+//                '<tpl if="minValue != undefined">min="{minValue}" </tpl>',
+//                '<tpl if="maxValue != undefined">max="{maxValue}" </tpl>',
+//                '<tpl if="stepValue != undefined">step="{stepValue}" </tpl>',
+//                '<tpl if="autoComplete">autocomplete="{autoComplete}" </tpl>',
+//                '<tpl if="autoCapitalize">autocapitalize="{autoCapitalize}" </tpl>',
+//            '/></tpl>',
+//            '<tpl if="showClear"><div class="x-field-clear x-hidden-display"></div></tpl>',
+//        '</div>'
+//    ],
+//    
+//    ui: 'number',
+//    maskField: Ext.platform.isIPhoneOS,
+//    
+//    
+//    onRender : function(ct, position) {
+//        Ext.apply(this.renderData, {
+//            maxValue : this.maxValue,
+//            minValue : this.minValue,
+//            stepValue : this.stepValue 
+//        });
+//        Ext.form.NumberField.superclass.onRender.call(this, ct, position);
+//    }
+//});
+//
+//Ext.reg('numberfield', Ext.form.NumberField);
 
-Ext.reg('numberfield', Ext.form.NumberField);
 
-
-Ext.form.SpinnerField = Ext.extend(Ext.form.NumberField, {
-
-    
-    cmpCls: 'x-spinner',
-    
-    
-    minValue: Number.NEGATIVE_INFINITY,
-    
-    maxValue: Number.MAX_VALUE,
-    
-    incrementValue: 1,
-    
-    accelerate: true,
-    
-    defaultValue: 0,
-
-    
-    cycle: false,
-    
-    
-    disableInput: false,
-
-    renderTpl: [
-        '<div <tpl if="id">id="{id}" </tpl>class="{baseCls} {cls} {cmpCls}<tpl if="ui"> {uiBase}-{ui}</tpl> <tpl if="label">{labelAlign}</tpl>" <tpl if="style"> style="{style}"</tpl>>',
-            '<tpl if="label"><label <tpl if="fieldEl">for="{inputId}"</tpl>>{label}</label></tpl>',
-            '<tpl if="fieldEl">',
-                '<div class="{cmpCls}-body">',
-                    '<div class="{cmpCls}-down"><span>-</span></div>',
-                    '<input id="{inputId}" type="number" name="{name}" class="{fieldCls}"',
-                        '<tpl if="disableInput">disabled </tpl>',
-                        '<tpl if="tabIndex">tabIndex="{tabIndex}" </tpl>',
-                        '<tpl if="placeholder">placeholder="{placeholder}" </tpl>',
-                        '<tpl if="style">style="{style}" </tpl>',
-                        '<tpl if="autoComplete">autocomplete="{autoComplete}" </tpl>',
-                    '/>',
-                    '<div class="{cmpCls}-up"><span>+</span></div>',
-                '</div>',
-            '</tpl>',
-            '<div class="x-field-mask"></div>',
-        '</div>'
-    ],
-    
-    initComponent: function(){
-        this.addEvents(
-            
-            'spin',
-            
-            'spindown',
-            
-            'spinup'
-        );
-        Ext.form.SpinnerField.superclass.initComponent.call(this);    
-    },
-
-    
-    onRender: function(ct, position) {
-        var me = this;
-        me.renderData.disableInput = me.disableInput;
-
-        Ext.applyIf(me.renderSelectors, {
-            spinUpEl: '.x-spinner-up',
-            spinDownEl: '.x-spinner-down'
-        });
-
-        Ext.form.SpinnerField.superclass.onRender.call(me, ct, position);
-        
-        me.downRepeater = me.createRepeater(me.spinDownEl, me.onSpinDown);
-        me.upRepeater = me.createRepeater(me.spinUpEl, me.onSpinUp);
-    },
-    
-    
-    createRepeater: function(el, fn){
-        var repeat = new Ext.util.TapRepeater(el, {
-            accelerate: this.accelerate
-        });
-        this.mon(repeat, {
-            tap: fn,
-            touchstart: this.onTouchStart,
-            touchend: this.onTouchEnd,
-            preventDefault: true,
-            scope: this
-        });
-        return repeat;
-    },
-
-    
-    onSpinDown: function() {
-        if (!this.disabled) {
-            this.spin(true);
-        }
-    },
-
-    
-    onSpinUp: function() {
-        if (!this.disabled) {
-            this.spin(false);
-        }
-    },
-
-    
-    onTouchStart : function(btn) {
-        btn.el.addClass('x-button-pressed');
-    },
-
-    
-    onTouchEnd : function(btn) {
-        btn.el.removeClass('x-button-pressed');
-    },
-
-    
-    spin: function(down) {
-        var me = this,
-            value = parseFloat(me.getValue()),
-            increment = me.incrementValue,
-            cycle = me.cycle,
-            min = me.minValue,
-            max = me.maxValue,
-            direction = down ? 'down' : 'up';
-
-        if(down){
-            value -= increment;
-        }else{
-            value += increment;
-        }
-
-        value = (isNaN(value)) ? me.defaultValue: value;
-        if (value < min) {
-            value = cycle ? max : min;
-        }
-        else if (value > max) {
-            value = cycle ? min : max;
-        }
-        me.setValue(value);
-        this.fireEvent('spin' + direction, this, value);
-        this.fireEvent('spin', this, value, direction);
-    },
-
-    
-    destroy : function() {
-        Ext.destroy(this.downRepeater, this.upRepeater);
-        Ext.form.SpinnerField.superclass.destroy.call(this, arguments);
-    }
-});
-
-Ext.reg('spinnerfield', Ext.form.SpinnerField);
+//Ext.form.SpinnerField = Ext.extend(Ext.form.NumberField, {
+//
+//    
+//    cmpCls: 'x-spinner',
+//    
+//    
+//    minValue: Number.NEGATIVE_INFINITY,
+//    
+//    maxValue: Number.MAX_VALUE,
+//    
+//    incrementValue: 1,
+//    
+//    accelerate: true,
+//    
+//    defaultValue: 0,
+//
+//    
+//    cycle: false,
+//    
+//    
+//    disableInput: false,
+//
+//    renderTpl: [
+//        '<div <tpl if="id">id="{id}" </tpl>class="{baseCls} {cls} {cmpCls}<tpl if="ui"> {uiBase}-{ui}</tpl> <tpl if="label">{labelAlign}</tpl>" <tpl if="style"> style="{style}"</tpl>>',
+//            '<tpl if="label"><label <tpl if="fieldEl">for="{inputId}"</tpl>>{label}</label></tpl>',
+//            '<tpl if="fieldEl">',
+//                '<div class="{cmpCls}-body">',
+//                    '<div class="{cmpCls}-down"><span>-</span></div>',
+//                    '<input id="{inputId}" type="number" name="{name}" class="{fieldCls}"',
+//                        '<tpl if="disableInput">disabled </tpl>',
+//                        '<tpl if="tabIndex">tabIndex="{tabIndex}" </tpl>',
+//                        '<tpl if="placeholder">placeholder="{placeholder}" </tpl>',
+//                        '<tpl if="style">style="{style}" </tpl>',
+//                        '<tpl if="autoComplete">autocomplete="{autoComplete}" </tpl>',
+//                    '/>',
+//                    '<div class="{cmpCls}-up"><span>+</span></div>',
+//                '</div>',
+//            '</tpl>',
+//            '<div class="x-field-mask"></div>',
+//        '</div>'
+//    ],
+//    
+//    initComponent: function(){
+//        this.addEvents(
+//            
+//            'spin',
+//            
+//            'spindown',
+//            
+//            'spinup'
+//        );
+//        Ext.form.SpinnerField.superclass.initComponent.call(this);    
+//    },
+//
+//    
+//    onRender: function(ct, position) {
+//        var me = this;
+//        me.renderData.disableInput = me.disableInput;
+//
+//        Ext.applyIf(me.renderSelectors, {
+//            spinUpEl: '.x-spinner-up',
+//            spinDownEl: '.x-spinner-down'
+//        });
+//
+//        Ext.form.SpinnerField.superclass.onRender.call(me, ct, position);
+//        
+//        me.downRepeater = me.createRepeater(me.spinDownEl, me.onSpinDown);
+//        me.upRepeater = me.createRepeater(me.spinUpEl, me.onSpinUp);
+//    },
+//    
+//    
+//    createRepeater: function(el, fn){
+//        var repeat = new Ext.util.TapRepeater(el, {
+//            accelerate: this.accelerate
+//        });
+//        this.mon(repeat, {
+//            tap: fn,
+//            touchstart: this.onTouchStart,
+//            touchend: this.onTouchEnd,
+//            preventDefault: true,
+//            scope: this
+//        });
+//        return repeat;
+//    },
+//
+//    
+//    onSpinDown: function() {
+//        if (!this.disabled) {
+//            this.spin(true);
+//        }
+//    },
+//
+//    
+//    onSpinUp: function() {
+//        if (!this.disabled) {
+//            this.spin(false);
+//        }
+//    },
+//
+//    
+//    onTouchStart : function(btn) {
+//        btn.el.addClass('x-button-pressed');
+//    },
+//
+//    
+//    onTouchEnd : function(btn) {
+//        btn.el.removeClass('x-button-pressed');
+//    },
+//
+//    
+//    spin: function(down) {
+//        var me = this,
+//            value = parseFloat(me.getValue()),
+//            increment = me.incrementValue,
+//            cycle = me.cycle,
+//            min = me.minValue,
+//            max = me.maxValue,
+//            direction = down ? 'down' : 'up';
+//
+//        if(down){
+//            value -= increment;
+//        }else{
+//            value += increment;
+//        }
+//
+//        value = (isNaN(value)) ? me.defaultValue: value;
+//        if (value < min) {
+//            value = cycle ? max : min;
+//        }
+//        else if (value > max) {
+//            value = cycle ? min : max;
+//        }
+//        me.setValue(value);
+//        this.fireEvent('spin' + direction, this, value);
+//        this.fireEvent('spin', this, value, direction);
+//    },
+//
+//    
+//    destroy : function() {
+//        Ext.destroy(this.downRepeater, this.upRepeater);
+//        Ext.form.SpinnerField.superclass.destroy.call(this, arguments);
+//    }
+//});
+//
+//Ext.reg('spinnerfield', Ext.form.SpinnerField);
 
 
 Ext.form.HiddenField = Ext.extend(Ext.form.Field, {
@@ -19213,29 +19213,29 @@ Ext.layout.DockLayout = Ext.extend(Ext.layout.ComponentLayout, {
 Ext.layout.TYPES['dock'] = Ext.layout.DockLayout;
 
 
-Ext.layout.FieldLayout = Ext.extend(Ext.layout.ComponentLayout, {
-    type: 'field',
-
-    
-    onLayout: function(owner, target, args) {
-        var w = args[0],
-            h = args[1];
-
-        this.owner = owner;
-        this.handleLabel();
-
-        owner.el.setSize(w, h);
-
-        Ext.layout.FieldLayout.superclass.onLayout.call(this, owner, target);
-    },
-
-    
-    handleLabel : function() {
-        this.owner.labelEl.setWidth(this.owner.labelWidth);
-    }
-});
-
-Ext.layout.TYPES['field'] = Ext.layout.FieldLayout;
+//Ext.layout.FieldLayout = Ext.extend(Ext.layout.ComponentLayout, {
+//    type: 'field',
+//
+//    
+//    onLayout: function(owner, target, args) {
+//        var w = args[0],
+//            h = args[1];
+//
+//        this.owner = owner;
+//        this.handleLabel();
+//
+//        owner.el.setSize(w, h);
+//
+//        Ext.layout.FieldLayout.superclass.onLayout.call(this, owner, target);
+//    },
+//
+//    
+//    handleLabel : function() {
+//        this.owner.labelEl.setWidth(this.owner.labelWidth);
+//    }
+//});
+//
+//Ext.layout.TYPES['field'] = Ext.layout.FieldLayout;
 
 
 Ext.layout.ContainerLayout = Ext.extend(Ext.layout.Layout, {
