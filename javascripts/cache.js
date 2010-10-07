@@ -18,7 +18,7 @@ var Cache = {
       data = Cache.nonPersistent[key]
     }
 
-    if (typeof (data) != 'undefined') {
+    if (typeof (data) != 'undefined' && data != 'null') {
       data = Utility.parseJSON(data)
 
       if (options && options.timeout && (new Date()).getTime() > data.time + options.timeout) {
