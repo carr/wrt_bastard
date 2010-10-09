@@ -11,15 +11,24 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
     
     doRequest: function(operation, callback, scope) {
         var writer  = this.getWriter(),
-            request = writer.write(this.buildRequest(operation, callback, scope));
+            //request = writer.write(this.buildRequest(operation, callback, scope));
+        request = this.buildRequest(operation, callback, scope);
         
+        if (operation.allowWrite()) {
+          request = writer.write(request);
+        }
+        
+        // maybe merge this.params (this.baseParams??) with operation.params
         Ext.apply(request, {
           scope   : this,
           callback: this.createRequestCallback(request, operation, callback, scope),
     	    method: 'post',
-    	    jsonData: { jsonrpc: "2.0", method: this.rpcMethod, params: this.params, "id": 1 }	            
+          timeout : this.timeout,
+          headers : this.headers,          
+    	    jsonData: { jsonrpc: "2.0", method: this.rpcMethod, params: operation.params, "id": 1 }	            
         });
-        	    	
+        
+        showLoading()
         Ext.Ajax.request(request)	    	
         
         return request;
@@ -33,12 +42,12 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
     
     createRequestCallback: function(request, operation, callback, scope) {
         var me = this;
-        
+     
         return function(options, success, response) {
             if (success === true) {
                 var reader = me.getReader(),
                     result = reader.read(response);
-
+                
                 
                 Ext.apply(operation, {
                     response : response,
@@ -46,8 +55,9 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
                 });
 
                 operation.markCompleted();
+                hideLoading()
             } else {
-                this.fireEvent('exception', this, 'response', operation);
+                this.fireEvent('exception', this, response, operation);
                 
                 
                 operation.markException();                

@@ -9,6 +9,11 @@ function initExtensions() {
     layout : 'card',
 
     stack : function(card, options) {
+      options = options || {}
+      if(options.keepPrevious == undefined){
+        options.keepPrevious = true;
+      }
+      
       if ((options && !options.keepPrevious || !options) && this.cardStack.length > 0) {
         this.cardStack.pop()
       }
@@ -37,7 +42,7 @@ function initExtensions() {
     },
 
     listeners : {
-      beforeshow : function() {
+      activate : function() { // prebacio sa beforeshow jer ne radi na 0.9.6 senchi
         if (this.cardStack == null) {
           this.cardStack = []
         }
