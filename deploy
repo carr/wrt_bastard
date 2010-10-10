@@ -20,6 +20,8 @@ class BastardDeployer
       'wrt_bastard/*.markdown',
       'wrt_bastard/deploy',
       'wrt_bastard/lib/*',
+      'wrt_bastard/preview',
+      'wrt_bastard/emulator',
       '.zip',
       'app/*'
     ]
