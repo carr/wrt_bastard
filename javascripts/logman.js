@@ -1,12 +1,12 @@
 var Logman = {}
 
-Logman.init = function(host, app_id, options){
+Logman.init = function(host, app_id, callback){
   Logman.host = host
   Logman.app_id = app_id
-  Logman.options = options
   
   Logman.req('/apps/1/log_sessions.json', null, function(data){
     Logman.log_session_id = data.log_session.id
+    callback()
   })
 }
 
@@ -31,7 +31,7 @@ Logman.req = function(url, payload, callback){
         }
       }		  
 		}
-		req.open("POST", Logman.host + "/api" + url, false)		
+		req.open("POST", Logman.host + "/api" + url, true)		
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")		
 		req.send(payload)
 	}  
