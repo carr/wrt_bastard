@@ -5303,7 +5303,7 @@ Ext.data.Store = Ext.extend(Ext.data.AbstractStore, {
 
     
     onProxyLoad: function(operation) {
-      try{ 
+     // try{ 
         var records = operation.getRecords();
         this.loadRecords(records, operation.addRecords);
         this.fireEvent('load', this, records, operation.wasSuccessful());
@@ -5315,10 +5315,10 @@ Ext.data.Store = Ext.extend(Ext.data.AbstractStore, {
         if (typeof callback == 'function') {
             callback.call(operation.scope || this, records, operation, operation.wasSuccessful());
         }        
-      }catch(e){
+//      }catch(e){
 //        alert(printStackTrace(e))
-        alert("ex " + e) 
-      }
+   //     alert("ex " + e) 
+///      }
     },
 
     

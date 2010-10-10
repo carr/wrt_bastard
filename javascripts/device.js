@@ -15,7 +15,6 @@ var Device = {
 
     var str = "SymbianOS/9.2; Series60/3.1 NokiaN95_8GB"
     str = navigator.userAgent
-    Utility.log(str)
     var regexp = /Series[\d]{2}\/([\d]{1})\.([\d]{1})/
 
     var result = regexp.exec(str)

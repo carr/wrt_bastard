@@ -40,6 +40,12 @@ function initExtensions() {
         throw "Called back with only 1 card on stack!"
       }
     },
+    
+    // remove all the cards from the stack, leaving just the first
+    clear : function(){
+      this.cardStack = [this.cardStack[0]]
+      this.setCard(this.cardStack[0])
+    },
 
     listeners : {
       activate : function() { // prebacio sa beforeshow jer ne radi na 0.9.6 senchi

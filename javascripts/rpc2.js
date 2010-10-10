@@ -28,7 +28,7 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
     	    jsonData: { jsonrpc: "2.0", method: this.rpcMethod, params: operation.params, "id": 1 }	            
         });
         
-        showLoading()
+        App.showLoading()
         Ext.Ajax.request(request)	    	
         
         return request;
@@ -55,7 +55,7 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
                 });
 
                 operation.markCompleted();
-                hideLoading()
+                App.hideLoading()
             } else {
                 this.fireEvent('exception', this, response, operation);
                 
