@@ -3,6 +3,7 @@ var Logman = {}
 Logman.init = function(host, app_id, callback){
   Logman.host = host
   Logman.app_id = app_id
+  Logman.position = 0
   
   Logman.req('/apps/1/log_sessions.json', null, function(data){
     Logman.log_session_id = data.log_session.id
@@ -40,6 +41,7 @@ Logman.req = function(url, payload, callback){
 Logman.log = function(contents){
   var url = '/apps/' + Logman.app_id + '/log_sessions/' + Logman.log_session_id + '/messages.json'
   var payload = 'message[contents]=' + contents
+  payload += '&message[position]=' + (Logman.position++)
   Logman.req(url, payload)
 }
 
