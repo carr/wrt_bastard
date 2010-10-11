@@ -16,12 +16,12 @@ var Tpl = {
   get : function(tplId) {
     if (!Tpl.cache[tplId]) {
       try {
-        Tpl.cache[tplId] = Ext.get(tplId).getHTML().trim()
+        Tpl.cache[tplId] = Ext.util.Format.trim(document.getElementById(tplId).innerHTML) //.trim()
       } catch (e) {
-        Wrt.log('Template "' + tplId + '" not defined!')
+        alert('Template "' + tplId + '" not defined! - ' + e)
+        throw('Template "' + tplId + '" not defined!')
       }
     }
-
     return Tpl.cache[tplId]
   }
 }
