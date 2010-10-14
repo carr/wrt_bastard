@@ -5,7 +5,7 @@ Logman.init = function(host, app_id, callback){
   Logman.app_id = app_id
   Logman.position = 0
   
-  Logman.req('/apps/1/log_sessions.json', null, function(data){
+  Logman.req('/apps/' + app_id + '/log_sessions.json', null, function(data){
     Logman.log_session_id = data.log_session.id
     callback()
   })
