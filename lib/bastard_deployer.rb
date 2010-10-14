@@ -12,8 +12,6 @@ class BastardDeployer
   DEVICE_CACHE_PATH = 'wrt_bastard/.device_cache'
   
   def initialize
-    load_devices
-    save_devices_to_cache
     @archive = File.join(File.basename(Dir.pwd)) + '_release.wgz'
     @excludes = [
       '.git',
@@ -26,7 +24,8 @@ class BastardDeployer
       'wrt_bastard/preview',
       'wrt_bastard/emulator',
       '.zip',
-      'app/*'
+      'app/*',
+      DEVICE_CACHE_PATH
     ]
 
     @deploy_to = 'deploy'
@@ -56,7 +55,7 @@ class BastardDeployer
   end
   
   def load_devices_from_cache
-    @devices = File.readlines(DEVICE_CACHE_PATH).map{|x| x.strip}
+    @devices = File.readlines(DEVICE_CACHE_PATH).map{|x| x.strip} if File.exists?(DEVICE_CACHE_PATH)
   end
   
   def save_devices_to_cache
@@ -103,6 +102,8 @@ class BastardDeployer
   end
 
   def deploy
+    load_devices
+    save_devices_to_cache
     build
     
     @devices.each do |device|
