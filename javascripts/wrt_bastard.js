@@ -16,7 +16,7 @@ function includeBastardStylesheet(src) {
   includeStylesheet(src, 'wrt_bastard/stylesheets/')
 }
 
-var senchaVersion = '0.9.6'
+var senchaVersion = '0.9.3'
 
 includeBastardJavaScript('sizzle')
 includeBastardJavaScript('js_ext-touch-debug-' + senchaVersion)
