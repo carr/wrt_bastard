@@ -1,4 +1,3 @@
-
 // include a script file
 function includeJavaScript(src, path) {
   document.write("<script type=\"text/javascript\" src=\"" + path + src + ".js\"></script>")
@@ -26,13 +25,6 @@ includeBastardJavaScript('js_ext_extensions')
 var Wrt = {}
 
 Wrt.setup = function() {
-  // define selector with sizzle if not defined in browser
-  if (typeof (document.querySelectorAll) == 'undefined') {
-    document.querySelectorAll = Element.prototype.querySelectorAll = function(selectors) {
-      return Sizzle(selectors, this)
-    }
-  }  
-  
   //Tpl.loadAll(function(){
   Wrt.initTemplates()
 
