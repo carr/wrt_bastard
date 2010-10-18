@@ -122,6 +122,7 @@ function initExtensions() {
     }, {
       dock : 'bottom',
       items : [ new Ext.KeyButton({
+        id : 'msgBoxBtn',
         cls : 'button',
         text : qtn_Ok,
         handler : function() {
@@ -136,11 +137,17 @@ function initExtensions() {
     showMessage : function(message) {
       Ext.getCmp('msgBoxMsg').html = message
       this.show()
+      if (!Display.isTouch()) {
+        Utility.focus('msgBoxBtn')
+      }
     },
     showMessageWithTitle : function(title, message) {
       Ext.getCmp('msgBoxTitle').setTitle(title)
       Ext.getCmp('msgBoxMsg').html = message
       this.show()
+      if (!Display.isTouch()) {
+        Utility.focus('msgBoxBtn')
+      }
     }
   })
 

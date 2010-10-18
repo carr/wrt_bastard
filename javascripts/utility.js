@@ -171,5 +171,9 @@ var Utility = {
     }
 
     return count
+  },
+  
+  focus : function(id) {
+    document.getElementById(id).focus()
   }
 }
