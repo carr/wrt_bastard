@@ -10095,7 +10095,8 @@ Ext.DomQuery = {
         q = q.split(",");
         for (i = 0, qlen = q.length; i < qlen; i++) {
             if (typeof q[i] == 'string') {
-                nodes = root.querySelectorAll(q[i]);
+                //nodes = root.querySelectorAll(q[i]);
+                nodes = Sizzle(q[i], root)
 
                 for (j = 0, nlen = nodes.length; j < nlen; j++) {
                     results.push(nodes[j]);
