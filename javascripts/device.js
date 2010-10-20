@@ -3,7 +3,7 @@ var Device = {
 
 	// is the widget running on an emulator (a web browser on a PC)
 	isEmulator : function(){
-		return navigator.userAgent.indexOf('SymbianOS')==-1;
+  return navigator.userAgent.indexOf('SymbianOS') == -1 && navigator.userAgent.indexOf('Symbian') == -1
 	},
 	
 	user_agents : [
