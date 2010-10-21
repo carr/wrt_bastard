@@ -15,7 +15,10 @@ function includeBastardStylesheet(src) {
   includeStylesheet(src, 'wrt_bastard/stylesheets/')
 }
 
-var senchaVersion = '0.9.6'
+/* place this line of code with appropriate sencha version somewhere BEFORE including this file */
+/*var senchaVersion = '0.9.6'*/
+
+var senchaVersion = senchaVersion == undefined ? '0.9.6' : senchaVersion
 
 includeBastardJavaScript('sizzle')
 includeBastardJavaScript('js_ext-touch-debug-' + senchaVersion)
@@ -41,7 +44,7 @@ Wrt.setup = function() {
   //})
 }
 
-Wrt.scrollTo = function(value){
+Wrt.scrollTo = function(value) {
   document.body.scrollTop = value
 }
 
