@@ -31,8 +31,7 @@ Screen.prototype.loadData = function(callback) {
 }
 
 Screen.prototype.show = function(callback) {
-  widget.prepareForTransition("fade");
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0)
   if (this.showHeader) {
     this.resetHeaderButton()
     $('#header_text').html(this.title)
@@ -42,7 +41,6 @@ Screen.prototype.show = function(callback) {
   }
   this.render(function(data) {
     callback(data)
-    widget.performTransition()
   })
 }
 
