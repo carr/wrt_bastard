@@ -32,6 +32,6 @@ ExpandableList.prototype.applyCurrent = function(index) {
   $(this.expandeds[index]).show()
   
   if (this.autoScroll) {
-    document.body.scrollTop = this.current.offset().top
+    document.body.scrollTop = this.current.offset().top - $('#header').height()
   }
 }
