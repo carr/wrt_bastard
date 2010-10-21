@@ -18,6 +18,7 @@ function ExpandableList(options) {
     this.parent.constructor.call(this, options)
 
     this.autoClose = options.autoClose ? options.autoClose : true
+    this.autoScroll = options.autoScroll ? options.autoScroll : true
   }
 }
 
@@ -29,4 +30,8 @@ ExpandableList.prototype.applyCurrent = function(index) {
     this.expandeds.hide()
   }
   $(this.expandeds[index]).show()
+  
+  if (this.autoScroll) {
+    document.body.scrollTop = this.current.offset().top
+  }
 }
