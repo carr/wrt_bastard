@@ -80,7 +80,7 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 		
 		console : function(){
 			if (!typeof window.console) {
-				_BRIDGE_REF.helper.loadScript("preview/script/lib/console.js");
+				_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/console.js");
 			}			
 		}
 		
@@ -90,11 +90,11 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 	/*
 	 Load Scripts
 	 */
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/widget.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/systeminfo.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/menu.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/menuItem.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/console.js");
+	_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/widget.js");
+	_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/systeminfo.js");
+	_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/menu.js");
+	_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/menuItem.js");
+	_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/console.js");
 
 	//	Inject SAPI scripts	
 	if (_BRIDGE_REF.nokia) {
@@ -102,14 +102,14 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 		if ((typeof wrtVersion == 'undefined') || (wrtVersion == 'WRT 1.1')) {
 			_BRIDGE_REF.nokia.version = 'WRT 1.1';
 			_BRIDGE_REF.nokia.helper.createCookie('_WRT_VERSION', 'WRT 1.1');
-			_BRIDGE_REF.helper.loadScript("preview/script/lib/device.js");
+			_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/device.js");
 		}
 		else {
 			_BRIDGE_REF.nokia.version = 'WRT 1.0';
 		}
 	}
 	else {
-		_BRIDGE_REF.helper.loadScript("preview/script/lib/device.js");
+		_BRIDGE_REF.helper.loadScript("wrt_bastard/preview/script/lib/device.js");
 	}
 
 	/*

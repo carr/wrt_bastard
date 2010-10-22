@@ -66,8 +66,8 @@ device.implementation = function(version){
 	// set context to current object
 	device.implementation.context = this;	
 
-	var libpath = 'preview/script/lib/',
-		datapath = 'preview/data/';
+	var libpath = 'wrt_bastard/preview/script/lib/',
+		datapath = 'wrt_bastard/preview/data/';
 	
 	// load implementation files
 	// this is done async by the browser engine, so be aware of sync conditions!!
