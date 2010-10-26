@@ -28,6 +28,8 @@ function initExtensions() {
       if (!options.skipSetCard) {
         this.setCard(card)
       }
+      
+      Wrt.scrollTo(0)
     },
 
     stackTop : function() {

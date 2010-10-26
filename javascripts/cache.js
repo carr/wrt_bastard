@@ -33,7 +33,7 @@ var Cache = {
   },
 
   set : function(key, data, options) {
-    var object = JSON.stringify( {
+    var object = JSON.stringify({
       time : (new Date()).getTime(),
       value : data
     })
@@ -46,7 +46,14 @@ var Cache = {
   },
 
   clear : function(key) {
-    delete Cache.nonPersistent[key]
-    window.widget.setPreferenceForKey(null, key)
+    if (typeof (key) == 'string') {
+      delete Cache.nonPersistent[key]
+      window.widget.setPreferenceForKey(null, key)
+    } else {
+      for ( var i = 0; i < key.length; i++) {
+        delete Cache.nonPersistent[key[i]]
+        window.widget.setPreferenceForKey(null, key[i])
+      }
+    }
   }
 }
