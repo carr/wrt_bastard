@@ -19,9 +19,6 @@ Screen.prototype.init = function(callback) {
 
   this.loadData(function() {
     callback(function() {
-      if (that.isBlocking) {
-        Dialog.hide()
-      }
     })
   })
 }
@@ -33,19 +30,25 @@ Screen.prototype.loadData = function(callback) {
 Screen.prototype.show = function(callback) {
   window.scrollTo(0, 0)
   if (this.showHeader) {
-    this.resetHeaderButton()
+    if (this.parent.type == 'touch') {
+      this.resetHeaderButton()
+    }
     $('#header_text').html(this.title)
     $('#header').show()
   } else {
     $('#header').hide()
   }
-  this.render(function(data) {
-    callback(data)
-  })
+  var that = this
+  setTimeout(function() {
+    that.render(function(data) {
+      callback(data)
+    })
+  }, 50)
 }
 
 Screen.prototype.render = function(callback) {
   T.loadTemplate(this.DEFAULT_TEMPLATE, callback)
+  Dialog.hide()
 }
 
 Screen.prototype.resetHeaderButton = function() {
