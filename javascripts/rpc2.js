@@ -1,3 +1,12 @@
+Ext.Ajax.rpcRequest = function(options){
+  Ext.apply(options, {
+    method: 'post',
+    jsonData: { jsonrpc: "2.0", method: options.rpcMethod, params: options.rpcParams, "id": 1 }	            
+  });
+  
+  Ext.Ajax.request(options)  
+}
+
 /**
  * Proxy for RPC requests. Config accepts "rpcMethod" parameter for the rpc method to call. Also accepts params for rpc params
  */
@@ -56,8 +65,9 @@ Ext.data.RpcProxy = Ext.extend(Ext.data.ServerProxy, {
                 operation.markCompleted();
                 App.hideLoading()
             } else {
-                this.fireEvent('exception', this, response, operation);
-                
+                //this.fireEvent('exception', this, response, operation);
+                App.hideLoading()
+                new Ext.MessageBox({}).showMessage("Problemi s Internet konekcijom.")                
                 
                 operation.markException();                
             }

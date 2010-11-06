@@ -22,7 +22,7 @@ var senchaVersion = senchaVersion == undefined ? '0.9.6' : senchaVersion
 
 includeBastardJavaScript('sizzle')
 includeBastardJavaScript('js_ext-touch-debug-' + senchaVersion)
-includeBastardJavaScript('js_ext_templates')
+includeBastardJavaScript('tpl')
 includeBastardJavaScript('js_ext_extensions')
 
 var Wrt = {}

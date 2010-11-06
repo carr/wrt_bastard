@@ -28,6 +28,8 @@ function initExtensions() {
       if (!options.skipSetCard) {
         this.setCard(card)
       }
+      
+      Wrt.scrollTo(0)
     },
 
     stackTop : function() {
@@ -40,6 +42,7 @@ function initExtensions() {
         if (oldCard.back) {
           oldCard.back()
         }
+        oldCard.destroy()
 
         this.setCard(this.cardStack[this.cardStack.length - 1])
         this.restoreScroll()
@@ -85,7 +88,6 @@ function initExtensions() {
 
     saveScroll : function() {
       this.scrollStack.push(document.body.scrollTop)
-      document.body.scrollTop = 0
     },
 
     restoreScroll : function() {
@@ -95,15 +97,20 @@ function initExtensions() {
     }
   })
 
+  // TODO svi buttoni su sads keybuttoni (izmijenjeno u Senchi) tako da ovo je obsolete u projektu
   Ext.KeyButton = Ext.extend(Ext.Button, {
-    renderTpl : new Ext.XTemplate(Tpl.get('keyButton'), {
-      compiled : true
-    })
+    //renderTpl : [Tpl.get('keyButton')],
+    //renderTpl: ['<a href="javascript:;"></a>'],   
   })
 
   Ext.MessageBox = Ext.extend(Ext.Panel, {
-    width : Display.getWidgetSize().width * 0.8,
-    height : Display.getWidgetSize().height * 0.6,
+    initComponent : function(){
+      this.width = Display.getWidgetSize().width * 0.8
+      this.height = Display.getWidgetSize().height * 0.6
+      
+      Ext.MessageBox.superclass.initComponent.call(this)      
+    },
+    
     floating : true,
     centered : true,
     modal : true,

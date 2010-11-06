@@ -7,6 +7,7 @@ require 'json' # gem install json --version=1.4.3
 gem 'rubyzip'
 require 'zip/zip'
 require 'zip/zipfilesystem'
+require 'lib/template_handler'
 
 class BastardDeployer
   DEVICE_CACHE_PATH = 'wrt_bastard/.device_cache'
@@ -14,12 +15,19 @@ class BastardDeployer
   def initialize
     @archive = File.join(File.basename(Dir.pwd)) + '_release.wgz'
     @excludes = [
+      'Gemfile',
+      'Gemfile.lock',
       '.git',
       '.gitmodules',
       '*.wgz',
       'deploy',
+      'sass',
+      'tmp',
+      'themes',
       'wrt_bastard/*.markdown',
       'wrt_bastard/deploy',
+      'wrt_bastard/build',
+      'wrt_bastard/server.rb',
       'wrt_bastard/lib/*',
       'wrt_bastard/preview',
       'wrt_bastard/emulator',
@@ -95,10 +103,20 @@ class BastardDeployer
     bundle_assets
 
     change_environment
-
+    
+    bundle_templates
+    
     create_wgz
 
     FileUtils.rm_r @deploy_to, :force=>true    
+  end
+  
+  def bundle_templates
+    templates = TemplateHandler.get_templates()
+    index_html = File.join(@deploy_tmp, 'index.html')
+    str = File.read(index_html)
+    str.gsub!('</body>', templates)    
+    File.open(index_html, 'w+'){ |f| f.puts(str) }
   end
 
   def deploy

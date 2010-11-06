@@ -14305,9 +14305,7 @@ Ext.gesture.Manager = new Ext.AbstractManager({
         this.currentGestures.remove(gesture);
     },
     
-    handleTargets : function(targets, e) {
-        
-        
+    handleTargets : function(targets, e) {        
         var ln = targets.length,
             i, target;
         
@@ -16985,7 +16983,8 @@ Ext.Button = Ext.extend(Ext.Component, {
         if (me.rendered) {
             if (!me.textEl && text) {
                 me.textEl = me.el.createChild({
-                    tag: 'span',
+                    tag: 'a',
+                    href: 'javascript:;',
                     html: text,
                     cls: this.labelCls
                 });

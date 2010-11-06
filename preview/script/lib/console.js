@@ -16,7 +16,7 @@
  */
 
 //	for console support
-if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navigator.userAgent)) && !(/Version/i.test(navigator.userAgent))) ){
+/*if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navigator.userAgent)) && !(/Version/i.test(navigator.userAgent))) ){
 	window.console = {
 	
 			sprintf: function(args){
@@ -136,3 +136,4 @@ if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navi
 
 //	make TRUE console.js script loaded
 window.parent.NOKIA.scriptsLoaded.console = true;
+*/
