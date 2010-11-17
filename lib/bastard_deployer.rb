@@ -31,6 +31,7 @@ class BastardDeployer
       'wrt_bastard/lib/*',
       'wrt_bastard/preview',
       'wrt_bastard/emulator',
+      'wrt_bastard/javascripts/lib',
       '.zip',
       'app/*',
       DEVICE_CACHE_PATH
@@ -39,6 +40,9 @@ class BastardDeployer
     @deploy_to = 'deploy'
     @deploy_tmp = File.join(@deploy_to, 'tmp')
     @environment = 'production'
+    @build_options  = {
+      'minify' => true
+    }
   end
   
   def load_devices
@@ -108,7 +112,7 @@ class BastardDeployer
     
     create_wgz
 
-    FileUtils.rm_r @deploy_to, :force=>true    
+    #FileUtils.rm_r @deploy_to, :force=>true    
   end
   
   def bundle_templates
@@ -134,6 +138,13 @@ class BastardDeployer
     puts "Bundling assets"
     str = File.read('config/dependencies.js').gsub('var config = ', '')
     assets = JSON.parse(str)
+    
+    str2 = File.read('wrt_bastard/javascripts/config.js').gsub('var wrtBastardCore = ', '')
+    wrt_bastard_core = JSON.parse(str2)
+    wrt_bastard = wrt_bastard_core + assets['wrt_bastard']
+    wrt_bastard.map!{|x| {"path" => "wrt_bastard/javascripts/lib/", "filename" => x} }
+
+    assets['javascripts'] = wrt_bastard + assets['javascripts']
 
     join_files(assets['javascripts'], '.js')
     join_files(assets['stylesheets'], '.css')
@@ -152,11 +163,15 @@ class BastardDeployer
     end
 
     FileUtils.mkdir_p output_dir
-    file_tmp = File.join(output_dir, "bundle_tmp#{extension}")
     file = File.join(output_dir, "bundle#{extension}")
-    File.open(file_tmp, 'w+'){|f| f.puts(str)}
-    `java -jar #{File.join("wrt_bastard", "lib", "yuicompressor.jar")} #{file_tmp} > #{file}`
-    FileUtils.rm_f file_tmp
+    File.open(file, 'w+'){|f| f.puts(str)}
+    if @build_options['minify']
+      file_tmp = File.join(output_dir, "bundle_tmp#{extension}")
+      
+      FileUtils.cp file, file_tmp
+      `java -jar #{File.join("wrt_bastard", "lib", "yuicompressor.jar")} #{file_tmp} > #{file}`
+      FileUtils.rm_f file_tmp      
+    end
   end
 
   def change_environment

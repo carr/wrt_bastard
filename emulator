@@ -1,0 +1,10 @@
+#!/bin/bash
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  /opt/google/chrome/google-chrome "http://localhost:4567/wrt_bastard/emulator.html" --disable-web-security &
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  open "http://localhost:4567/wrt_bastard/emulator.html" --args --disable-web-security &
+fi
+
+# TODO windowss support
+# /c/Users/Car/AppData/Local/Google/Chrome/Application/chrome.exe "`pwd`/wrt_bastard/emulator.html" --disable-web-security &

@@ -159,19 +159,21 @@ function initExtensions() {
   })
 
   Ext.LoadingBox = Ext.extend(Ext.Panel, {
-    id : 'loadingBox',
-    width : 180,
-    height : 100,
-    floating : true,
-    centered : true,
-    modal : true,
-    hideOnMaskTap : false,
-    cls : 'loadingBox',
-    data : {
-      message : qtn_Loading
-    },
-    tpl : new Ext.Template(Tpl.get('loadingBoxTpl'), {
-      compiled : true
-    })
+    initComponent : function(){
+      this.id = 'loadingBox',
+      this.width = 180,
+      this.height = 100,
+      this.floating = true,
+      this.centered = true,
+      this.modal = true,
+      this.hideOnMaskTap = false,
+      this.cls = 'loadingBox',
+      this.data = {
+        message : qtn_Loading
+      }
+      this.tpl = Template.get('loadingBoxTpl')
+         
+      Ext.LoadingBox.superclass.initComponent.call(this)      
+    }    
   })
 }

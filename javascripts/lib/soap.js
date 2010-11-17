@@ -186,12 +186,34 @@ SOAPClient.invoke = function(url, method, parameters, async, callback)
 
 // private: invoke async
 SOAPClient._loadWsdl = function(url, method, parameters, async, callback){	
-	$.ajax({
-		url : url + "?wsdl", 
-		complete : function(data){
-			SOAPClient._onLoadWsdl(url, method, parameters, async, callback, data)
+	var xmlHttp = new Ajax();    
+  xmlHttp.onreadystatechange = function(){
+		if(xmlHttp.readyState == 4){			
+			SOAPClient._onLoadWsdl(url, method, parameters, async, callback, xmlHttp)		  
+		}else{
+
 		}
-	})
+	}
+	var newUrl = url + "?wsdl&t=" + Math.random()
+
+  xmlHttp.open("GET", newUrl, true);
+//	xmlHttp.setRequestHeader("SOAPAction", soapaction);
+//  xmlHttp.setRequestHeader("User-Agent", )
+	//xmlHttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");	
+  xmlHttp.send(null);  
+  
+	/*Ext.Ajax.request({
+		url : url + "?wsdl", 
+		method: 'get',
+		success : function(data){
+			SOAPClient._onLoadWsdl(url, method, parameters, async, callback, data)
+		},
+		
+    failure: function(response, opts) {
+      alert('server-side failure with status code ' + response.status);
+      alert(response.responseText)
+    }
+	})*/
 }
 
 SOAPClient._onLoadWsdl = function(wsdlUrl, method, parameters, async, callback, req){
@@ -211,7 +233,7 @@ SOAPClient._sendSoapRequest = function(serviceUrl, method, parameters, async, ca
 	var ns
 	
 	if(wsdl.documentElement.attributes["targetNamespace"] + "" == "undefined"){
-		alert(wsdl)
+		alert("Probably error with soap request")
 		ns = wsdl.documentElement.attributes.getNamedItem("targetNamespace").nodeValue
 	}else{
 		ns = wsdl.documentElement.attributes["targetNamespace"].value

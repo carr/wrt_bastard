@@ -1,4 +1,4 @@
-var Tpl = {
+var Template = {
   cache : {},
 
   get : function(tplId) {
@@ -17,3 +17,6 @@ var Tpl = {
     return Tpl.cache[tplId]
   }
 }
+
+// DEPRECATED USAGE - remove in future versions
+var Tpl = Template

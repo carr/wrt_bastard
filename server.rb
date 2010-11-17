@@ -8,6 +8,8 @@ require 'template_handler'
 
 set :public, File.join(File.expand_path(File.dirname(__FILE__)), '..')
 
+puts "Go to http://localhost:{port}/wrt_bastard/emulator.html"
+
 get '/app.html' do
   # rebuild sass files
   `cd sass && compass compile && cd ..`

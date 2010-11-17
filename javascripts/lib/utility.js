@@ -175,5 +175,7 @@ var Utility = {
   
   focus : function(id) {
     document.getElementById(id).focus()
-  }
+  },
+  
+  lipsum : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur dictum eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius lorem a nisi pharetra in aliquet leo pharetra. Nam orci odio, aliquam aliquet dignissim id, vulputate in metus. Sed in mauris in dui suscipit hendrerit sed sed tellus. Morbi ullamcorper sapien eget nunc varius feugiat. Pellentesque fringilla auctor felis, sed sagittis nulla aliquam in. Suspendisse urna sapien, aliquet non auctor a, scelerisque eu neque. Maecenas molestie tincidunt ornare. Ut condimentum suscipit fringilla. Vivamus at turpis et odio sollicitudin pretium. Vestibulum auctor metus vitae lacus imperdiet tincidunt ornare nec ligula.'
 }
