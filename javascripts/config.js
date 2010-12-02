@@ -1,6 +1,6 @@
 var wrtBastardCore = [
   "sizzle",
-  "ext-touch-debug-0.9.6",
+  "ext-touch-debug-1.0.1",
   "template",
   "ext_extensions",
   "device",
@@ -8,3 +8,4 @@ var wrtBastardCore = [
   "utility",
   "wrt"
 ]
+

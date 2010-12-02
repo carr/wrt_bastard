@@ -26,7 +26,7 @@ function initExtensions() {
 
       this.cardStack.push(card)
       if (!options.skipSetCard) {
-        this.setCard(card)
+        this.setActiveItem(card)
       }
       
       Wrt.scrollTo(0)
@@ -44,7 +44,7 @@ function initExtensions() {
         }
         oldCard.destroy()
 
-        this.setCard(this.cardStack[this.cardStack.length - 1])
+        this.setActiveItem(this.cardStack[this.cardStack.length - 1])
         this.restoreScroll()
       } else {
         throw "Called back with only 1 card on stack!"
@@ -54,7 +54,7 @@ function initExtensions() {
     // remove all the cards from the stack, leaving just the first
     clear : function() {
       this.cardStack = [ this.cardStack[0] ]
-      this.setCard(this.cardStack[0])
+      this.setActiveItem(this.cardStack[0])
     },
 
     listeners : {
