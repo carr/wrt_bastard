@@ -15,7 +15,6 @@ function includeBastardStylesheet(src) {
 }
 
 // include styles
-//includeBastardStylesheet('css_ext-touch')
 includeBastardStylesheet('dialog')
 includeBastardStylesheet('dialog_box')
 includeBastardStylesheet('toast')
