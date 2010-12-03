@@ -18,7 +18,6 @@ function includeBastardStylesheet(src) {
 //includeBastardStylesheet('css_ext-touch')
 includeBastardStylesheet('dialog')
 includeBastardStylesheet('dialog_box')
-includeBastardStylesheet('tabs')
 includeBastardStylesheet('toast')
 includeBastardStylesheet('wrt_bastard')
 
