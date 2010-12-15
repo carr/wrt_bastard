@@ -21483,7 +21483,8 @@ Ext.Button = Ext.extend(Ext.Component, {
         if (me.rendered) {
             if (!me.textEl && text) {
                 me.textEl = me.el.createChild({
-                    tag: 'span',
+                    tag: 'a',
+                    href: 'javascript:;',
                     html: text,
                     cls: this.labelCls
                 });
