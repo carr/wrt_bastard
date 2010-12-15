@@ -22,3 +22,15 @@ get '/app.html' do
   str.gsub!('</body>', templates)
   str
 end
+
+get '/mobile.html' do
+  # rebuild sass files
+  `cd sass && compass compile && cd ..`
+
+  # add templates
+  templates = TemplateHandler.get_templates()
+
+  str = File.read('index.html')
+  str.gsub!('</body>', templates)
+  str
+end
